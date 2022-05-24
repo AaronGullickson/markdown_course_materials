@@ -20,6 +20,9 @@ if(!require(kableExtra)) {
 if(!require(texreg)) {
   install.packages("texreg")
 }
+if(!require(flextable)) {
+  install.packages("flextable")
+}
 
 # Libraries with custom templates
 if(!require(bookdown)) {
@@ -48,4 +51,10 @@ if(!require(tidyverse)) {
 }
 if(!require(scales)) {
   install.packages("scales")
+}
+if(!require(gapminder)) {
+  install.packages("gapminder")
+}
+if(!require(PNWColors)) {
+  install.packages("PNWColors")
 }

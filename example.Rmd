@@ -3,9 +3,13 @@ title: "Example R Markdown Document"
 author: "Aaron Gullickson"
 date: '2022-05-09'
 output:
-  pdf_document: default
-  html_document:
-    df_print: paged
+  pdf_document: 
+    keep_tex: no
+  html_document: 
+    keep_md: no
+    self_contained: yes
+  word_document: 
+    keep_md: no
 bibliography: references.bib
 ---
 
@@ -14,8 +18,9 @@ knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message = FALSE)
 library(ggplot2)
 library(tidyverse)
 library(scales)
-library(kableExtra)
 library(texreg)
+library(kableExtra)
+#library(flextable)
 load("input/popularity.RData")
 ```
 
@@ -55,21 +60,46 @@ Ipsum fringilla natoque sem praesent auctor tellus viverra convallis nullam quis
 
 Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis mattis. Porta pharetra rhoncus dis massa nulla ornare egestas! Ante leo cursus mauris eleifend potenti donec tempus. Fusce ultricies aptent accumsan himenaeos netus augue felis nibh. Duis commodo himenaeos aliquam integer!
 
-```{r desc-stats}
+```{r desc-stats-kable, eval=TRUE}
 popularity %>% 
   group_by(grade) %>%
   summarize(n=comma(n()), m_nom=round(mean(indegree), 2), 
          p_drink=percent(mean(alcoholuse=="Drinker"), accuracy=0.1),
          p_smoke=percent(mean(smoker=="Smoker"), accuracy=0.1)) %>%
-  kbl(booktabs = TRUE,
+  kbl(booktabs = TRUE, longtable = FALSE,
       linesep = NULL,
       align = c("l",rep("r", 4)),
       caption = "Sample size and descriptive statistics, Add Health data, Wave 1",
-      col.names = c("Grade","N", 
-                    "Mean friend nominations", 
-                    "% drink regularly", 
-                    "% smoke regularly")) %>%
-  kable_styling()
+      position="t",
+      col.names = c("Grade","N", "Mean friend nominations", "Drink regularly", 
+                    "Smoke regularly")) %>%
+  kable_styling(full_width=TRUE) %>%
+  column_spec(1:2, width = "1cm") %>%
+  add_header_above(c(" "=3, "Percent substance use" = 2)) %>%
+  footnote(general=
+             c("Drinking frequently is defined as drinking at least one or twice a month for the previous 12 months.",
+               "Smoking frequently is defines as smoking at least 5 cigarettes in the last 30 days."),
+           threeparttable = FALSE, footnote_as_chunk = FALSE, 
+           general_title="Notes: ", title_format="italic")
+```
+
+```{r desc-stats-flex, eval=FALSE}
+popularity %>% 
+  group_by(grade) %>%
+  summarize(n=n(), m_nom=mean(indegree), p_drink=100*mean(alcoholuse=="Drinker"),
+            p_smoke=100*mean(smoker=="Smoker")) %>%
+  flextable() %>%
+  colformat_double(j="m_nom", digits=2) %>%
+  colformat_double(j=c("p_drink","p_smoke"), digits=1, suffix="%") %>%
+  set_header_labels(grade="Grade", n="N", m_nom="Mean friend nominations",
+                    p_drink="% drink regularly", 
+                    p_smoke="% smoke regularly") %>%
+  #add_header_row(values = c("", "Percent substance use"),
+  #               colwidths = c(3, 2)) %>%
+  set_caption("Sample size and descriptive statistics, Add Health data, Wave 1") %>%
+  theme_booktabs() %>%
+  add_footer_lines("Notes: Drinking frequently is defined as drinking at least one or twice a month for the previous 12 months. Smoking frequently is defines as smoking at least 5 cigarettes in the last 30 days.") %>%
+  autofit()
 ```
 
 Lorem lobortis lectus pellentesque sapien vivamus eros felis cum. Mattis risus euismod vivamus vel mi nostra euismod euismod praesent aliquam? Sagittis posuere bibendum turpis arcu maecenas gravida leo sollicitudin primis. Ullamcorper lacinia laoreet tincidunt mollis torquent semper. Sem nascetur eleifend gravida nostra magnis arcu gravida facilisis sollicitudin? Cum curae placerat et auctor faucibus arcu ad mauris sollicitudin nunc! Posuere iaculis arcu dapibus dis ullamcorper pellentesque penatibus ultrices sed aenean ligula ullamcorper donec aliquam.
