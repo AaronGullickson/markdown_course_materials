@@ -5,6 +5,7 @@ date: '2022-05-09'
 output:
   pdf_document: 
     keep_tex: no
+    extra_dependencies: ["dcolumn"]
   html_document: 
     keep_md: no
     self_contained: yes
@@ -157,12 +158,16 @@ knitreg(list(model1, model2, model3),
         digits=3,
         caption="Linear models predicting the number of friend nominations recieved, Add Health data",
         caption.above=TRUE,
+        booktabs=TRUE,
+        float.pos = "t",
+        dcolumn=TRUE,
         custom.coef.names=c("Intercept","Smoker","Drinker",
                             "Parental income (1000 USD)",
                             "Male","Black","Latino",
                             "Asian/Pacific Islander","Other",
                             "Native American","Pseudo-GPA",
-                            "Honor society member"))
+                            "Honor society member"),
+        custom.note="%stars. Standard errors in parenthesis.")
 ```
 
 Dolor convallis vulputate dictum mollis ante placerat dui parturient porttitor conubia vitae. Eros nec dignissim tortor nascetur laoreet mi nascetur interdum lacus donec? Non potenti elementum massa hendrerit odio taciti euismod sagittis rhoncus sodales montes mattis? Sociosqu luctus neque euismod elementum accumsan parturient sed morbi scelerisque sociis quis faucibus primis suscipit scelerisque.
