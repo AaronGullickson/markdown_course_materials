@@ -12,6 +12,7 @@ output:
   word_document: 
     keep_md: no
 bibliography: references.bib
+csl: ajs.csl
 ---
 
 ```{r setup, include=FALSE}
