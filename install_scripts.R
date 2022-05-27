@@ -1,4 +1,6 @@
-# Please run this script to install all the necessary libraries
+# Please run this script to install all the necessary libraries. You may
+# also see a popup at the top of the script with an option to install missing
+# libraries. If so, you can use that instead.
 
 # Core libraries required for R Markdown
 if(!require(knitr)) {
