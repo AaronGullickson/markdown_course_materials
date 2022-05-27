@@ -9,6 +9,7 @@ output:
   html_document: 
     keep_md: no
     self_contained: yes
+    code_folding: none
   word_document: 
     keep_md: no
   bookdown::pdf_document2: 
