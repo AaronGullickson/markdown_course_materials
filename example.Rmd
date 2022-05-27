@@ -3,20 +3,22 @@ title: "Example R Markdown Document"
 author: "Aaron Gullickson"
 date: '2022-05-09'
 output:
-  html_document: 
+  bookdown::pdf_document2: 
+    keep_tex: no
+    toc: false
+    extra_dependencies: ["dcolumn"]
+  bookdown::html_document2: 
     keep_md: no
     self_contained: yes
-  pdf_document: 
-    keep_tex: no
-    extra_dependencies: ["dcolumn"]
-  word_document: 
+  bookdown::word_document2: 
     keep_md: no
 bibliography: references.bib
 csl: bib-styles/chicago-parenthetical.csl
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message = FALSE,
+                      fig.pos="t", fig.height=4)
 library(ggplot2)
 library(tidyverse)
 library(scales)
@@ -112,7 +114,7 @@ $$y_i=\beta_0+\beta_1x_i+\epsilon_i$$
 
 Elit nam mus class aliquam volutpat purus mauris ultricies aptent dignissim ($\beta_1=0$). Iaculis pulvinar at inceptos sociosqu blandit tristique ridiculus et sagittis mus justo. Suspendisse commodo nullam risus molestie pulvinar elementum malesuada consequat non velit augue. Vehicula id purus vulputate metus dis lectus magna purus nullam scelerisque interdum. Montes quis sem convallis vehicula orci habitasse metus nullam imperdiet faucibus dignissim! Na dignissim.
 
-```{r dist-nominations, fig.cap="Distribution of number of friend nominations received in Add Health data"}
+```{r dist-nominations, fig.cap="Distribution of number of friend nominations received in Add Health data", fig.pos="t", fig.height=4}
 popularity %>%
   ggplot(aes(x=indegree))+
   geom_histogram(binwidth = 1, center=0.5, 
