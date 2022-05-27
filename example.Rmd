@@ -18,7 +18,7 @@ csl: bib-styles/chicago-parenthetical.csl
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message = FALSE,
-                      fig.pos="t", fig.height=4)
+                      fig.pos="t", fig.height=4, out.extra = "")
 library(ggplot2)
 library(tidyverse)
 library(scales)
@@ -64,7 +64,7 @@ Ipsum fringilla natoque sem praesent auctor tellus viverra convallis nullam quis
 
 # Data and Methods
 
-Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis mattis. Porta pharetra rhoncus dis massa nulla ornare egestas! Ante leo cursus mauris eleifend potenti donec tempus. Fusce ultricies aptent accumsan himenaeos netus augue felis nibh. Duis commodo himenaeos aliquam integer!
+Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis mattis. Porta pharetra rhoncus dis massa nulla ornare egestas! Ante leo cursus mauris eleifend potenti donec tempus. Fusce ultricies aptent accumsan himenaeos netus augue felis nibh. Duis commodo himenaeos aliquam integer! See Table \@ref(tab:desc-stats-kable).
 
 ```{r desc-stats-kable, eval=TRUE}
 popularity %>% 
@@ -112,7 +112,7 @@ Lorem lobortis lectus pellentesque sapien vivamus eros felis cum. Mattis risus e
 
 $$y_i=\beta_0+\beta_1x_i+\epsilon_i$$
 
-Elit nam mus class aliquam volutpat purus mauris ultricies aptent dignissim ($\beta_1=0$). Iaculis pulvinar at inceptos sociosqu blandit tristique ridiculus et sagittis mus justo. Suspendisse commodo nullam risus molestie pulvinar elementum malesuada consequat non velit augue. Vehicula id purus vulputate metus dis lectus magna purus nullam scelerisque interdum. Montes quis sem convallis vehicula orci habitasse metus nullam imperdiet faucibus dignissim! Na dignissim.
+Elit nam mus class aliquam volutpat purus mauris ultricies aptent dignissim ($\beta_1=0$). Iaculis pulvinar at inceptos sociosqu blandit tristique ridiculus et sagittis mus justo. Suspendisse commodo nullam risus molestie pulvinar elementum malesuada consequat non velit augue. Vehicula id purus vulputate metus dis lectus magna purus nullam scelerisque interdum. Montes quis sem convallis vehicula orci habitasse metus nullam imperdiet faucibus dignissim! Na dignissim. See Figure \@ref(fig:dist-nominations).
 
 ```{r dist-nominations, fig.cap="Distribution of number of friend nominations received in Add Health data", fig.pos="t", fig.height=4}
 popularity %>%
@@ -131,7 +131,7 @@ Elit imperdiet aenean varius conubia sagittis orci ultrices. Ridiculus conubia a
 
 Lorem accumsan pharetra est cubilia placerat cubilia est fusce natoque laoreet rutrum porta pellentesque tempus! Inceptos arcu augue phasellus nunc ad aptent sem pulvinar maecenas. Tempor porttitor velit fermentum ornare convallis consequat proin mauris. Magna tortor non integer proin semper ad malesuada cras orci.
 
-Lorem accumsan pharetra est cubilia placerat cubilia est fusce natoque laoreet rutrum porta pellentesque tempus! Inceptos arcu augue phasellus nunc ad aptent sem pulvinar maecenas. Tempor porttitor velit fermentum ornare convallis consequat proin mauris. Magna tortor non integer proin semper ad malesuada cras orci.
+Lorem accumsan pharetra est cubilia placerat cubilia est fusce natoque laoreet rutrum porta pellentesque tempus! Inceptos arcu augue phasellus nunc ad aptent sem pulvinar maecenas. Tempor porttitor velit fermentum ornare convallis consequat proin mauris. Magna tortor non integer proin semper ad malesuada cras orci. See Figure \@ref(fig:fig-income-nom).
 
 ```{r fig-income-nom, fig.cap="Association between parental income and friend nominations by gender."}
 popularity %>%
@@ -154,7 +154,7 @@ Elit semper laoreet tristique etiam egestas arcu ut. Lacus condimentum diam faci
 
 Lorem nullam nunc habitasse blandit eleifend est mauris. Lacus class mauris interdum netus quisque volutpat. Aliquet at cum lobortis odio dapibus nunc porttitor ullamcorper? Suscipit nostra mi vulputate etiam purus tristique posuere augue orci sociis lectus justo a condimentum nascetur nibh.
 
-Elit varius diam quam magnis suscipit leo aptent congue? Proin placerat ultrices interdum mollis platea integer ac pharetra vulputate lacinia. Viverra nostra bibendum lacus lobortis varius condimentum eleifend faucibus odio justo montes sagittis? Eget imperdiet class tellus tincidunt dictumst sem ridiculus quam? Eget rutrum fames ridiculus eget pretium neque libero per! Eget dignissim magna nunc nulla dis orci interdum tellus tortor risus ut.
+Elit varius diam quam magnis suscipit leo aptent congue? Proin placerat ultrices interdum mollis platea integer ac pharetra vulputate lacinia. Viverra nostra bibendum lacus lobortis varius condimentum eleifend faucibus odio justo montes sagittis? Eget imperdiet class tellus tincidunt dictumst sem ridiculus quam? Eget rutrum fames ridiculus eget pretium neque libero per! Eget dignissim magna nunc nulla dis orci interdum tellus tortor risus ut. See Table \@ref(tab:model-table).
 
 ```{r model-table, results="asis"}
 model1 <- lm(indegree~smoker+alcoholuse, data=popularity)
@@ -163,7 +163,7 @@ model3 <- update(model2, .~.+pseudoGPA+honorsociety)
 
 knitreg(list(model1, model2, model3),
         digits=3,
-        caption="Linear models predicting the number of friend nominations recieved, Add Health data",
+        caption="(\\#tab:model-table)Linear models predicting the number of friend nominations recieved, Add Health data",
         caption.above=TRUE,
         booktabs=TRUE,
         float.pos = "t",
@@ -178,6 +178,12 @@ knitreg(list(model1, model2, model3),
 ```
 
 Dolor convallis vulputate dictum mollis ante placerat dui parturient porttitor conubia vitae. Eros nec dignissim tortor nascetur laoreet mi nascetur interdum lacus donec? Non potenti elementum massa hendrerit odio taciti euismod sagittis rhoncus sodales montes mattis? Sociosqu luctus neque euismod elementum accumsan parturient sed morbi scelerisque sociis quis faucibus primis suscipit scelerisque.
+
+Also see Equation \@ref(eq:mean).
+
+\begin{equation}
+\bar{X} = \frac{\sum_{i=1}^n X_i}{n} (\#eq:mean)
+\end{equation}
 
 Sit aenean sociosqu curae magna natoque sociis pulvinar sagittis et congue. Sodales magna montes potenti tristique quis? Id suscipit lobortis suspendisse felis taciti massa vitae convallis in montes. Mauris sodales parturient mus tellus mollis dapibus felis vel? Dui malesuada nibh dui ut torquent taciti sodales tempor dapibus vitae montes?
 
