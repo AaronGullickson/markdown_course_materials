@@ -31,6 +31,12 @@ if(!require(bookdown)) {
 if(!require(rmdformats)) {
   install.packages("rmdformats")
 }
+if(!require(rticles)) {
+  install.packages("rticles")
+}
+if(!require(bslib)) {
+  install.packages("bslib")
+}
 
 # Libraries for web publishing
 if(!require(blogdown)) {
