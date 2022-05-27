@@ -15,10 +15,12 @@ classoption:
   - Royal
   - times
 bibliography: references.bib
+# Many rticles templates use a LaTeX bst file rather than CSL
 bibliographystyle: bib-styles/sageh
 output:
   rticles::sage_article:
     keep_tex: no
+# This is an alternative way to load LaTeX package dependencies
 header-includes: 
  - \usepackage{dcolumn}
  - \usepackage{booktabs}

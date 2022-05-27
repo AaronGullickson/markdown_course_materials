@@ -3,6 +3,7 @@ title: "Example R Markdown Document"
 author: "Aaron Gullickson"
 date: '2022-05-09'
 output:
+  # basic R Markdown formats
   pdf_document: 
     keep_tex: no
     extra_dependencies: ["dcolumn"]
@@ -11,6 +12,7 @@ output:
     self_contained: yes
   word_document: 
     keep_md: no
+  # additional more advanced formats
   bookdown::pdf_document2: 
     keep_tex: no
     toc: false
@@ -20,8 +22,11 @@ output:
     toc_depth: 2
     code_folding: hide
     lightbox: TRUE
+# bibliography information for citations
 bibliography: references.bib
 csl: bib-styles/chicago-parenthetical.csl
+# You can also use a link to the CSL rather than a local file
+#csl: https://www.zotero.org/styles/modern-language-association-7th-edition
 ---
 
 ```{r setup, include=FALSE}
