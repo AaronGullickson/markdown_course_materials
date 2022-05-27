@@ -3,12 +3,12 @@ title: "Example R Markdown Document"
 author: "Aaron Gullickson"
 date: '2022-05-09'
 output:
-  html_document: 
-    keep_md: no
-    self_contained: yes
   pdf_document: 
     keep_tex: no
     extra_dependencies: ["dcolumn"]
+  html_document: 
+    keep_md: no
+    self_contained: yes
   word_document: 
     keep_md: no
 bibliography: references.bib
@@ -16,7 +16,8 @@ csl: bib-styles/chicago-parenthetical.csl
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message = FALSE,
+                      fig.pos="t", fig.height=4, out.extra="")
 library(ggplot2)
 library(tidyverse)
 library(scales)
