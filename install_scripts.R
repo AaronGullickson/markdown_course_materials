@@ -23,6 +23,12 @@ if(!require(texreg)) {
 if(!require(flextable)) {
   install.packages("flextable")
 }
+if(!require(gt)) {
+  install.packages("gt")
+}
+if(!require(gtsummary)) {
+  install.packages("gtsummary")
+}
 
 # Libraries with custom templates
 if(!require(bookdown)) {
