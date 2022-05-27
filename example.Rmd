@@ -11,6 +11,11 @@ output:
     self_contained: yes
   word_document: 
     keep_md: no
+  rmdformats::robobook:
+    highlight: tango
+    toc_depth: 2
+    code_folding: hide
+    lightbox: TRUE
 bibliography: references.bib
 csl: bib-styles/chicago-parenthetical.csl
 ---
