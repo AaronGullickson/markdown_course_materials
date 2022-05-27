@@ -45,6 +45,9 @@ if(!require(rticles)) {
 if(!require(bslib)) {
   install.packages("bslib")
 }
+if(!require(thematic)) {
+  install.packages("thematic")
+}
 
 # Libraries for web publishing
 if(!require(blogdown)) {
