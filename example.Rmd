@@ -11,6 +11,10 @@ output:
     self_contained: yes
   word_document: 
     keep_md: no
+  bookdown::pdf_document2: 
+    keep_tex: no
+    toc: false
+    extra_dependencies: ["dcolumn"]
   rmdformats::robobook:
     highlight: tango
     toc_depth: 2
