@@ -3,16 +3,16 @@ title: "Example R Markdown Document"
 author: "Aaron Gullickson"
 date: '2022-05-09'
 output:
-  pdf_document: 
-    keep_tex: no
-    extra_dependencies: ["dcolumn"]
   html_document: 
     keep_md: no
     self_contained: yes
+  pdf_document: 
+    keep_tex: no
+    extra_dependencies: ["dcolumn"]
   word_document: 
     keep_md: no
 bibliography: references.bib
-csl: ajs.csl
+csl: bib-styles/chicago-parenthetical.csl
 ---
 
 ```{r setup, include=FALSE}
@@ -36,7 +36,9 @@ Consectetur *sodales* suscipit ultrices venenatis sagittis hendrerit lacus. Impe
 2.  Molestie egestas fermentum aliquam convallis fames dictum?
 3.  Consectetur vehicula habitant porttitor volutpat velit augue eleifend rutrum accumsan quam pretium pretium?
 
-Consectetur ullamcorper pharetra mattis leo himenaeos magnis non est non sagittis. Nec rutrum aptent sapien convallis euismod taciti felis interdum torquent suspendisse. Ultrices auctor hac ad arcu urna leo integer. Torquent turpis accumsan suscipit cum laoreet blandit ante molestie netus a. Sociosqu placerat purus mollis senectus blandit magna quis pharetra sodales. Platea dui felis porttitor leo enim aenean interdum mauris libero primis volutpat vulputate. Ultrices ullamcorper magna consequat vehicula leo massa at erat sapien arcu scelerisque.
+Consectetur ullamcorper pharetra mattis leo himenaeos magnis non est non sagittis.^[This is a footnote.] Nec rutrum aptent sapien convallis euismod taciti felis interdum torquent suspendisse. Ultrices auctor hac ad arcu urna leo integer. Torquent turpis accumsan suscipit cum laoreet blandit ante molestie netus a. Sociosqu placerat purus mollis senectus blandit magna quis pharetra sodales. Platea dui felis porttitor leo enim aenean interdum mauris libero primis volutpat vulputate. Ultrices ullamcorper magna consequat vehicula leo massa at erat sapien arcu scelerisque.[^ssx]
+
+[^ssx]: This is another footnote. This one has math. $$\sum (x_i-\bar{x})^2$$
 
 # Background
 
@@ -46,7 +48,7 @@ Adipiscing habitasse integer sed fusce phasellus morbi libero mauris scelerisque
 
 ## Subsection 1
 
-Amet ridiculus magna ut pulvinar viverra himenaeos dignissim malesuada elementum montes. Luctus libero torquent praesent eleifend pretium convallis dictumst dictum! Porta erat senectus class pellentesque lobortis curabitur non pulvinar varius nibh lobortis fermentum sem? Volutpat id curabitur mattis egestas netus habitasse purus aliquam montes. Pellentesque pellentesque placerat integer varius sagittis curabitur laoreet nunc maecenas ullamcorper [@lieberson_many_1988].
+Amet ridiculus magna ut pulvinar viverra himenaeos dignissim malesuada elementum montes. Luctus libero torquent praesent eleifend pretium convallis dictumst dictum! Porta erat senectus class pellentesque lobortis curabitur non pulvinar varius nibh lobortis fermentum sem? Volutpat id curabitur mattis egestas netus habitasse purus aliquam montes. Pellentesque pellentesque placerat integer varius sagittis curabitur laoreet nunc maecenas ullamcorper [see @lieberson_many_1988].
 
 Amet rutrum a venenatis mi lectus venenatis nullam purus libero. Pulvinar dapibus nisl dapibus ornare dignissim nibh congue elementum pharetra natoque cum ac laoreet tortor facilisi penatibus sollicitudin.
 
@@ -106,7 +108,9 @@ popularity %>%
 
 Lorem lobortis lectus pellentesque sapien vivamus eros felis cum. Mattis risus euismod vivamus vel mi nostra euismod euismod praesent aliquam? Sagittis posuere bibendum turpis arcu maecenas gravida leo sollicitudin primis. Ullamcorper lacinia laoreet tincidunt mollis torquent semper. Sem nascetur eleifend gravida nostra magnis arcu gravida facilisis sollicitudin? Cum curae placerat et auctor faucibus arcu ad mauris sollicitudin nunc! Posuere iaculis arcu dapibus dis ullamcorper pellentesque penatibus ultrices sed aenean ligula ullamcorper donec aliquam.
 
-Elit nam mus class aliquam volutpat purus mauris ultricies aptent dignissim. Iaculis pulvinar at inceptos sociosqu blandit tristique ridiculus et sagittis mus justo. Suspendisse commodo nullam risus molestie pulvinar elementum malesuada consequat non velit augue. Vehicula id purus vulputate metus dis lectus magna purus nullam scelerisque interdum. Montes quis sem convallis vehicula orci habitasse metus nullam imperdiet faucibus dignissim! Na dignissim.
+$$y_i=\beta_0+\beta_1x_i+\epsilon_i$$
+
+Elit nam mus class aliquam volutpat purus mauris ultricies aptent dignissim ($\beta_1=0$). Iaculis pulvinar at inceptos sociosqu blandit tristique ridiculus et sagittis mus justo. Suspendisse commodo nullam risus molestie pulvinar elementum malesuada consequat non velit augue. Vehicula id purus vulputate metus dis lectus magna purus nullam scelerisque interdum. Montes quis sem convallis vehicula orci habitasse metus nullam imperdiet faucibus dignissim! Na dignissim.
 
 ```{r dist-nominations, fig.cap="Distribution of number of friend nominations received in Add Health data"}
 popularity %>%
