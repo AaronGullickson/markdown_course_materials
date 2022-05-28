@@ -48,6 +48,17 @@ if(!require(bslib)) {
 if(!require(thematic)) {
   install.packages("thematic")
 }
+if(!require(pagedown)) {
+  install.packages("pagedown")
+}
+
+# Libraries for xaringan presentations
+if(!require(xaringan)) {
+  install.packages("xaringan")
+}
+if(!require(xaringanExtra)) {
+  install.packages("xaringanExtra")
+}
 
 # Libraries for web publishing
 if(!require(blogdown)) {
@@ -56,7 +67,6 @@ if(!require(blogdown)) {
 if(!require(distill)) {
   install.packages("distill")
 }
-
 
 
 # Additional libraries that our documents will use
