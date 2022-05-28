@@ -1,54 +1,50 @@
 ---
-# Basic information on title, author, date, and abstract
 title: "Example R Markdown Document"
 author: "Aaron Gullickson"
 date: '2022-05-09'
 abstract: "Ipsum nostra facilisis sapien nullam. Facilisi himenaeos pharetra ultricies scelerisque non fusce quisque aliquam netus tellus. Dictum tellus et sociis quisque ornare ad a natoque magna blandit. Tortor duis aptent cursus lacus inceptos tristique magnis dictumst. Taciti varius nascetur aliquet hac ornare vitae ultricies. Rhoncus primis purus morbi aliquet quam cubilia nullam malesuada ridiculus."
-# The next three entries only work in some output formats
 keywords: Rmarkdown; Examples; Reproducibility
 description: An R Markdown Document for Testing and Playing
 thanks: Thanks to everyone for checking this out.
-# The next five entries can be uncommented to change look for LaTeX/PDF only
 #documentclass: scrartcl
 #fontfamily: accanthis # See https://tug.org/FontCatalogue/ for full list
-#fontsize: 11pt
-#geometry: margin=1in
-#papersize: letter
-# All of the various output options are listed below with further indentation
-# for specific output options
+#fontsize: 11pt        # font size
+#linestretch: 1        # line spacing
+#geometry: margin=1in  # margin size
+#papersize: letter     # paper type
+#lof: false            # list of figures
+#lot: false            # list of tables
 output:
-  html_document: 
-    self_contained: yes
-    keep_md: no
-    code_folding: none
-    number_sections: yes
-    #css: templates/my_styles.css
   pdf_document: 
     keep_tex: no
     toc: false
     number_sections: false
     extra_dependencies: ["dcolumn"]
-  word_document: 
-    keep_md: no
-    #reference_docx: templates/aog_word_style.docx
   bookdown::pdf_document2: 
     keep_tex: no
     toc: false
     number_sections: false
     #template: templates/aog-latex-ms.tex
     extra_dependencies: ["dcolumn"]
-  distill::distill_article:
-    toc: true
-    toc_depth: 2
+  word_document: 
+    keep_md: no
+    #reference_docx: templates/aog_word_style.docx
   rmdformats::robobook:
     highlight: tango
     toc_depth: 2
     code_folding: hide
     lightbox: TRUE
-# These last entries control aspects of the bibliography and citation
+  html_document: 
+    self_contained: yes
+    keep_md: no
+    code_folding: none
+    number_sections: no
+    #css: templates/my_styles.css
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
 bibliography: references.bib
 csl: bib-styles/chicago-parenthetical.csl
-# You can also specify CSL files with a url
 #csl: https://www.zotero.org/styles/modern-language-association-7th-edition
 ---
 
