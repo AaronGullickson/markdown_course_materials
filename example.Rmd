@@ -7,7 +7,7 @@ keywords: Rmarkdown; Examples; Reproducibility
 description: An R Markdown Document for Testing and Playing
 thanks: Thanks to everyone for checking this out.
 #documentclass: scrartcl
-#fontfamily: mathpazo # See https://tug.org/FontCatalogue/ for full list
+#fontfamily: accanthis # See https://tug.org/FontCatalogue/ for full list
 #fontsize: 11pt
 #geometry: margin=1in
 #papersize: letter
