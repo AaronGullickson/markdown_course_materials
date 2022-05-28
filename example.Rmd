@@ -13,6 +13,8 @@ thanks: Thanks to everyone for checking this out.
 #papersize: letter
 output:
   html_document: 
+    self_contained: yes
+    keep_md: no
     code_folding: none
     number_sections: yes
     #css: templates/my_styles.css
