@@ -59,6 +59,9 @@ if(!require(xaringan)) {
 if(!require(xaringanExtra)) {
   install.packages("xaringanExtra")
 }
+if(!require(xaringanthemer)) {
+  install.packages("xaringanthemer")
+}
 
 # Libraries for web publishing
 if(!require(blogdown)) {
