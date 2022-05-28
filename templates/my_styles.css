@@ -1,0 +1,23 @@
+/* Adjustments for figure caption headings */
+p.caption {
+  font-size: 0.9em;
+  /*font-style: italic;*/
+  color: #696969;
+  margin-right: 5%;
+  margin-left: 5%;  
+  margin-bottom: 2%;
+  text-align: center;
+}
+
+/* Adjustments for table caption headings */
+caption {
+  font-style: normal;
+  /*font-weight: bold;*/
+  color: #696969;
+  text-align: left;
+}
+
+/* highlight links with background color when hovered over */
+a:hover {
+    background-color: #ffe5b4;
+}

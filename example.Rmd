@@ -12,14 +12,15 @@ thanks: Thanks to everyone for checking this out.
 #geometry: margin=1in
 #papersize: letter
 output:
+  html_document: 
+    code_folding: none
+    number_sections: yes
+    #css: templates/my_styles.css
   pdf_document: 
     keep_tex: no
     toc: false
     number_sections: false
     extra_dependencies: ["dcolumn"]
-  html_document: 
-    code_folding: none
-    number_sections: yes
   word_document: 
     keep_md: no
     #reference_docx: templates/aog_word_style.docx
