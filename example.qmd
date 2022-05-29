@@ -6,55 +6,28 @@ abstract: "Ipsum nostra facilisis sapien nullam. Facilisi himenaeos pharetra ult
 keywords: Rmarkdown; Examples; Reproducibility
 description: An R Markdown Document for Testing and Playing
 thanks: Thanks to everyone for checking this out.
-#documentclass: scrartcl
-#fontfamily: accanthis # See https://tug.org/FontCatalogue/ for full list
-#fontsize: 11pt        # font size
-#linestretch: 1        # line spacing
-#geometry: margin=1in  # margin size
-#papersize: letter     # paper type
-#lof: false            # list of figures
-#lot: false            # list of tables
-output:
-  pdf_document: 
-    keep_tex: no
-    toc: false
-    number_sections: false
-    extra_dependencies: ["dcolumn"]
-  html_document: 
-    self_contained: yes
-    keep_md: no
-    code_folding: none
-    number_sections: no
-    #css: templates/my_styles.css
-  word_document: 
-    keep_md: no
-    #reference_docx: templates/aog_word_style.docx
-  bookdown::pdf_document2: 
-    keep_tex: no
-    toc: false
-    number_sections: false
-    #template: templates/aog-latex-ms.tex
-    extra_dependencies: ["dcolumn"]
-  rmdformats::robobook:
-    highlight: tango
-    toc_depth: 2
-    code_folding: hide
-    lightbox: TRUE
-  distill::distill_article:
-    toc: true
-    toc_depth: 2
-  pagedown::html_paged:
-    toc: false
-    self_contained: true
-    number_sections: false
+execute: 
+  eval: true
+  echo: false
+  warning: false
+  error: false
+format: 
+  pdf:
+    fig-pos: t
+    fig-height: 4
+    keep-md: false
+    keep-tex: true
+    include-in-header: 
+      text: |
+        \usepackage{booktabs}
+        \usepackage{dcolumn}
 bibliography: references.bib
 csl: bib-styles/chicago-parenthetical.csl
-#csl: https://www.zotero.org/styles/modern-language-association-7th-edition
+editor: visual
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message = FALSE,
-                      fig.pos="t", fig.height=4, out.extra="")
+```{r setup}
+#| include: false
 library(ggplot2)
 library(tidyverse)
 library(scales)
@@ -74,9 +47,11 @@ Consectetur *sodales* suscipit ultrices venenatis sagittis hendrerit lacus. Impe
 2.  Molestie egestas fermentum aliquam convallis fames dictum?
 3.  Consectetur vehicula habitant porttitor volutpat velit augue eleifend rutrum accumsan quam pretium pretium?
 
-Consectetur ullamcorper pharetra mattis leo himenaeos magnis non est non sagittis.^[This is a footnote.] Nec rutrum aptent sapien convallis euismod taciti felis interdum torquent suspendisse. Ultrices auctor hac ad arcu urna leo integer. Torquent turpis accumsan suscipit cum laoreet blandit ante molestie netus a. Sociosqu placerat purus mollis senectus blandit magna quis pharetra sodales. Platea dui felis porttitor leo enim aenean interdum mauris libero primis volutpat vulputate. Ultrices ullamcorper magna consequat vehicula leo massa at erat sapien arcu scelerisque.[^ssx]
+Consectetur ullamcorper pharetra mattis leo himenaeos magnis non est non sagittis.[^1] Nec rutrum aptent sapien convallis euismod taciti felis interdum torquent suspendisse. Ultrices auctor hac ad arcu urna leo integer. Torquent turpis accumsan suscipit cum laoreet blandit ante molestie netus a. Sociosqu placerat purus mollis senectus blandit magna quis pharetra sodales. Platea dui felis porttitor leo enim aenean interdum mauris libero primis volutpat vulputate. Ultrices ullamcorper magna consequat vehicula leo massa at erat sapien arcu scelerisque.[^2]
 
-[^ssx]: This is another footnote. This one has math. $$\sum (x_i-\bar{x})^2$$
+[^1]: This is a footnote.
+
+[^2]: This is another footnote. This one has math. $$\sum (x_i-\bar{x})^2$$
 
 # Background
 
@@ -100,9 +75,11 @@ Ipsum fringilla natoque sem praesent auctor tellus viverra convallis nullam quis
 
 # Data and Methods
 
-Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis mattis. Porta pharetra rhoncus dis massa nulla ornare egestas! Ante leo cursus mauris eleifend potenti donec tempus. Fusce ultricies aptent accumsan himenaeos netus augue felis nibh. Duis commodo himenaeos aliquam integer!
+Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis mattis. Porta pharetra rhoncus dis massa nulla ornare egestas! Ante leo cursus mauris eleifend potenti donec tempus. Fusce ultricies aptent accumsan himenaeos netus augue felis nibh. Duis commodo himenaeos aliquam integer! See @tbl-descriptive.
 
-```{r desc-stats-kable, eval=TRUE}
+```{r}
+#| label: tbl-descriptive
+#| tbl-cap: Sample size and descriptive statistics, Add Health data, Wave 1
 popularity %>% 
   group_by(grade) %>%
   summarize(n=comma(n()), m_nom=round(mean(indegree), 2), 
@@ -125,7 +102,9 @@ popularity %>%
            general_title="Notes: ", title_format="italic")
 ```
 
-```{r desc-stats-flex, eval=FALSE}
+```{r desc-stats-flex}
+#| eval: false
+#| results: asis
 popularity %>% 
   group_by(grade) %>%
   summarize(n=n(), m_nom=mean(indegree), p_drink=100*mean(alcoholuse=="Drinker"),
@@ -148,9 +127,11 @@ Lorem lobortis lectus pellentesque sapien vivamus eros felis cum. Mattis risus e
 
 $$y_i=\beta_0+\beta_1x_i+\epsilon_i$$
 
-Elit nam mus class aliquam volutpat purus mauris ultricies aptent dignissim ($\beta_1=0$). Iaculis pulvinar at inceptos sociosqu blandit tristique ridiculus et sagittis mus justo. Suspendisse commodo nullam risus molestie pulvinar elementum malesuada consequat non velit augue. Vehicula id purus vulputate metus dis lectus magna purus nullam scelerisque interdum. Montes quis sem convallis vehicula orci habitasse metus nullam imperdiet faucibus dignissim! Na dignissim.
+Elit nam mus class aliquam volutpat purus mauris ultricies aptent dignissim ($\beta_1=0$). Iaculis pulvinar at inceptos sociosqu blandit tristique ridiculus et sagittis mus justo. Suspendisse commodo nullam risus molestie pulvinar elementum malesuada consequat non velit augue. Vehicula id purus vulputate metus dis lectus magna purus nullam scelerisque interdum. Montes quis sem convallis vehicula orci habitasse metus nullam imperdiet faucibus dignissim! Na dignissim. See @fig-dist.
 
-```{r dist-nominations, fig.cap="Distribution of number of friend nominations received in Add Health data"}
+```{r}
+#| label: fig-dist
+#| fig-cap: "Distribution of number of friend nominations received in Add Health data"
 popularity %>%
   ggplot(aes(x=indegree))+
   geom_histogram(binwidth = 1, center=0.5, 
@@ -167,9 +148,11 @@ Elit imperdiet aenean varius conubia sagittis orci ultrices. Ridiculus conubia a
 
 Lorem accumsan pharetra est cubilia placerat cubilia est fusce natoque laoreet rutrum porta pellentesque tempus! Inceptos arcu augue phasellus nunc ad aptent sem pulvinar maecenas. Tempor porttitor velit fermentum ornare convallis consequat proin mauris. Magna tortor non integer proin semper ad malesuada cras orci.
 
-Lorem accumsan pharetra est cubilia placerat cubilia est fusce natoque laoreet rutrum porta pellentesque tempus! Inceptos arcu augue phasellus nunc ad aptent sem pulvinar maecenas. Tempor porttitor velit fermentum ornare convallis consequat proin mauris. Magna tortor non integer proin semper ad malesuada cras orci.
+Lorem accumsan pharetra est cubilia placerat cubilia est fusce natoque laoreet rutrum porta pellentesque tempus! Inceptos arcu augue phasellus nunc ad aptent sem pulvinar maecenas. Tempor porttitor velit fermentum ornare convallis consequat proin mauris. Magna tortor non integer proin semper ad malesuada cras orci. See @fig-scatter.
 
-```{r fig-income-nom, fig.cap="Association between parental income and friend nominations by gender."}
+```{r}
+#| label: fig-scatter
+#| fig-cap: "Association between parental income and friend nominations by gender."
 popularity %>%
   ggplot(aes(x=parentinc, y=indegree, color=sex))+
   geom_jitter(alpha=0.3)+
@@ -192,12 +175,14 @@ Lorem nullam nunc habitasse blandit eleifend est mauris. Lacus class mauris inte
 
 Elit varius diam quam magnis suscipit leo aptent congue? Proin placerat ultrices interdum mollis platea integer ac pharetra vulputate lacinia. Viverra nostra bibendum lacus lobortis varius condimentum eleifend faucibus odio justo montes sagittis? Eget imperdiet class tellus tincidunt dictumst sem ridiculus quam? Eget rutrum fames ridiculus eget pretium neque libero per! Eget dignissim magna nunc nulla dis orci interdum tellus tortor risus ut.
 
-```{r model-table, results="asis"}
+```{r}
+#| label: model-table
+#| results: asis
 model1 <- lm(indegree~smoker+alcoholuse, data=popularity)
 model2 <- update(model1, .~.+parentinc+sex+race)
 model3 <- update(model2, .~.+pseudoGPA+honorsociety)
 
-knitreg(list(model1, model2, model3),
+texreg(list(model1, model2, model3),
         digits=3,
         caption="Linear models predicting the number of friend nominations recieved, Add Health data",
         caption.above=TRUE,
@@ -211,7 +196,7 @@ knitreg(list(model1, model2, model3),
                             "Native American","Pseudo-GPA",
                             "Honor society member"),
         custom.note="%stars. Standard errors in parenthesis.",
-        use.packages=FALSE)
+       use.packages=FALSE)
 ```
 
 Dolor convallis vulputate dictum mollis ante placerat dui parturient porttitor conubia vitae. Eros nec dignissim tortor nascetur laoreet mi nascetur interdum lacus donec? Non potenti elementum massa hendrerit odio taciti euismod sagittis rhoncus sodales montes mattis? Sociosqu luctus neque euismod elementum accumsan parturient sed morbi scelerisque sociis quis faucibus primis suscipit scelerisque.
