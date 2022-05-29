@@ -48,6 +48,8 @@ blogdown::build_site()
 
 This command will create a `public` directory that contains your entire site. You can copy all of the files here to a public server and they should display correctly.
 
+Alternatively, if you are comfortable with git/GitHub, you can commit and push your entire blogdown directory (not the `public` subdirectory) up to a GitHub repository. You can then associate that repository with a [GitHub Pages](https://pages.github.com/) website or use [Netlify](https://netlify.app/) to deploy it.
+
 ## Changing Site Design
 
 If you want to mess about with the overall site design, you will want to learn a little more about how [Hugo](https://gohugo.io/) works. Many of the useful parameters (including the theme) can be adjusted in the top-level `config.yaml` file. Generally, you should only be modifying that file and files in the content directory, unless you are messing about with theming.
