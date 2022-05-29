@@ -20,29 +20,33 @@ output:
     toc: false
     number_sections: false
     extra_dependencies: ["dcolumn"]
-  bookdown::pdf_document2: 
-    keep_tex: no
-    toc: false
-    number_sections: false
-    #template: templates/aog-latex-ms.tex
-    extra_dependencies: ["dcolumn"]
-  word_document: 
-    keep_md: no
-    #reference_docx: templates/aog_word_style.docx
-  rmdformats::robobook:
-    highlight: tango
-    toc_depth: 2
-    code_folding: hide
-    lightbox: TRUE
   html_document: 
     self_contained: yes
     keep_md: no
     code_folding: none
     number_sections: no
     #css: templates/my_styles.css
+  word_document: 
+    keep_md: no
+    #reference_docx: templates/aog_word_style.docx
+  bookdown::pdf_document2: 
+    keep_tex: no
+    toc: false
+    number_sections: false
+    #template: templates/aog-latex-ms.tex
+    extra_dependencies: ["dcolumn"]
+  rmdformats::robobook:
+    highlight: tango
+    toc_depth: 2
+    code_folding: hide
+    lightbox: TRUE
   distill::distill_article:
     toc: true
     toc_depth: 2
+  pagedown::html_paged:
+    toc: false
+    self_contained: true
+    number_sections: false
 bibliography: references.bib
 csl: bib-styles/chicago-parenthetical.csl
 #csl: https://www.zotero.org/styles/modern-language-association-7th-edition
