@@ -1,0 +1,162 @@
+---
+title: "My Presentation"
+subtitle: "A Subtitle"
+author: "Aaron Gullickson"
+institute: "University of Oregon"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [xaringan-themer.css, presentation_template.css]
+    self_contained: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: ""
+      ratio: 16:10
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.retina = 3, message=FALSE, warning=FALSE, echo=FALSE,
+                      fig.width=13, fig.height=6.5, fig.align="center")
+library(dplyr)
+library(knitr)
+library(texreg)
+library(ggplot2)
+library(kableExtra)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_light(base_color="#23395b",
+                 white_color="#EAEBEE",
+  header_font_google = google_font("Yanone Kaffeesatz", "400"),
+  text_font_google   = google_font("Open Sans", "400", "400i"),
+  code_font_google   = google_font("Fira Mono")
+)
+```
+
+```{r custom-ggtheme, include=FALSE}
+theme_myslides <- theme_xaringan(background_color = "#EAEBEE")+
+  theme(axis.title = element_text(size=20),
+        axis.text = element_text(size=12),
+        plot.title = element_text(size=24, hjust=0),
+        plot.title.position = "panel",
+        plot.subtitle = element_text(size=16, hjust=0),
+        plot.caption = element_text(size=14, hjust=1, vjust=1),
+        plot.caption.position = "panel",
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), panel.border = element_rect(fill=NA))
+theme_set(theme_myslides)
+```
+
+class: inverse, center, middle
+
+background-image: url(images/mikael-kristenson-3aVlWP-7bg8-unsplash.jpg)
+background-size: cover
+
+# An Inverse Cover Slide
+
+---
+
+## Basic Bullet Points
+
+This is an example of a basic slide with just text and bullet points on it. The `--` makes the bullet points appear one by one. 
+
+--
+
+- Bullet 1
+
+--
+
+- Bullet 2
+
+--
+
+- Bullet 3
+
+---
+
+## Split a Slide
+
+You can use `.pull-left[]` and `.pull-right[]` to split slide in two.
+
+--
+
+.pull-left[
+### A Point
+- Unfortunately, you cannot make
+- bullet points appear sequentially within
+- sub-frames
+]
+
+--
+
+.pull-right[
+LaTex style equations work well:
+
+$$\hat{y}_i=\beta_0+\beta_1x_i$$
+]
+
+
+---
+
+## A Neat Figure
+
+```{r}
+ggplot(mpg, aes(displ, hwy, colour = class)) + 
+  geom_point()+
+  labs(title="A scatterplot", subtitle = "A subtitle", caption="A caption")+
+  scale_xaringan_color_discrete()
+```
+
+---
+
+## Half-sized figure
+
+.pull-left[
+```{r, fig.width=6.5}
+ggplot(mpg, aes(displ, hwy, colour = class)) + 
+  geom_point()
+```
+]
+
+.pull-right[
+To make a figure take up half slide, set `fig.width` to 6.5 and  use `pull-left` and `pull-right` to add comments or other details on the other side (or put two figures side by side).
+]
+
+---
+
+## Slide with a regression model using texreg
+
+.knitreg[
+```{r results="asis"}
+model1 <- lm(Fertility~Agriculture, data=swiss)
+model2 <- update(model1, .~.+Education)
+model3 <- update(model2, .~.+Catholic)
+htmlreg(list(model1, model2, model3),
+        custom.coef.names=c("Intercept",
+                            "Percent in agriculture",
+                            "Percent with primary education",
+                            "Percent Catholic"),
+        custom.gof.names = c("R-squared","N"),
+        caption="OLS regression models predicting fertility index in Swiss cantons",
+        caption.above=TRUE,
+        digits=2,
+        star.symbol='&#42;',
+        custom.note = "%stars. Standard errors in parenthesis.",
+        include.adjrs=FALSE, include.rmse=FALSE,
+        doctype = FALSE)
+```
+]
+
+---
+
+## Slide with table using kable and kableExtra
+
+```{r, results='asis'}
+dt <- mtcars[1:5, 1:6]
+kable(dt, caption="Car info") %>% 
+  kable_material()
+```
