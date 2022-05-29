@@ -7,3 +7,4 @@
 *.pdf
 *.png
 presentation/libs/*
+blogdown/public/*
