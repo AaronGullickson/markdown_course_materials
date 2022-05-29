@@ -48,7 +48,7 @@ theme_myslides <- theme_xaringan(background_color = "#EAEBEE")+
         plot.caption.position = "panel",
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(), panel.border = element_rect(fill=NA))
-theme_set(theme_myslides)
+#theme_set(theme_myslides)
 ```
 
 class: inverse, center, middle
@@ -94,7 +94,7 @@ You can use `.pull-left[]` and `.pull-right[]` to split slide in two.
 --
 
 .pull-right[
-LaTex style equations work well:
+LaTeX style equations work well:
 
 $$\hat{y}_i=\beta_0+\beta_1x_i$$
 ]
@@ -108,7 +108,8 @@ $$\hat{y}_i=\beta_0+\beta_1x_i$$
 ggplot(mpg, aes(displ, hwy, colour = class)) + 
   geom_point()+
   labs(title="A scatterplot", subtitle = "A subtitle", caption="A caption")+
-  scale_xaringan_color_discrete()
+  scale_xaringan_color_discrete()+
+  theme_xaringan()
 ```
 
 ---
@@ -118,7 +119,9 @@ ggplot(mpg, aes(displ, hwy, colour = class)) +
 .pull-left[
 ```{r, fig.width=6.5}
 ggplot(mpg, aes(displ, hwy, colour = class)) + 
-  geom_point()
+  geom_point()+
+  scale_xaringan_color_discrete()+
+  theme_xaringan()
 ```
 ]
 
@@ -135,19 +138,18 @@ To make a figure take up half slide, set `fig.width` to 6.5 and  use `pull-left`
 model1 <- lm(Fertility~Agriculture, data=swiss)
 model2 <- update(model1, .~.+Education)
 model3 <- update(model2, .~.+Catholic)
-htmlreg(list(model1, model2, model3),
+knitreg(list(model1, model2, model3),
         custom.coef.names=c("Intercept",
                             "Percent in agriculture",
                             "Percent with primary education",
                             "Percent Catholic"),
         custom.gof.names = c("R-squared","N"),
-        caption="OLS regression models predicting fertility index in Swiss cantons",
+        caption="Models predicting fertility index",
         caption.above=TRUE,
         digits=2,
         star.symbol='&#42;',
         custom.note = "%stars. Standard errors in parenthesis.",
-        include.adjrs=FALSE, include.rmse=FALSE,
-        doctype = FALSE)
+        include.adjrs=FALSE, include.rmse=FALSE)
 ```
 ]
 
