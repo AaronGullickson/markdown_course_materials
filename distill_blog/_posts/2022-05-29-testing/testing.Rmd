@@ -1,0 +1,33 @@
+---
+title: "A Test Post"
+description: |
+  A test post created using the Distill format.
+author:
+  - name: Aaron Gullickson
+    url: https://aarongullickson.netlify.app
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+I created this post in R with the following command:
+
+```r
+distill:create_post("testing")
+```
+
+This creates a subdirectory in the `_posts` to contain my post as well as the R Markdown file for the actual post. I can write this R markdown file as usual like:
+
+```{r, echo=TRUE, fig.cap="A Neat Figure"}
+library(ggplot2)
+ggplot(mpg, aes(displ, hwy, colour = class)) + 
+  geom_point()+
+  theme_bw()
+```
+
+To test out my post, I just need to knit it.

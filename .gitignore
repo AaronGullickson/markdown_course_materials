@@ -8,3 +8,5 @@
 *.png
 presentation/libs/*
 blogdown/public/*
+distill_blog/_site
+distill_blog/_posts/**/*_files
