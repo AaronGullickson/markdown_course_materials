@@ -5,7 +5,7 @@ These are the course materials for the [course on R Markdown](https://codehorizo
 ## Preparation for the Course
 
 1. Ensure that you have RStudio and R installed and updated to a recent version. 
-2. Download or clone these course materials to your local machine.
+2. [Download](https://github.com/AaronGullickson/markdown_course_materials/releases) or clone these course materials to your local machine.
 3. Run/source the `install_scripts.R` script contained in these course materials to install any required R packages for the course. You can do this by opening it in RStudio and selecting the "Source" button at the top of the document viewer panel.
 
 ## Full Documentation of Materials
