@@ -16,7 +16,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{python py-setup, include=FALSE}
+```{python py-setup, include=FALSE, eval=FALSE}
+# example of a python code chunk, turn eval to TRUE to run
 import numpy as np
 from sklearn.linear_model import LinearRegression
 model = LinearRegression()
@@ -42,7 +43,7 @@ plot(pressure)
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
-```{python}
+```{python, eval=FALSE}
 x = np.array([5, 15, 25, 35, 45, 55]).reshape((-1, 1))
 y = np.array([5, 20, 14, 32, 22, 38])
 model.fit(x, y)
