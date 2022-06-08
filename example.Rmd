@@ -16,17 +16,17 @@ thanks: Thanks to everyone for checking this out.
 #lot: false            # list of tables
 always_allow_html: true
 output:
-  pdf_document: 
-    keep_tex: no
-    toc: false
-    number_sections: false
-    extra_dependencies: ["dcolumn"]
   html_document: 
     self_contained: yes
     keep_md: no
     code_folding: none
     number_sections: no
     #css: templates/my_styles.css
+  pdf_document: 
+    keep_tex: yes
+    toc: false
+    number_sections: false
+    extra_dependencies: ["dcolumn"]
   word_document: 
     keep_md: no
     #reference_docx: templates/aog_word_style.docx
@@ -102,6 +102,38 @@ Ipsum fringilla natoque sem praesent auctor tellus viverra convallis nullam quis
 # Data and Methods
 
 Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis mattis. Porta pharetra rhoncus dis massa nulla ornare egestas! Ante leo cursus mauris eleifend potenti donec tempus. Fusce ultricies aptent accumsan himenaeos netus augue felis nibh. Duis commodo himenaeos aliquam integer!
+
+```{r example-class, results="asis", eval=FALSE}
+dt <- popularity %>%
+  group_by(grade) %>%
+  summarize(n=comma(n()), m_nom=round(mean(indegree), 2), 
+         p_drink=mean(alcoholuse=="Drinker"),
+         p_smoke=mean(smoker=="Smoker"))
+
+popularity %>%
+  group_by(grade) %>%
+  summarize(n=comma(n()), m_nom=round(mean(indegree), 2), 
+         p_drink=percent(mean(alcoholuse=="Drinker"), accuracy=0.1),
+         p_smoke=percent(mean(smoker=="Smoker"), accuracy=0.1)) %>%
+  kbl(caption="Sample size and descriptive statistics, Add Health data, Wave 1",
+      position="t",
+      align = c("l",rep("r", 4)),
+      col.names = c("Grade","N","Mean friend nominations",
+                    "Drink regularly", "Smoke regularly"),
+      booktabs=TRUE, linesep=NULL) %>%
+  kable_classic(full_width=TRUE) %>%
+  add_header_above(c(" "=3, "Percent substance use"=2), bold = TRUE) %>%
+  row_spec(0, bold = TRUE) %>%
+  column_spec(2, width = "1cm") %>%
+  #column_spec(4, color = ifelse(dt$p_drink>.1, "red","black")) %>%
+  pack_rows("Middle school", 1, 2) %>%
+  pack_rows("High school", 3, 6) %>%
+  footnote(general=c("Drinking frequently is defined as drinking at least one or twice a month for the previous 12 months.", "Smoking frequently is defines as smoking at least 5 cigarettes in the last 30 days."),
+           number = c("A footnote", "Another footnote"),
+           alphabet = c("Heres one!", "Heres another"),
+           symbol = c("One Monkey", "Two Monkeys"))
+  
+```
 
 ```{r desc-stats-kable, eval=TRUE}
 popularity %>% 
@@ -192,6 +224,25 @@ Elit semper laoreet tristique etiam egestas arcu ut. Lacus condimentum diam faci
 Lorem nullam nunc habitasse blandit eleifend est mauris. Lacus class mauris interdum netus quisque volutpat. Aliquet at cum lobortis odio dapibus nunc porttitor ullamcorper? Suscipit nostra mi vulputate etiam purus tristique posuere augue orci sociis lectus justo a condimentum nascetur nibh.
 
 Elit varius diam quam magnis suscipit leo aptent congue? Proin placerat ultrices interdum mollis platea integer ac pharetra vulputate lacinia. Viverra nostra bibendum lacus lobortis varius condimentum eleifend faucibus odio justo montes sagittis? Eget imperdiet class tellus tincidunt dictumst sem ridiculus quam? Eget rutrum fames ridiculus eget pretium neque libero per! Eget dignissim magna nunc nulla dis orci interdum tellus tortor risus ut.
+
+```{r model-class-example, results='asis'}
+model1 <- lm(indegree~smoker+alcoholuse, data=popularity)
+model2 <- update(model1, .~.+parentinc+sex+race)
+model3 <- update(model2, .~.+pseudoGPA+honorsociety)
+
+knitreg(list(model1, model2, model3),
+        caption="Linear models predicting friend nominations",
+        caption.above=TRUE,
+        digits=2,
+        custom.coef.names=c("Intercept","Smokes frequently","Drinks frequently",
+                             "Parental income (1000s USD)", "Male",
+                             "Black","Latino","API","Other","AIAN",
+                             "GPA in four courses","Honor society member"),
+        custom.model.names=c("(1)","(2)","(3)"),
+        include.adjrs=FALSE,
+        custom.gof.names=c("R-squared","N"),
+        custom.note="%stars. Standard errors in parenthesis.")
+```
 
 ```{r model-table, results="asis"}
 model1 <- lm(indegree~smoker+alcoholuse, data=popularity)
