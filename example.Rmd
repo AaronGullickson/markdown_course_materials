@@ -103,20 +103,20 @@ Ipsum fringilla natoque sem praesent auctor tellus viverra convallis nullam quis
 
 Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis mattis. Porta pharetra rhoncus dis massa nulla ornare egestas! Ante leo cursus mauris eleifend potenti donec tempus. Fusce ultricies aptent accumsan himenaeos netus augue felis nibh. Duis commodo himenaeos aliquam integer!
 
-```{r example-class, results="asis", eval=FALSE}
+```{r example-class, results="asis", eval=TRUE}
 dt <- popularity %>%
   group_by(grade) %>%
   summarize(n=comma(n()), m_nom=round(mean(indegree), 2), 
-         p_drink=mean(alcoholuse=="Drinker"),
-         p_smoke=mean(smoker=="Smoker"))
+            p_drink=percent(mean(alcoholuse=="Drinker"), accuracy=0.1),
+            p_smoke=percent(mean(smoker=="Smoker"), accuracy=0.1)) 
 
-popularity %>%
-  group_by(grade) %>%
-  summarize(n=comma(n()), m_nom=round(mean(indegree), 2), 
-         p_drink=percent(mean(alcoholuse=="Drinker"), accuracy=0.1),
-         p_smoke=percent(mean(smoker=="Smoker"), accuracy=0.1)) %>%
+#uncomment to get a superscript on this cell
+#dt[3,4] <- paste0(dt[3,4], "<sup>1</sup>")
+  
+dt %>%
   kbl(caption="Sample size and descriptive statistics, Add Health data, Wave 1",
-      position="t",
+      position="t", 
+      escape=FALSE, #set this to false if using superscripts, but it will only knit to one output type
       align = c("l",rep("r", 4)),
       col.names = c("Grade","N","Mean friend nominations",
                     "Drink regularly", "Smoke regularly"),
