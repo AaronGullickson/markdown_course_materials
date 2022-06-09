@@ -250,9 +250,9 @@ knitreg(list(model1, model2, model3),
         #                      "Control for parental income?"=rep("Yes",3),
         #                      "Control for GPA?"=rep("Yes",3),
         #                      "Control for honor society?"=rep("Yes",3)),
-        #scalebox=1.2,
-        custom.gof.names=c("R-squared","N"))
-        #custom.note="\\parbox{\\linewidth}{\\vspace{2pt} \\small \\emph{Notes:} Standard errors in parenthesis. Standard errors in parenthesis. Standard errors in parenthesis. Standard errors in parenthesis. Standard errors in parenthesis. Standard errors in parenthesis.}")
+        custom.gof.names=c("R-squared","N"),
+        #threeparttable=TRUE, # should work for wrapping but produces latex processing error at the moment
+        custom.note="%stars. Robust clustered standard errors in parenthesis. Data come from Add Health, Wave 1 respondents.")
 ```
 
 ```{r model-table, results="asis"}
