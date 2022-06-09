@@ -17,7 +17,7 @@ thanks: Thanks to everyone for checking this out.
 always_allow_html: true
 output:
   pdf_document: 
-    keep_tex: yes
+    keep_tex: no
     toc: false
     number_sections: false
     extra_dependencies: ["dcolumn"]
@@ -103,7 +103,7 @@ Ipsum fringilla natoque sem praesent auctor tellus viverra convallis nullam quis
 
 Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis mattis. Porta pharetra rhoncus dis massa nulla ornare egestas! Ante leo cursus mauris eleifend potenti donec tempus. Fusce ultricies aptent accumsan himenaeos netus augue felis nibh. Duis commodo himenaeos aliquam integer!
 
-```{r example-class, results="asis", eval=TRUE}
+```{r example-class, results="asis", eval=FALSE}
 dt <- popularity %>%
   group_by(grade) %>%
   summarize(n=comma(n()), m_nom=round(mean(indegree), 2), 
