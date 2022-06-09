@@ -16,11 +16,6 @@ thanks: Thanks to everyone for checking this out.
 #lot: false            # list of tables
 always_allow_html: true
 output:
-  pdf_document: 
-    keep_tex: no
-    toc: false
-    number_sections: false
-    extra_dependencies: ["dcolumn"]
   html_document: 
     self_contained: yes
     keep_md: no
@@ -30,6 +25,11 @@ output:
   word_document: 
     keep_md: no
     #reference_docx: templates/aog_word_style.docx
+  pdf_document: 
+    keep_tex: no
+    toc: false
+    number_sections: false
+    extra_dependencies: ["dcolumn","booktabs"]
   bookdown::pdf_document2: 
     keep_tex: no
     toc: false
@@ -49,7 +49,7 @@ output:
     self_contained: true
     number_sections: false
 bibliography: references.bib
-csl: bib-styles/chicago-parenthetical.csl
+#csl: bib-styles/ama.csl
 #csl: https://www.zotero.org/styles/modern-language-association-7th-edition
 ---
 
@@ -60,24 +60,23 @@ library(ggplot2)
 library(tidyverse)
 library(scales)
 library(texreg)
-library(kableExtra)
-#library(flextable)
+#library(kableExtra)
+library(flextable)
 load("input/popularity.RData")
 ```
 
 # Introduction
 
-Ipsum interdum enim dapibus luctus potenti viverra ridiculus vulputate! Pretium ante euismod auctor semper proin lacinia augue vitae [@abascal_love_2015; @gentzkow_code_2014]. Magnis vivamus dis dapibus dapibus tristique vestibulum venenatis accumsan lobortis suscipit faucibus. Dis **scelerisque** egestas sodales tempor nisl accumsan conubia sem mauris mi himenaeos. Facilisis curabitur habitant quam malesuada facilisis inceptos phasellus rutrum vulputate etiam primis. Na primis?
+Ipsum interdum enim dapibus luctus potenti viverra ridiculus vulputate! Pretium ante euismod auctor semper proin lacinia augue vitae [@abascal_love_2015; @gentzkow_code_2014]. Magnis vivamus dis dapibus dapibus tristique vestibulum venenatis accumsan lobortis suscipit faucibus. Dis **scelerisque** egestas sodales tempor nisl accumsan conubia sem mauris mi himenaeos [@lee_probabilistic_1999]. Dist pharetra ut lacus tortor sodales convallis?
 
-Consectetur *sodales* suscipit ultrices venenatis sagittis hendrerit lacus. Imperdiet nunc rhoncus ornare pharetra platea ut blandit nec senectus montes quisque purus. Phasellus rutrum rutrum aliquet rutrum erat scelerisque non augue vulputate suspendisse lacinia commodo aptent vel. Mattis suscipit himenaeos rhoncus integer fames aliquam.
+1.  Molestie egestas fermentum aliquam convallis fames dictum?
+2.  Consectetur vehicula habitant porttitor volutpat velit augue eleifend rutrum accumsan quam pretium pretium?
 
-1.  Sit pharetra ut lacus tortor sodales convallis?
-2.  Molestie egestas fermentum aliquam convallis fames dictum?
-3.  Consectetur vehicula habitant porttitor volutpat velit augue eleifend rutrum accumsan quam pretium pretium?
+Consectetur ullamcorper pharetra mattis leo himenaeos magnis non est non sagittis.[^1] Nec rutrum aptent sapien convallis euismod taciti felis interdum torquent suspendisse. Ultrices auctor hac ad arcu urna leo integer [@ainsworth-darnell_assessing_1998; @akkerman_problem_1996; @winblad2000]. Torquent turpis accumsan suscipit cum laoreet blandit ante molestie netus a. Sociosqu placerat purus mollis senectus blandit magna quis pharetra sodales. Platea dui felis porttitor leo enim aenean interdum mauris libero primis volutpat vulputate. Ultrices ullamcorper magna consequat vehicula leo massa at erat sapien arcu scelerisque.[^2]
 
-Consectetur ullamcorper pharetra mattis leo himenaeos magnis non est non sagittis.^[This is a footnote.] Nec rutrum aptent sapien convallis euismod taciti felis interdum torquent suspendisse. Ultrices auctor hac ad arcu urna leo integer. Torquent turpis accumsan suscipit cum laoreet blandit ante molestie netus a. Sociosqu placerat purus mollis senectus blandit magna quis pharetra sodales. Platea dui felis porttitor leo enim aenean interdum mauris libero primis volutpat vulputate. Ultrices ullamcorper magna consequat vehicula leo massa at erat sapien arcu scelerisque.[^ssx]
+[^1]: This is a footnote.
 
-[^ssx]: This is another footnote. This one has math. $$\sum (x_i-\bar{x})^2$$
+[^2]: This is another footnote. This one has math. $$\sum (x_i-\bar{x})^2$$
 
 # Background
 
@@ -135,7 +134,7 @@ dt %>%
   
 ```
 
-```{r desc-stats-kable, eval=TRUE}
+```{r desc-stats-kable, eval=FALSE}
 popularity %>% 
   group_by(grade) %>%
   summarize(n=comma(n()), m_nom=round(mean(indegree), 2), 
@@ -158,7 +157,7 @@ popularity %>%
            general_title="Notes: ", title_format="italic")
 ```
 
-```{r desc-stats-flex, eval=FALSE}
+```{r desc-stats-flex, eval=TRUE}
 popularity %>% 
   group_by(grade) %>%
   summarize(n=n(), m_nom=mean(indegree), p_drink=100*mean(alcoholuse=="Drinker"),
@@ -169,8 +168,9 @@ popularity %>%
   set_header_labels(grade="Grade", n="N", m_nom="Mean friend nominations",
                     p_drink="% drink regularly", 
                     p_smoke="% smoke regularly") %>%
-  #add_header_row(values = c("", "Percent substance use"),
-  #               colwidths = c(3, 2)) %>%
+  add_header_row(values = c("", "Percent substance use"),
+                 colwidths = c(3, 2)) %>%
+  align(i=1, part="header", align="center") %>%
   set_caption("Sample size and descriptive statistics, Add Health data, Wave 1") %>%
   theme_booktabs() %>%
   add_footer_lines("Notes: Drinking frequently is defined as drinking at least one or twice a month for the previous 12 months. Smoking frequently is defines as smoking at least 5 cigarettes in the last 30 days.") %>%
@@ -235,13 +235,23 @@ knitreg(list(model1, model2, model3),
         caption.above=TRUE,
         digits=2,
         custom.coef.names=c("Intercept","Smokes frequently","Drinks frequently",
-                             "Parental income (1000s USD)", "Male",
-                             "Black","Latino","API","Other","AIAN",
-                             "GPA in four courses","Honor society member"),
+                              "Parental income (\\$1000)", "Male",
+                              "Black","Latino","API","Other","AIAN",
+                              "GPA in four courses","Honor society member"),
         custom.model.names=c("(1)","(2)","(3)"),
         include.adjrs=FALSE,
+        custom.header=list("Number of friend nominations"=1:3),
+        groups=list("Gender (ref. female)"=5, "Race (ref. white)"=6:10),
+        dcolumn=TRUE,
+        single.row=TRUE,
+        # omit.coef="race|parentinc|sex|GPA|honor",
+        # custom.gof.rows=list("Control for race?"=rep("Yes",3),
+        #                      "Control for gender?"=rep("Yes",3),
+        #                      "Control for parental income?"=rep("Yes",3),
+        #                      "Control for GPA?"=rep("Yes",3),
+        #                      "Control for honor society?"=rep("Yes",3)),
         custom.gof.names=c("R-squared","N"),
-        custom.note="%stars. Standard errors in parenthesis.")
+        custom.note="\\parbox{\\linewidth}{\\vspace{2pt} \\small \\emph{Notes:} Standard errors in parenthesis. Standard errors in parenthesis. Standard errors in parenthesis. Standard errors in parenthesis. Standard errors in parenthesis. Standard errors in parenthesis.}")
 ```
 
 ```{r model-table, results="asis"}
@@ -282,3 +292,9 @@ Consectetur blandit class scelerisque placerat et sapien. Aptent ornare orci com
 Consectetur torquent justo cubilia luctus justo erat dignissim faucibus aliquet dictumst. Gravida metus morbi tristique pharetra at venenatis pretium dapibus porttitor commodo. Pulvinar tempus platea accumsan aliquam inceptos magna praesent pulvinar curae sollicitudin. Justo tincidunt imperdiet potenti quam malesuada fames dis et dignissim.
 
 # References
+
+<div id="refs"></div>
+
+# Supplementary Material
+
+
