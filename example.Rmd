@@ -16,27 +16,38 @@ thanks: Thanks to everyone for checking this out.
 #lot: false            # list of tables
 always_allow_html: true
 output:
-  html_document: 
+  bookdown::html_document2:
     self_contained: yes
     keep_md: no
     code_folding: none
     number_sections: no
-    #css: templates/my_styles.css
+    css: templates/my_styles.css
   word_document: 
     keep_md: no
     #reference_docx: templates/aog_word_style.docx
+  html_document:
+    code_folding: show
+    #theme:
+    #  color-contrast-warnings: false
+    #  bootswatch: "sketchy"
+    #  bg: "white"
+    #  fg: "black"
+    #  primary: "#EA80FC"
+    #  secondary: "#00DAC6"
+    #  base_font:
+    #    google: Indie Flower
+    #  heading_font:
+    #    google: Proza Libre
+    self_contained: yes
+    keep_md: no
+    number_sections: no
+    #css: templates/my_styles.css
   pdf_document: 
     keep_tex: no
     toc: false
     number_sections: false
     extra_dependencies: ["dcolumn","booktabs"]
-  bookdown::pdf_document2: 
-    keep_tex: no
-    toc: false
-    number_sections: false
-    #template: templates/aog-latex-ms.tex
-    extra_dependencies: ["dcolumn"]
-  rmdformats::robobook:
+  rmdformats::readthedown:
     highlight: tango
     toc_depth: 2
     code_folding: hide
@@ -44,12 +55,18 @@ output:
   distill::distill_article:
     toc: true
     toc_depth: 2
+  bookdown::pdf_document2: 
+    keep_tex: no
+    toc: false
+    number_sections: false
+    #template: templates/aog-latex-ms.tex
+    extra_dependencies: ["dcolumn"]
   pagedown::html_paged:
     toc: false
     self_contained: true
     number_sections: false
 bibliography: references.bib
-csl: bib-styles/ama.csl
+csl: bib-styles/chicago-parenthetical.csl
 #csl: https://www.zotero.org/styles/modern-language-association-7th-edition
 ---
 
@@ -67,6 +84,8 @@ load("input/popularity.RData")
 
 # Introduction
 
+[Here is a link](https://google.com).
+
 Ipsum interdum enim dapibus luctus potenti viverra ridiculus vulputate! Pretium ante euismod auctor semper proin lacinia augue vitae [@abascal_love_2015; @gentzkow_code_2014]. Magnis vivamus dis dapibus dapibus tristique vestibulum venenatis accumsan lobortis suscipit faucibus. Dis **scelerisque** egestas sodales tempor nisl accumsan conubia sem mauris mi himenaeos [@lee_probabilistic_1999]. Dist pharetra ut lacus tortor sodales convallis?
 
 1.  Molestie egestas fermentum aliquam convallis fames dictum?
@@ -76,7 +95,9 @@ Consectetur ullamcorper pharetra mattis leo himenaeos magnis non est non sagitti
 
 [^1]: This is a footnote.
 
-[^2]: This is another footnote. This one has math. $$\sum (x_i-\bar{x})^2$$
+[^2]: This is another footnote.
+
+    This one has math. $$\sum (x_i-\bar{x})^2$$
 
 # Background
 
@@ -134,7 +155,9 @@ dt %>%
   
 ```
 
-```{r desc-stats-kable, eval=TRUE}
+See Table \@ref(tab:desc-stats-kable).
+
+```{r desc-stats-kable, eval=TRUE, echo=TRUE}
 popularity %>% 
   group_by(grade) %>%
   summarize(n=comma(n()), m_nom=round(mean(indegree), 2), 
@@ -179,9 +202,15 @@ popularity %>%
 
 Lorem lobortis lectus pellentesque sapien vivamus eros felis cum. Mattis risus euismod vivamus vel mi nostra euismod euismod praesent aliquam? Sagittis posuere bibendum turpis arcu maecenas gravida leo sollicitudin primis. Ullamcorper lacinia laoreet tincidunt mollis torquent semper. Sem nascetur eleifend gravida nostra magnis arcu gravida facilisis sollicitudin? Cum curae placerat et auctor faucibus arcu ad mauris sollicitudin nunc! Posuere iaculis arcu dapibus dis ullamcorper pellentesque penatibus ultrices sed aenean ligula ullamcorper donec aliquam.
 
-$$y_i=\beta_0+\beta_1x_i+\epsilon_i$$
+See Equation \@ref(eq:model).
+
+\begin{equation}
+y_i=\beta_0+\beta_1x_i+\epsilon_i (\#eq:model) 
+\end{equation}
 
 Elit nam mus class aliquam volutpat purus mauris ultricies aptent dignissim ($\beta_1=0$). Iaculis pulvinar at inceptos sociosqu blandit tristique ridiculus et sagittis mus justo. Suspendisse commodo nullam risus molestie pulvinar elementum malesuada consequat non velit augue. Vehicula id purus vulputate metus dis lectus magna purus nullam scelerisque interdum. Montes quis sem convallis vehicula orci habitasse metus nullam imperdiet faucibus dignissim! Na dignissim.
+
+See Figure \@ref(fig:dist-nominations).
 
 ```{r dist-nominations, fig.cap="Distribution of number of friend nominations received in Add Health data"}
 popularity %>%
@@ -197,6 +226,10 @@ Consectetur magnis nisi porttitor massa vivamus iaculis vulputate suscipit vehic
 # Results
 
 Elit imperdiet aenean varius conubia sagittis orci ultrices. Ridiculus conubia accumsan aliquam mi penatibus molestie fringilla proin. Ullamcorper blandit libero sapien etiam cum justo vel habitant nostra? Molestie tincidunt lobortis dis accumsan curae mi maecenas aptent bibendum eget lacus ad torquent lobortis mattis sagittis aliquam!
+
+$$
+\bar{x}=\frac{\sum_{i=1}^n x_i}{n}
+$$
 
 Lorem accumsan pharetra est cubilia placerat cubilia est fusce natoque laoreet rutrum porta pellentesque tempus! Inceptos arcu augue phasellus nunc ad aptent sem pulvinar maecenas. Tempor porttitor velit fermentum ornare convallis consequat proin mauris. Magna tortor non integer proin semper ad malesuada cras orci.
 
@@ -243,7 +276,7 @@ knitreg(list(model1, model2, model3),
         custom.header=list("Number of friend nominations"=1:3),
         groups=list("Gender (ref. female)"=5, "Race (ref. white)"=6:10),
         dcolumn=TRUE,
-        single.row=FALSE,
+        single.row=TRUE,
         # The code below omits some coefficients and adds some custom
         # summary rows to explain what else is in the model. If you 
         # uncomment it, you will need to change custom.coef.names to just
@@ -261,6 +294,8 @@ knitreg(list(model1, model2, model3),
         custom.note="\\item %stars. Robust clustered standard errors in parenthesis. Data come from Add Health, Wave 1 respondents.")
 ```
 
+See Table \@ref(tab:model-table).
+
 ```{r model-table, results="asis"}
 model1 <- lm(indegree~smoker+alcoholuse, data=popularity)
 model2 <- update(model1, .~.+parentinc+sex+race)
@@ -268,7 +303,7 @@ model3 <- update(model2, .~.+pseudoGPA+honorsociety)
 
 knitreg(list(model1, model2, model3),
         digits=3,
-        caption="Linear models predicting the number of friend nominations recieved, Add Health data",
+        caption="(\\#tab:model-table)Linear models predicting the number of friend nominations recieved, Add Health data",
         caption.above=TRUE,
         booktabs=TRUE,
         float.pos = "t",
@@ -300,8 +335,7 @@ Consectetur torquent justo cubilia luctus justo erat dignissim faucibus aliquet 
 
 # References
 
-<div id="refs"></div>
+::: {#refs}
+:::
 
 # Supplementary Material
-
-
