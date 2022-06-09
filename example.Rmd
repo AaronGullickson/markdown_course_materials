@@ -16,20 +16,20 @@ thanks: Thanks to everyone for checking this out.
 #lot: false            # list of tables
 always_allow_html: true
 output:
-  pdf_document: 
-    keep_tex: no
-    toc: false
-    number_sections: false
-    extra_dependencies: ["dcolumn","booktabs"]
-  word_document: 
-    keep_md: no
-    #reference_docx: templates/aog_word_style.docx
   html_document: 
     self_contained: yes
     keep_md: no
     code_folding: none
     number_sections: no
     #css: templates/my_styles.css
+  word_document: 
+    keep_md: no
+    #reference_docx: templates/aog_word_style.docx
+  pdf_document: 
+    keep_tex: no
+    toc: false
+    number_sections: false
+    extra_dependencies: ["dcolumn","booktabs"]
   bookdown::pdf_document2: 
     keep_tex: no
     toc: false
@@ -251,8 +251,8 @@ knitreg(list(model1, model2, model3),
         #                      "Control for GPA?"=rep("Yes",3),
         #                      "Control for honor society?"=rep("Yes",3)),
         custom.gof.names=c("R-squared","N"),
-        #threeparttable=TRUE, # should work for wrapping but produces latex processing error at the moment
-        custom.note="%stars. Robust clustered standard errors in parenthesis. Data come from Add Health, Wave 1 respondents.")
+        threeparttable=TRUE,
+        custom.note="\\item %stars. Robust clustered standard errors in parenthesis. Data come from Add Health, Wave 1 respondents.")
 ```
 
 ```{r model-table, results="asis"}
