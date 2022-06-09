@@ -244,6 +244,10 @@ knitreg(list(model1, model2, model3),
         groups=list("Gender (ref. female)"=5, "Race (ref. white)"=6:10),
         dcolumn=TRUE,
         single.row=FALSE,
+        # The code below omits some coefficients and adds some custom
+        # summary rows to explain what else is in the model. If you 
+        # uncomment it, you will need to change custom.coef.names to just
+        # the drinking and smoking labels
         # omit.coef="race|parentinc|sex|GPA|honor",
         # custom.gof.rows=list("Control for race?"=rep("Yes",3),
         #                      "Control for gender?"=rep("Yes",3),
@@ -251,6 +255,8 @@ knitreg(list(model1, model2, model3),
         #                      "Control for GPA?"=rep("Yes",3),
         #                      "Control for honor society?"=rep("Yes",3)),
         custom.gof.names=c("R-squared","N"),
+        # Three part table will allow for wrapped notes in the table
+        # but you must start the custom note with "\\item" to work properly
         threeparttable=TRUE,
         custom.note="\\item %stars. Robust clustered standard errors in parenthesis. Data come from Add Health, Wave 1 respondents.")
 ```
