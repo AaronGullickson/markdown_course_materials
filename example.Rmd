@@ -16,17 +16,17 @@ thanks: Thanks to everyone for checking this out.
 #lot: false            # list of tables
 always_allow_html: true
 output:
+  pdf_document: 
+    keep_tex: yes
+    toc: false
+    number_sections: false
+    extra_dependencies: ["dcolumn"]
   html_document: 
     self_contained: yes
     keep_md: no
     code_folding: none
     number_sections: no
     #css: templates/my_styles.css
-  pdf_document: 
-    keep_tex: yes
-    toc: false
-    number_sections: false
-    extra_dependencies: ["dcolumn"]
   word_document: 
     keep_md: no
     #reference_docx: templates/aog_word_style.docx
@@ -116,7 +116,7 @@ dt <- popularity %>%
 dt %>%
   kbl(caption="Sample size and descriptive statistics, Add Health data, Wave 1",
       position="t", 
-      escape=FALSE, #set this to false if using superscripts, but it will only knit to one output type
+      escape=TRUE, #set this to false if using superscripts, but it will only knit to one output type
       align = c("l",rep("r", 4)),
       col.names = c("Grade","N","Mean friend nominations",
                     "Drink regularly", "Smoke regularly"),
