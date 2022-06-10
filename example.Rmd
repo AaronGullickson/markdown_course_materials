@@ -16,15 +16,15 @@ thanks: Thanks to everyone for checking this out.
 #lot: false            # list of tables
 always_allow_html: true
 output:
+  word_document: 
+    keep_md: no
+    #reference_docx: templates/aog_word_style.docx
   bookdown::html_document2:
     self_contained: yes
     keep_md: no
     code_folding: none
     number_sections: no
     css: templates/my_styles.css
-  word_document: 
-    keep_md: no
-    #reference_docx: templates/aog_word_style.docx
   html_document:
     code_folding: show
     #theme:
@@ -83,8 +83,6 @@ load("input/popularity.RData")
 ```
 
 # Introduction
-
-[Here is a link](https://google.com).
 
 Ipsum interdum enim dapibus luctus potenti viverra ridiculus vulputate! Pretium ante euismod auctor semper proin lacinia augue vitae [@abascal_love_2015; @gentzkow_code_2014]. Magnis vivamus dis dapibus dapibus tristique vestibulum venenatis accumsan lobortis suscipit faucibus. Dis **scelerisque** egestas sodales tempor nisl accumsan conubia sem mauris mi himenaeos [@lee_probabilistic_1999]. Dist pharetra ut lacus tortor sodales convallis?
 
@@ -157,7 +155,7 @@ dt %>%
 
 See Table \@ref(tab:desc-stats-kable).
 
-```{r desc-stats-kable, eval=TRUE, echo=TRUE}
+```{r desc-stats-kable, eval=TRUE}
 popularity %>% 
   group_by(grade) %>%
   summarize(n=comma(n()), m_nom=round(mean(indegree), 2), 
