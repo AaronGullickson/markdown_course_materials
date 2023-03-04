@@ -41,7 +41,7 @@ library(scales)
 library(texreg)
 library(kableExtra)
 library(gt)
-#library(flextable)
+library(gtsummary)
 load("input/popularity.RData")
 ```
 
@@ -83,7 +83,7 @@ Ipsum fringilla natoque sem praesent auctor tellus viverra convallis nullam quis
 
 # Data and Methods
 
-Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis mattis. Porta pharetra rhoncus dis massa nulla ornare egestas! Ante leo cursus mauris eleifend potenti donec tempus. Fusce ultricies aptent accumsan himenaeos netus augue felis nibh. Duis commodo himenaeos aliquam integer! See @tbl-des-gt.
+Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis mattis. Porta pharetra rhoncus dis massa nulla ornare egestas! Ante leo cursus mauris eleifend potenti donec tempus. Fusce ultricies aptent accumsan himenaeos netus augue felis nibh. Duis commodo himenaeos aliquam integer! See @tbl-desc-gt.
 
 ```{r}
 #| label: tbl-desc-gt
@@ -164,6 +164,7 @@ Elit varius diam quam magnis suscipit leo aptent congue? Proin placerat ultrices
 #| label: tbl-model-results
 #| tbl-cap: Linear models predicting the number of friend nominations recieved, Add Health data
 #| results: asis
+#| eval: true
 model1 <- lm(indegree~smoker+alcoholuse, data=popularity)
 model2 <- update(model1, .~.+parentinc+sex+race)
 model3 <- update(model2, .~.+pseudoGPA+honorsociety)
@@ -187,6 +188,7 @@ texreg(list(model1, model2, model3),
 ```{r}
 #| label: tbl-model-gt
 #| tbl-cap: Linear models predicting the number of friend nominations recieved, Add Health data
+#| eval: false
 t1 <- tbl_regression(model1, conf.int=FALSE)
 t2 <- tbl_regression(model2, conf.int=FALSE)
 t3 <- tbl_regression(model3, conf.int=FALSE)
