@@ -83,7 +83,7 @@ Ipsum fringilla natoque sem praesent auctor tellus viverra convallis nullam quis
 
 # Data and Methods
 
-Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis mattis. Porta pharetra rhoncus dis massa nulla ornare egestas! Ante leo cursus mauris eleifend potenti donec tempus. Fusce ultricies aptent accumsan himenaeos netus augue felis nibh. Duis commodo himenaeos aliquam integer! See @tbl-descriptive.
+Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis mattis. Porta pharetra rhoncus dis massa nulla ornare egestas! Ante leo cursus mauris eleifend potenti donec tempus. Fusce ultricies aptent accumsan himenaeos netus augue felis nibh. Duis commodo himenaeos aliquam integer! See @tbl-des-gt.
 
 ```{r}
 #| label: tbl-desc-gt
@@ -158,18 +158,17 @@ Elit semper laoreet tristique etiam egestas arcu ut. Lacus condimentum diam faci
 
 Lorem nullam nunc habitasse blandit eleifend est mauris. Lacus class mauris interdum netus quisque volutpat. Aliquet at cum lobortis odio dapibus nunc porttitor ullamcorper? Suscipit nostra mi vulputate etiam purus tristique posuere augue orci sociis lectus justo a condimentum nascetur nibh.
 
-Elit varius diam quam magnis suscipit leo aptent congue? Proin placerat ultrices interdum mollis platea integer ac pharetra vulputate lacinia. Viverra nostra bibendum lacus lobortis varius condimentum eleifend faucibus odio justo montes sagittis? Eget imperdiet class tellus tincidunt dictumst sem ridiculus quam? Eget rutrum fames ridiculus eget pretium neque libero per! Eget dignissim magna nunc nulla dis orci interdum tellus tortor risus ut.
+Elit varius diam quam magnis suscipit leo aptent congue? Proin placerat ultrices interdum mollis platea integer ac pharetra vulputate lacinia. Viverra nostra bibendum lacus lobortis varius condimentum eleifend faucibus odio justo montes sagittis? Eget imperdiet class tellus tincidunt dictumst sem ridiculus quam? Eget rutrum fames ridiculus eget pretium neque libero per! Eget dignissim magna nunc nulla dis orci interdum tellus tortor risus ut @tbl-model-results.
 
 ```{r}
-#| label: model-table
+#| label: tbl-model-results
+#| tbl-cap: Linear models predicting the number of friend nominations recieved, Add Health data
 #| results: asis
 model1 <- lm(indegree~smoker+alcoholuse, data=popularity)
 model2 <- update(model1, .~.+parentinc+sex+race)
 model3 <- update(model2, .~.+pseudoGPA+honorsociety)
-
 texreg(list(model1, model2, model3),
         digits=3,
-        caption="Linear models predicting the number of friend nominations recieved, Add Health data",
         caption.above=TRUE,
         booktabs=TRUE,
         float.pos = "t",
@@ -182,6 +181,17 @@ texreg(list(model1, model2, model3),
                             "Honor society member"),
         custom.note="%stars. Standard errors in parenthesis.",
        use.packages=FALSE)
+```
+
+
+```{r}
+#| label: tbl-model-gt
+#| tbl-cap: Linear models predicting the number of friend nominations recieved, Add Health data
+t1 <- tbl_regression(model1, conf.int=FALSE)
+t2 <- tbl_regression(model2, conf.int=FALSE)
+t3 <- tbl_regression(model3, conf.int=FALSE)
+tbl_merge(tbls = list(t1, t2, t3),
+          tab_spanner=c("Model 1","Model 2","Model 3"))
 ```
 
 Dolor convallis vulputate dictum mollis ante placerat dui parturient porttitor conubia vitae. Eros nec dignissim tortor nascetur laoreet mi nascetur interdum lacus donec? Non potenti elementum massa hendrerit odio taciti euismod sagittis rhoncus sodales montes mattis? Sociosqu luctus neque euismod elementum accumsan parturient sed morbi scelerisque sociis quis faucibus primis suscipit scelerisque.
