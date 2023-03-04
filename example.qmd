@@ -99,7 +99,12 @@ popularity %>%
   cols_label(grade="Grade", n="N", m_nom="Mean friend nominations",
              p_drink="Drink Regularly", p_smoke="Smoke Regularly") %>%
   tab_spanner("Percent substance use", 4:5) %>%
-  tab_source_note(md("*Notes*: Drinking frequently is defined as drinking at least one or twice a month for the previous 12 months. Smoking frequently is defined as smoking at least 5 cigarettes in the last 30 days."))
+  tab_options(table.width = "100%") %>%
+  tab_footnote(footnote = "Drinking frequently is defined as drinking at least one or twice a month for the previous 12 months.",
+               locations = cells_column_labels(columns = p_drink)) %>%
+  tab_footnote(footnote = "Smoking frequently is defined as smoking at least 5 cigarettes in the last 30 days.",
+               locations = cells_column_labels(columns = p_smoke)) %>%
+  tab_source_note(md("*Source*: National Survey of Adolescent to Adult Health, Wave 1, 1997"))
   
 ```
 
