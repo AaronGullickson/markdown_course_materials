@@ -2,28 +2,14 @@
 # also see a popup at the top of the script with an option to install missing
 # libraries. If so, you can use that instead.
 
-# Core libraries required for R Markdown
+# Core libraries required for Quarto
 if(!require(knitr)) {
   install.packages("knitr")
 }
-if(!require(rmarkdown)) {
-  install.packages("rmarkdown")
-}
-
-# Library that enables installing and updating tinytex via R
-if(!require(tinytex)) {
-  install.packages("tinytex")
-}
 
 # Libraries for making tables
-if(!require(kableExtra)) {
-  install.packages("kableExtra")
-}
 if(!require(texreg)) {
   install.packages("texreg")
-}
-if(!require(flextable)) {
-  install.packages("flextable")
 }
 if(!require(gt)) {
   install.packages("gt")
@@ -32,35 +18,9 @@ if(!require(gtsummary)) {
   install.packages("gtsummary")
 }
 
-# Libraries with custom templates
-if(!require(bookdown)) {
-  install.packages("bookdown")
-}
-if(!require(rmdformats)) {
-  install.packages("rmdformats")
-}
-if(!require(rticles)) {
-  install.packages("rticles")
-}
-if(!require(bslib)) {
-  install.packages("bslib")
-}
-if(!require(thematic)) {
-  install.packages("thematic")
-}
-if(!require(pagedown)) {
-  install.packages("pagedown")
-}
-
-# Libraries for xaringan presentations
-if(!require(xaringan)) {
-  install.packages("xaringan")
-}
-if(!require(xaringanExtra)) {
-  install.packages("xaringanExtra")
-}
-if(!require(xaringanthemer)) {
-  install.packages("xaringanthemer")
+# Libraries for Python integration
+if(!require(reticulate)) {
+  install.packages("reticulate")
 }
 
 # Libraries for web publishing
