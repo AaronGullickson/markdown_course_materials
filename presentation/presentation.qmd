@@ -16,7 +16,7 @@ format:
     highlight-style: arrow
     code-line-numbers: false
     self-contained: false
-  chalkboad-revealjs:
+  chalkboard-revealjs:
     chalkboard: true
     preview-links: true
     incremental: true
