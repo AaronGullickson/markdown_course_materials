@@ -15,6 +15,7 @@ format:
     fig-align: center
     highlight-style: arrow
     code-line-numbers: false
+    self-contained: false
   chalkboad-revealjs:
     chalkboard: true
     preview-links: true
@@ -24,6 +25,7 @@ format:
     fig-align: center
     highlight-style: arrow
     code-line-numbers: false
+    self-contained: false
 editor: source
 ---
 
