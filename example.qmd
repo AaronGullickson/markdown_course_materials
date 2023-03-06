@@ -28,6 +28,7 @@ keywords:
   - Reproducibility
 description: An R Markdown Document for Testing and Playing
 thanks: Thanks to everyone for checking this out.
+lang: en
 ## Execute parameters are used for default code chunk options ##
 execute: 
   eval: true
@@ -74,18 +75,18 @@ format:
     #reference-doc: sample_word_style.docx
 prefer-html: true        # This ensures that html tables will render in Word
 ## Cross-reference customization ##
-crossref:
-  fig-title: Figure      # (default is "Figure")
-  tbl-title: Table       # (default is "Table")
-  title-delim: ":"       # (default is ":")
-  fig-prefix: Figure     # (default is "Figure")
-  tbl-prefix: Table      # (default is "Table")
-  eq-prefix: Eq.         # (default is "Equation")
-  ref-hyperlink: true    # (default is true)
-  fig-labels: arabic     # (default is arabic)
-  tbl-labels: arabic     # (default is arabic)
-  eq-labels: arabic      # (default is arabic)
-  subref-labels: alpha a # (default is alpha a)
+#crossref:
+#  fig-title: Figure      # (default is "Figure")
+#  tbl-title: Table       # (default is "Table")
+#  title-delim: ":"       # (default is ":")
+#  fig-prefix: Figure     # (default is "Figure")
+#  tbl-prefix: Table      # (default is "Table")
+#  eq-prefix: Eq.         # (default is "Equation")
+#  ref-hyperlink: true    # (default is true)
+#  fig-labels: arabic     # (default is arabic)
+#  tbl-labels: arabic     # (default is arabic)
+#  eq-labels: arabic      # (default is arabic)
+#  subref-labels: alpha a # (default is alpha a)
 ## Which editor to use as default ##
 editor: source
 ---
