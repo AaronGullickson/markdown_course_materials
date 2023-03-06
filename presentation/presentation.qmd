@@ -1,0 +1,42 @@
+---
+title: "My Presentation"
+subtitle: "A Subtitle"
+author: "Aaron Gullickson"
+format:
+  revealjs: 
+    theme: default
+    chalkboard: true
+    preview-links: true
+    incremental: true
+    smaller: false
+    background-transition: concave
+    fig-align: center
+    highlight-style: arrow
+    code-line-numbers: false
+editor: source
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(knitr)
+library(texreg)
+library(ggplot2)
+```
+
+
+
+# An Inverse Cover Slide
+
+## Basic Bullet Points
+
+## Split a Slide
+
+## A Neat Figure
+
+## Half-sized figure
+
+
+## Slide with a regression model using texreg
+
+
+## Slide with table using kable and kableExtra
