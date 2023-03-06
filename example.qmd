@@ -1,36 +1,93 @@
 ---
-title: "Example R Markdown Document"
-author: "Aaron Gullickson"
-date: '2022-05-09'
+##  Author and title information ##
+title: "Example Quarto Document"
+author:
+  - name: Aaron Gullickson
+    orcid: 0000-0001-7237-8131
+    email: aarong@uoregon.edu
+    url: https://aarongullickson.netlify.app/
+    attributes:
+      corresponding: true
+    affiliations:
+      - id: uo
+        name: University of Oregon
+        department: Sociology
+        address: 727 PLC
+        city: Eugene
+        region: OR
+        country: USA
+        postal-code: 97405
+  - name: Bob Secondauthor
+    affiliations:
+      - ref: uo
+## Paper details ##
 abstract: "Ipsum nostra facilisis sapien nullam. Facilisi himenaeos pharetra ultricies scelerisque non fusce quisque aliquam netus tellus. Dictum tellus et sociis quisque ornare ad a natoque magna blandit. Tortor duis aptent cursus lacus inceptos tristique magnis dictumst. Taciti varius nascetur aliquet hac ornare vitae ultricies. Rhoncus primis purus morbi aliquet quam cubilia nullam malesuada ridiculus."
-keywords: Rmarkdown; Examples; Reproducibility
+keywords: 
+  - Rmarkdown
+  - Examples
+  - Reproducibility
 description: An R Markdown Document for Testing and Playing
 thanks: Thanks to everyone for checking this out.
+## Execute parameters are used for default code chunk options ##
 execute: 
   eval: true
   echo: false
   warning: false
   error: false
+## Some figure parameters ##
 fig-height: 3
-fig-align: center # default is center
+fig-align: center        # default is center
 fig-cap-location: bottom # default is bottom
-fig-dpi: 192
+## Bibliography information ##
+bibliography: references.bib
+csl: bib-styles/chicago-parenthetical.csl
+## Available formats ##
 format: 
-  docx:
-    keep-md: true
+  html:
+    keep-md: false
+    self-contained: true
+    #theme: cosmo
+    #css: css/my_styles.css
+    #mainfont: Times New Roman #css font-family
+    #fontsize: 1.1em
+    #linestretch: 1.7
+    #fontcolor: "white"
+    #backgroundcolor: "grey"
+    #linkcolor: "purple"
+    #max-width: "1600px"
   pdf:
-    fig-pos: "!tb"
+    fig-pos: "!t"
+    keep-md: false
+    keep-tex: false
+    #documentclass: scrartcl # LaTeX document class
+    #fontfamily: accanthis   # font family, see below for options
+    #fontsize: 11pt          # font size (typically 10pt, 11pt, or 12pt)
+    #linestretch: 1          # line spacing (1 for single, 2 for double)
+    #geometry: margin=0.5in  # controls the margin size
+    #papersize: letter       # controls the paper type
     include-in-header: 
       text: |
         \usepackage{booktabs}
         \usepackage{dcolumn}
-  html:
+  docx:
     keep-md: false
-    self-contained: true
-prefer-html: true
-bibliography: references.bib
-csl: bib-styles/chicago-parenthetical.csl
-editor: visual
+    #reference-doc: sample_word_style.docx
+prefer-html: true        # This ensures that html tables will render in Word
+## Cross-reference customization ##
+crossref:
+  fig-title: Figure      # (default is "Figure")
+  tbl-title: Table       # (default is "Table")
+  title-delim: ":"       # (default is ":")
+  fig-prefix: Figure     # (default is "Figure")
+  tbl-prefix: Table      # (default is "Table")
+  eq-prefix: Eq.         # (default is "Equation")
+  ref-hyperlink: true    # (default is true)
+  fig-labels: arabic     # (default is arabic)
+  tbl-labels: arabic     # (default is arabic)
+  eq-labels: arabic      # (default is arabic)
+  subref-labels: alpha a # (default is alpha a)
+## Which editor to use as default ##
+editor: source
 ---
 
 ```{r setup}
@@ -55,7 +112,7 @@ Consectetur *sodales* suscipit ultrices venenatis sagittis hendrerit lacus. Impe
 2.  Molestie egestas fermentum aliquam convallis fames dictum?
 3.  Consectetur vehicula habitant porttitor volutpat velit augue eleifend rutrum accumsan quam pretium pretium?
 
-Consectetur ullamcorper pharetra mattis leo himenaeos magnis non est non sagittis.[^1] Nec rutrum aptent sapien convallis euismod taciti felis interdum torquent suspendisse. Ultrices auctor hac ad arcu urna leo integer. Torquent turpis accumsan suscipit cum laoreet blandit ante molestie netus a. Sociosqu placerat purus mollis senectus blandit magna quis pharetra sodales. Platea dui felis porttitor leo enim aenean interdum mauris libero primis volutpat vulputate. Ultrices ullamcorper magna consequat vehicula leo massa at erat sapien arcu scelerisque.[^2]
+Consectetur ullamcorper pharetra mattis leo himenaeos magnis non est non sagittis.[^1] Nec rutrum aptent sapien convallis <!--TODO: Check this--> euismod taciti felis interdum torquent suspendisse. Ultrices auctor hac ad arcu urna leo integer. Torquent turpis accumsan suscipit cum laoreet blandit ante molestie netus a. Sociosqu placerat purus mollis senectus blandit magna quis pharetra sodales. Platea dui felis porttitor leo enim aenean interdum mauris libero primis volutpat vulputate. Ultrices ullamcorper magna consequat vehicula leo massa at erat sapien arcu scelerisque.[^2]
 
 [^1]: This is a footnote.
 
@@ -108,11 +165,11 @@ popularity %>%
   
 ```
 
-Lorem lobortis lectus pellentesque sapien vivamus eros felis cum. Mattis risus euismod vivamus vel mi nostra euismod euismod praesent aliquam? Sagittis posuere bibendum turpis arcu maecenas gravida leo sollicitudin primis. Ullamcorper lacinia laoreet tincidunt mollis torquent semper. Sem nascetur eleifend gravida nostra magnis arcu gravida facilisis sollicitudin? Cum curae placerat et auctor faucibus arcu ad mauris sollicitudin nunc! Posuere iaculis arcu dapibus dis ullamcorper pellentesque penatibus ultrices sed aenean ligula ullamcorper donec aliquam.
+Lorem lobortis lectus pellentesque sapien vivamus eros felis cum. Mattis risus euismod vivamus vel mi nostra euismod euismod praesent aliquam? @tbl-desc-gt Sagittis posuere bibendum turpis arcu maecenas gravida leo sollicitudin primis. Ullamcorper lacinia laoreet tincidunt mollis torquent semper. Sem nascetur eleifend gravida nostra magnis arcu gravida facilisis sollicitudin? Cum curae placerat et auctor faucibus arcu ad mauris sollicitudin nunc! Posuere iaculis arcu dapibus dis ullamcorper pellentesque penatibus ultrices sed aenean ligula ullamcorper donec aliquam.
 
-$$y_i=\beta_0+\beta_1x_i+\epsilon_i$$
+$$y_i=\beta_0+\beta_1x_i+\epsilon_i$$ {#eq-model}
 
-Elit nam mus class aliquam volutpat purus mauris ultricies aptent dignissim ($\beta_1=0$). Iaculis pulvinar at inceptos sociosqu blandit tristique ridiculus et sagittis mus justo. Suspendisse commodo nullam risus molestie pulvinar elementum malesuada consequat non velit augue. Vehicula id purus vulputate metus dis lectus magna purus nullam scelerisque interdum. Montes quis sem convallis vehicula orci habitasse metus nullam imperdiet faucibus dignissim! Na dignissim. See @fig-dist.
+@eq-model lit nam mus class aliquam volutpat purus mauris ultricies aptent dignissim ($\beta_1=0$). Iaculis pulvinar at inceptos sociosqu blandit tristique ridiculus et sagittis mus justo. Suspendisse commodo nullam risus molestie pulvinar elementum malesuada consequat non velit augue. Vehicula id purus vulputate metus dis lectus magna purus nullam scelerisque interdum. Montes quis sem convallis vehicula orci habitasse metus nullam imperdiet faucibus dignissim! Na dignissim. See @fig-dist.
 
 ```{r}
 #| label: fig-dist
@@ -125,7 +182,7 @@ popularity %>%
   theme_bw()
 ```
 
-Consectetur magnis nisi porttitor massa vivamus iaculis vulputate suscipit vehicula ante nisl? Tempor porttitor netus aliquet inceptos etiam ornare etiam. Suscipit nascetur lacus magna tempus luctus eu. Nisl vitae himenaeos nullam lacinia aenean potenti sociis volutpat feugiat dignissim pellentesque!
+@fig-dist onsectetur magnis nisi porttitor massa vivamus iaculis vulputate suscipit vehicula ante nisl? Tempor porttitor netus aliquet inceptos etiam ornare etiam. Suscipit nascetur lacus magna tempus luctus eu. Nisl vitae himenaeos nullam lacinia aenean potenti sociis volutpat feugiat dignissim pellentesque!
 
 # Results
 
@@ -148,7 +205,7 @@ popularity %>%
   theme_bw()
 ```
 
-Consectetur consequat aptent habitasse dignissim magna feugiat consequat nisl praesent nunc cras tellus? Suscipit curae quis lacus hac rutrum primis sem sem magnis pharetra leo odio parturient libero odio. Mattis praesent maecenas penatibus dapibus hendrerit venenatis libero tellus nascetur. Dis maecenas cursus aptent purus.
+@fig-scatter Consectetur consequat aptent habitasse dignissim magna feugiat consequat nisl praesent nunc cras tellus? Suscipit curae quis lacus hac rutrum primis sem sem magnis pharetra leo odio parturient libero odio. Mattis praesent maecenas penatibus dapibus hendrerit venenatis libero tellus nascetur. Dis maecenas cursus aptent purus.
 
 Amet quis rutrum sem senectus porttitor torquent habitasse quis commodo ut. Varius at facilisi hendrerit suscipit lacinia enim dui pharetra. Condimentum cum molestie class rutrum porttitor ultricies cursus cum nec nam potenti donec vel! Iaculis dictum ad?
 
@@ -184,7 +241,6 @@ texreg(list(model1, model2, model3),
        use.packages=FALSE)
 ```
 
-
 ```{r}
 #| label: tbl-model-gt
 #| tbl-cap: Linear models predicting the number of friend nominations recieved, Add Health data
@@ -196,7 +252,7 @@ tbl_merge(tbls = list(t1, t2, t3),
           tab_spanner=c("Model 1","Model 2","Model 3"))
 ```
 
-Dolor convallis vulputate dictum mollis ante placerat dui parturient porttitor conubia vitae. Eros nec dignissim tortor nascetur laoreet mi nascetur interdum lacus donec? Non potenti elementum massa hendrerit odio taciti euismod sagittis rhoncus sodales montes mattis? Sociosqu luctus neque euismod elementum accumsan parturient sed morbi scelerisque sociis quis faucibus primis suscipit scelerisque.
+@tbl-model-results results olor convallis vulputate dictum mollis ante placerat dui parturient porttitor conubia vitae. Eros nec dignissim tortor nascetur laoreet mi nascetur interdum lacus donec? Non potenti elementum massa hendrerit odio taciti euismod sagittis rhoncus sodales montes mattis? Sociosqu luctus neque euismod elementum accumsan parturient sed morbi scelerisque sociis quis faucibus primis suscipit scelerisque.
 
 Sit aenean sociosqu curae magna natoque sociis pulvinar sagittis et congue. Sodales magna montes potenti tristique quis? Id suscipit lobortis suspendisse felis taciti massa vitae convallis in montes. Mauris sodales parturient mus tellus mollis dapibus felis vel? Dui malesuada nibh dui ut torquent taciti sodales tempor dapibus vitae montes?
 
