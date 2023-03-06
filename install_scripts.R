@@ -23,15 +23,6 @@ if(!require(reticulate)) {
   install.packages("reticulate")
 }
 
-# Libraries for web publishing
-if(!require(blogdown)) {
-  install.packages("blogdown")
-}
-if(!require(distill)) {
-  install.packages("distill")
-}
-
-
 # Additional libraries that our documents will use
 if(!require(ggplot2)) {
   install.packages("ggplot2")
@@ -47,4 +38,7 @@ if(!require(gapminder)) {
 }
 if(!require(PNWColors)) {
   install.packages("PNWColors")
+}
+if(!require(PNWColors)) {
+  install.packages("palmerpenguins")
 }
