@@ -3,8 +3,19 @@ title: "My Presentation"
 subtitle: "A Subtitle"
 author: "Aaron Gullickson"
 format:
-  revealjs: 
+  revealjs:
     theme: default
+    #theme: moon
+    #theme: [default, my_styles.scss]
+    chalkboard: true
+    preview-links: true
+    incremental: true
+    smaller: false
+    background-transition: concave
+    fig-align: center
+    highlight-style: arrow
+    code-line-numbers: false
+  chalkboad-revealjs:
     chalkboard: true
     preview-links: true
     incremental: true
@@ -17,26 +28,105 @@ editor: source
 ---
 
 ```{r setup, include=FALSE}
-library(dplyr)
-library(knitr)
+library(tidyverse)
 library(texreg)
-library(ggplot2)
+library(gt)
+load("../input/popularity.RData")
 ```
 
-
-
-# An Inverse Cover Slide
+# An Inverse Cover Slide {background-color="black" background-image="images/mikael-kristenson-3aVlWP-7bg8-unsplash.jpg"}
 
 ## Basic Bullet Points
 
-## Split a Slide
+- A really important point
+- This is also important
+- But don't forget this other thing
+  - Although on the other hand, one should consider this
 
-## A Neat Figure
+::: {.notes}
+There are also some notes here, if you know how to find them.
+:::
 
-## Half-sized figure
+## Two Columns
+
+:::: {.columns}
+::: {.column width="40%"}
+### Column 1
+
+This column is taking up 40% of the width and the other column is taking up 60% of the width.
+:::
+::: {.column width="60%"}
+### Column 2
+This is accomplished with divs:
+```markdown
+:::: {.columns}
+::: {.column width="40%"}
+### Column 1 stuff
+:::
+::: {.column width="60%"}
+:::
+### Column 2 stuff
+::::
+```
+:::
+
+::::
+
+## Using Fragments
+
+:::: {.columns}
+::: {.column width="40%"}
+I can use fragments to display arbitrary content incrementally.
+
+```markdown
+::: {.fragment}
+Some Content
+:::
+```
+I wonder what content is in the other column?
+:::
+::: {.column width="60%"}
+::: {.fragment}
+![Its a Sloth!](images/sloth1.png)
+:::
+:::
+
+::::
 
 
-## Slide with a regression model using texreg
+## Tables Work Well {.smaller}
 
+```{r}
+#| label: tbl-addhealth
+#| tbl-cap: Add Health summary statistics by grade
+popularity |>
+  group_by(grade) |>
+  summarize(n=n(), m_nom=mean(indegree),  p_drink=mean(alcoholuse=="Drinker"),
+            p_smoke=mean(smoker=="Smoker")) |>
+  gt() |>
+  fmt_integer(1:2) |>
+  fmt_number(3, decimals=2) |>
+  fmt_percent(4:5, decimals = 1) |>
+  cols_label(grade="Grade", n="N", m_nom="Mean friend nominations",
+             p_drink="Drink Regularly", p_smoke="Smoke Regularly") |>
+  tab_spanner("Percent substance use", 4:5)
+```
 
-## Slide with table using kable and kableExtra
+This table was produced directly in `gt`. I also fit more on this slide by specifying:
+
+```markdown
+## Slide Title {.smaller}
+```
+
+## Figures Also Work Well
+
+```{r}
+#| label: fig-dist
+#| fig-cap: "Distribution of number of friend nominations received in Add Health data"
+popularity %>%
+  ggplot(aes(x=indegree))+
+  geom_histogram(binwidth = 1, center=0.5, 
+                 color="grey30", fill="grey60")+
+  labs(x="number of friend nominations received")+
+  theme_bw()
+```
