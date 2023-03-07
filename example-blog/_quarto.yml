@@ -17,7 +17,7 @@ website:
       - text: "Copyright, Aaron Gullickson, 2023"
 format:
   html:
-    theme: morph
+    theme: spacelab
     css: styles.css
 
 
