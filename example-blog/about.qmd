@@ -10,7 +10,9 @@ about:
     - icon: github
       text: Github
       href: https://github.com/AaronGullickson
-
+    - icon: mastodon
+      text: Mastodon
+      href: https://github.com/AaronGullickson
 ---
 
 My name is Aaron Gullickson. I am an Associate Professor of Sociology at the University of Oregon. I am also a demographer by training, a total data science nerd, a git evangelist, and an open science advocate.

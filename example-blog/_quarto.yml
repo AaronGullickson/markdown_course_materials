@@ -10,14 +10,14 @@ website:
         href: https://github.com/AaronGullickson
       - icon: twitter
         href: https://twitter.com/AaronGullickson
-      - icon: scholar
-        href: https://scholar.google.com/citations?user=LCTjizQAAAAJ
+      - icon: mastodon
+        href: https://sciences.social/@aarongullickson
   page-footer:
     center: 
       - text: "Copyright, Aaron Gullickson, 2023"
 format:
   html:
-    theme: spacelab
+    theme: morph
     css: styles.css
 
 
