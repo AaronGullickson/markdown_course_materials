@@ -1,0 +1,112 @@
+---
+title: "My new Post"
+description: "In Which I Analyze Some Data"
+author: "Aaron Gullickson"
+date: "3/6/2023"
+categories: [code, analysis]
+image: isaac-smith-6EnTPvPPL6I-unsplash.jpg
+echo: false
+---
+
+```{r setup}
+#| include: false
+library(ggplot2)
+library(tidyverse)
+library(scales)
+library(texreg)
+library(kableExtra)
+library(gt)
+library(gtsummary)
+load("../../../input/popularity.RData")
+```
+
+Ipsum interdum enim dapibus luctus potenti viverra ridiculus vulputate! Pretium ante euismod auctor semper proin lacinia augue vitae [@abascal_love_2015; @gentzkow_code_2014]. Magnis vivamus dis dapibus dapibus tristique vestibulum venenatis accumsan lobortis suscipit faucibus. Dis **scelerisque** egestas sodales tempor nisl accumsan conubia sem mauris mi himenaeos. Facilisis curabitur habitant quam malesuada facilisis inceptos phasellus rutrum vulputate etiam primis. Na primis?
+
+Consectetur *sodales* suscipit ultrices venenatis sagittis hendrerit lacus. Imperdiet nunc rhoncus ornare pharetra platea ut blandit nec senectus montes quisque purus. Phasellus rutrum rutrum aliquet rutrum erat scelerisque non augue vulputate suspendisse lacinia commodo aptent vel. Mattis suscipit himenaeos rhoncus integer fames aliquam.
+
+1.  Sit pharetra ut lacus tortor sodales convallis?
+2.  Molestie egestas fermentum aliquam convallis fames dictum?
+3.  Consectetur vehicula habitant porttitor volutpat velit augue eleifend rutrum accumsan quam pretium pretium?
+
+Consectetur ullamcorper pharetra mattis leo himenaeos magnis non est non sagittis.[^1] Nec rutrum aptent sapien convallis <!--TODO: Check this--> euismod taciti felis interdum torquent suspendisse. Ultrices auctor hac ad arcu urna leo integer. Torquent turpis accumsan suscipit cum laoreet blandit ante molestie netus a. Sociosqu placerat purus mollis senectus blandit magna quis pharetra sodales. Platea dui felis porttitor leo enim aenean interdum mauris libero primis volutpat vulputate. Ultrices ullamcorper magna consequat vehicula leo massa at erat sapien arcu scelerisque.[^2]
+
+[^1]: This is a footnote.
+
+[^2]: This is another footnote. This one has math. $$\sum (x_i-\bar{x})^2$$
+
+Ipsum fringilla natoque sem praesent auctor tellus viverra convallis nullam quis risus. Mus natoque cras facilisi ac blandit maecenas fringilla natoque varius. Aptent mauris ac nunc dis habitant penatibus torquent dictumst platea class sociis. Sodales mattis augue libero vestibulum interdum condimentum arcu ridiculus massa lobortis. Orci pretium dictumst sociosqu fringilla praesent faucibus tempus ultrices natoque. Risus potenti class nascetur molestie augue a justo vehicula vivamus? Molestie natoque lectus rhoncus sociosqu ligula semper mattis urna mi quis dignissim?
+
+Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis mattis. Porta pharetra rhoncus dis massa nulla ornare egestas! Ante leo cursus mauris eleifend potenti donec tempus. Fusce ultricies aptent accumsan himenaeos netus augue felis nibh. Duis commodo himenaeos aliquam integer! See @tbl-desc-gt.
+
+```{r}
+#| label: tbl-desc-gt
+#| tbl-cap: Sample size and descriptive statistics, Add Health data, Wave 1
+popularity %>%
+  group_by(grade) %>%
+  summarize(n=n(), m_nom=mean(indegree),  p_drink=mean(alcoholuse=="Drinker"),
+            p_smoke=mean(smoker=="Smoker")) %>%
+  gt() %>%
+  fmt_integer(1:2) %>%
+  fmt_number(3, decimals=2) %>%
+  fmt_percent(4:5, decimals = 1) %>%
+  cols_label(grade="Grade", n="N", m_nom="Mean friend nominations",
+             p_drink="Drink Regularly", p_smoke="Smoke Regularly") %>%
+  tab_spanner("Percent substance use", 4:5) %>%
+  tab_options(table.width = "100%") %>%
+  tab_footnote(footnote = "Drinking frequently is defined as drinking at least one or twice a month for the previous 12 months.",
+               locations = cells_column_labels(columns = p_drink)) %>%
+  tab_footnote(footnote = "Smoking frequently is defined as smoking at least 5 cigarettes in the last 30 days.",
+               locations = cells_column_labels(columns = p_smoke)) %>%
+  tab_source_note(md("*Source*: National Survey of Adolescent to Adult Health, Wave 1, 1997"))
+  
+```
+
+Lorem lobortis lectus pellentesque sapien vivamus eros felis cum. Mattis risus euismod vivamus vel mi nostra euismod euismod praesent aliquam? @tbl-desc-gt Sagittis posuere bibendum turpis arcu maecenas gravida leo sollicitudin primis. Ullamcorper lacinia laoreet tincidunt mollis torquent semper. Sem nascetur eleifend gravida nostra magnis arcu gravida facilisis sollicitudin? Cum curae placerat et auctor faucibus arcu ad mauris sollicitudin nunc! Posuere iaculis arcu dapibus dis ullamcorper pellentesque penatibus ultrices sed aenean ligula ullamcorper donec aliquam.
+
+$$y_i=\beta_0+\beta_1x_i+\epsilon_i$$ {#eq-model}
+
+@eq-model lit nam mus class aliquam volutpat purus mauris ultricies aptent dignissim ($\beta_1=0$). Iaculis pulvinar at inceptos sociosqu blandit tristique ridiculus et sagittis mus justo. Suspendisse commodo nullam risus molestie pulvinar elementum malesuada consequat non velit augue. Vehicula id purus vulputate metus dis lectus magna purus nullam scelerisque interdum. Montes quis sem convallis vehicula orci habitasse metus nullam imperdiet faucibus dignissim! Na dignissim. See @fig-dist.
+
+```{r}
+#| label: fig-dist
+#| fig-cap: "Distribution of number of friend nominations received in Add Health data"
+popularity %>%
+  ggplot(aes(x=indegree))+
+  geom_histogram(binwidth = 1, center=0.5, 
+                 color="grey30", fill="grey60")+
+  labs(x="number of friend nominations received")+
+  theme_bw()
+```
+
+@fig-dist onsectetur magnis nisi porttitor massa vivamus iaculis vulputate suscipit vehicula ante nisl? Tempor porttitor netus aliquet inceptos etiam ornare etiam. Suscipit nascetur lacus magna tempus luctus eu. Nisl vitae himenaeos nullam lacinia aenean potenti sociis volutpat feugiat dignissim pellentesque!
+
+# Results
+
+Elit imperdiet aenean varius conubia sagittis orci ultrices. Ridiculus conubia accumsan aliquam mi penatibus molestie fringilla proin. Ullamcorper blandit libero sapien etiam cum justo vel habitant nostra? Molestie tincidunt lobortis dis accumsan curae mi maecenas aptent bibendum eget lacus ad torquent lobortis mattis sagittis aliquam!
+
+Lorem accumsan pharetra est cubilia placerat cubilia est fusce natoque laoreet rutrum porta pellentesque tempus! Inceptos arcu augue phasellus nunc ad aptent sem pulvinar maecenas. Tempor porttitor velit fermentum ornare convallis consequat proin mauris. Magna tortor non integer proin semper ad malesuada cras orci.
+
+Lorem accumsan pharetra est cubilia placerat cubilia est fusce natoque laoreet rutrum porta pellentesque tempus! Inceptos arcu augue phasellus nunc ad aptent sem pulvinar maecenas. Tempor porttitor velit fermentum ornare convallis consequat proin mauris. Magna tortor non integer proin semper ad malesuada cras orci. See @fig-scatter.
+
+```{r}
+#| label: fig-scatter
+#| fig-cap: "Association between parental income and friend nominations by gender."
+popularity %>%
+  ggplot(aes(x=parentinc, y=indegree, color=sex))+
+  geom_jitter(alpha=0.3)+
+  geom_smooth(se=FALSE)+
+  labs(x="parental income in 1000 USD",
+       y="number of friend nominations received",
+       color="gender")+
+  theme_bw()
+```
+
+@fig-scatter Consectetur consequat aptent habitasse dignissim magna feugiat consequat nisl praesent nunc cras tellus? Suscipit curae quis lacus hac rutrum primis sem sem magnis pharetra leo odio parturient libero odio. Mattis praesent maecenas penatibus dapibus hendrerit venenatis libero tellus nascetur. Dis maecenas cursus aptent purus.
+
+Amet quis rutrum sem senectus porttitor torquent habitasse quis commodo ut. Varius at facilisi hendrerit suscipit lacinia enim dui pharetra. Condimentum cum molestie class rutrum porttitor ultricies cursus cum nec nam potenti donec vel! Iaculis dictum ad?
+
+Sit suscipit conubia nisi integer vel suscipit torquent taciti. Urna eu phasellus urna nullam varius nascetur ultricies fringilla. Vivamus platea auctor curabitur senectus natoque morbi dignissim proin pulvinar netus?
+
+Elit semper laoreet tristique etiam egestas arcu ut. Lacus condimentum diam facilisis quam tellus magnis sollicitudin a suspendisse penatibus convallis tellus felis urna. Montes pulvinar ultrices himenaeos interdum nostra imperdiet per mauris luctus. Integer cubilia vestibulum vestibulum parturient cubilia morbi orci dictumst morbi sodales faucibus. Maecenas magnis et nulla nulla.
+
+Lorem nullam nunc habitasse blandit eleifend est mauris. Lacus class mauris interdum netus quisque volutpat. Aliquet at cum lobortis odio dapibus nunc porttitor ullamcorper? Suscipit nostra mi vulputate etiam purus tristique posuere augue orci sociis lectus justo a condimentum nascetur nibh.

@@ -1,0 +1,24 @@
+project:
+  type: website
+
+website:
+  title: "My Great Blog"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/AaronGullickson
+      - icon: twitter
+        href: https://twitter.com/AaronGullickson
+      - icon: scholar
+        href: https://scholar.google.com/citations?user=LCTjizQAAAAJ
+  page-footer:
+    center: 
+      - text: "Copyright, Aaron Gullickson, 2023"
+format:
+  html:
+    theme: spacelab
+    css: styles.css
+
+
+

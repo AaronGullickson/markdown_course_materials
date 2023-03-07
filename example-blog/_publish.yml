@@ -1,0 +1,4 @@
+- source: project
+  netlify:
+    - id: 8765f49d-7383-45e7-ab89-bbbc82c7032b
+      url: 'https://jade-macaron-c22d56.netlify.app'
