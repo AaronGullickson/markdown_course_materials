@@ -1,0 +1,89 @@
+---
+title: "Example Document"
+author: "Me"
+format:
+  html:
+    keep-md: true
+  pdf:
+    keep-tex: true
+  docx:
+    keep-md: true
+execute: 
+  warning: false
+  message: false
+  error: false
+  echo: true
+  eval: true
+  output: true
+fig-height: 3.5
+editor: visual
+---
+
+```{r}
+#| label: setup
+library(ggplot2)
+```
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+```{r}
+x <- 4
+```
+
+```{r}
+#| cache: true
+#| cache-rebuild: false
+#| eval: false
+mean(replicate(10000000, 2))+x
+```
+
+ The `echo: false` option disables the printing of code (only output is displayed).
+
+Testing!
+
+```{r}
+4+7
+```
+
+```{r}
+#| label: fig-cars
+#| fig-cap: Relationship between horsepower and MPG
+ggplot(mtcars, aes(x=hp, y=mpg))+
+  geom_point()+
+  geom_smooth()
+```
+
+
+```{python}
+#| label: fig-python
+#| fig-cap: Not a snake
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 2 * np.pi * r
+fig, ax = plt.subplots(
+  subplot_kw = {'projection':'polar'} 
+)
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```
