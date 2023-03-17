@@ -1,6 +1,6 @@
 ---
 ##  Author and title information ##
-title: "Example Quarto Document"
+title: Example Quarto Document
 author:
   - name: Aaron Gullickson
     orcid: 0000-0001-7237-8131
@@ -21,11 +21,11 @@ author:
     affiliations:
       - ref: uo
 ## Paper details ##
-abstract: "Ipsum nostra facilisis sapien nullam. Facilisi himenaeos pharetra ultricies scelerisque non fusce quisque aliquam netus tellus. Dictum tellus et sociis quisque ornare ad a natoque magna blandit. Tortor duis aptent cursus lacus inceptos tristique magnis dictumst. Taciti varius nascetur aliquet hac ornare vitae ultricies. Rhoncus primis purus morbi aliquet quam cubilia nullam malesuada ridiculus."
-keywords: 
-  - Rmarkdown
-  - Examples
-  - Reproducibility
+abstract: Ipsum nostra facilisis sapien nullam. Facilisi himenaeos pharetra ultricies scelerisque non fusce quisque aliquam netus tellus. Dictum tellus et sociis quisque ornare ad a natoque magna blandit. Tortor duis aptent cursus lacus inceptos tristique magnis dictumst. Taciti varius nascetur aliquet hac ornare vitae ultricies. Rhoncus primis purus morbi aliquet quam cubilia nullam malesuada ridiculus.
+keywords: [Quarto, Examples, Reproducibility]
+#  - Quarto
+#  - Examples
+#  - Reproducibility
 description: An R Markdown Document for Testing and Playing
 thanks: Thanks to everyone for checking this out.
 lang: en
@@ -59,7 +59,7 @@ format:
   pdf:
     fig-pos: "!t"
     keep-md: false
-    keep-tex: false
+    keep-tex: true
     #documentclass: scrartcl # LaTeX document class
     #fontfamily: accanthis   # font family, see below for options
     #fontsize: 11pt          # font size (typically 10pt, 11pt, or 12pt)
@@ -70,6 +70,11 @@ format:
       text: |
         \usepackage{booktabs}
         \usepackage{dcolumn}
+        \renewcommand{\thetable}{\Alph{table}}
+        \renewcommand{\thefigure}{\Roman{figure}}
+        \usepackage{subcaption}
+        \DeclareCaptionSubType{figure}
+        \renewcommand{\thesubfigure}{\Alph{subfigure}}
   docx:
     keep-md: false
     #reference-doc: sample_word_style.docx
@@ -86,12 +91,13 @@ prefer-html: true        # This ensures that html tables will render in Word
 #  fig-labels: arabic     # (default is arabic)
 #  tbl-labels: arabic     # (default is arabic)
 #  eq-labels: arabic      # (default is arabic)
-#  subref-labels: alpha a # (default is alpha a)
+#  subref-labels: roman i # (default is alpha a)
 ## Which editor to use as default ##
 editor: source
 ---
 
-```{r setup}
+```{r}
+#| label: setup-library
 #| include: false
 library(ggplot2)
 library(tidyverse)
@@ -100,18 +106,42 @@ library(texreg)
 library(kableExtra)
 library(gt)
 library(gtsummary)
+library(gapminder)
+```
+
+```{r}
+#| label: load-data
+#| include: false
 load("input/popularity.RData")
 ```
 
+
 # Introduction
+
+## Here is a subsection
+
+### Here is a subsubsection
+
+#### Here is a subsubsubsection
+
+##### Here is a subsubsubsection
+
+###### Something
 
 Ipsum interdum enim dapibus luctus potenti viverra ridiculus vulputate! Pretium ante euismod auctor semper proin lacinia augue vitae [@abascal_love_2015; @gentzkow_code_2014]. Magnis vivamus dis dapibus dapibus tristique vestibulum venenatis accumsan lobortis suscipit faucibus. Dis **scelerisque** egestas sodales tempor nisl accumsan conubia sem mauris mi himenaeos. Facilisis curabitur habitant quam malesuada facilisis inceptos phasellus rutrum vulputate etiam primis. Na primis?
 
 Consectetur *sodales* suscipit ultrices venenatis sagittis hendrerit lacus. Imperdiet nunc rhoncus ornare pharetra platea ut blandit nec senectus montes quisque purus. Phasellus rutrum rutrum aliquet rutrum erat scelerisque non augue vulputate suspendisse lacinia commodo aptent vel. Mattis suscipit himenaeos rhoncus integer fames aliquam.
 
 1.  Sit pharetra ut lacus tortor sodales convallis?
-2.  Molestie egestas fermentum aliquam convallis fames dictum?
-3.  Consectetur vehicula habitant porttitor volutpat velit augue eleifend rutrum accumsan quam pretium pretium?
+1.  Molestie egestas fermentum aliquam convallis fames dictum?
+10.  Consectetur vehicula habitant porttitor volutpat velit augue eleifend rutrum accumsan quam pretium pretium?
+
+- Here is a bullet
+  - Here is sub-bullet
+* Here is a bullet again
+
+Definition
+: A thing
 
 Consectetur ullamcorper pharetra mattis leo himenaeos magnis non est non sagittis.[^1] Nec rutrum aptent sapien convallis <!--TODO: Check this--> euismod taciti felis interdum torquent suspendisse. Ultrices auctor hac ad arcu urna leo integer. Torquent turpis accumsan suscipit cum laoreet blandit ante molestie netus a. Sociosqu placerat purus mollis senectus blandit magna quis pharetra sodales. Platea dui felis porttitor leo enim aenean interdum mauris libero primis volutpat vulputate. Ultrices ullamcorper magna consequat vehicula leo massa at erat sapien arcu scelerisque.[^2]
 
@@ -137,9 +167,44 @@ Adipiscing ad rhoncus nunc molestie sed feugiat? Imperdiet vivamus montes himena
 
 Sit nunc lacus sapien augue ornare magnis massa odio velit maecenas mauris. Molestie justo proin venenatis hac congue facilisi suscipit arcu litora quam varius urna. Lacinia montes convallis ante sapien orci platea rutrum. Gravida dignissim mauris bibendum sollicitudin libero primis ultrices enim aliquam dictum! Vivamus sociis odio non vivamus ridiculus. Libero vitae cursus montes aptent est quisque sociosqu fringilla posuere lacinia sagittis. Quisque orci cum nulla sollicitudin duis nisi.
 
+```{r}
+#| label: fig-complex-panel
+#| layout: [[50,50], [100]]
+#| fig-height: 4
+#| fig-cap: Some Graphs of Life Expectancy in 2002
+#| fig-subcap: 
+#|   - Relationship to GDP cer Capita
+#|   - Distribution by Continent
+#|   - Distribution
+gapminder %>%
+  filter(year==2002) %>%
+  ggplot(aes(x=gdpPercap, y=lifeExp))+
+  geom_point(alpha=0.5)+
+  geom_smooth(se=FALSE)+
+  scale_x_continuous(labels=scales::dollar)+
+  labs(x="gdp per capita", y="life expectancy")+
+  theme_bw()
+
+gapminder %>%
+  filter(year==2002) %>%
+  ggplot(aes(x=continent, y=lifeExp))+
+  geom_violin(fill="skyblue")+
+  labs(x=NULL, y="life expectancy")+
+  theme_bw()
+
+gapminder %>%
+  filter(year==2002) %>%
+  ggplot(aes(x=lifeExp))+
+  geom_histogram(fill="skyblue")+
+  labs(x="life expectancy")+
+  theme_bw()
+```
+
 Ipsum fringilla natoque sem praesent auctor tellus viverra convallis nullam quis risus. Mus natoque cras facilisi ac blandit maecenas fringilla natoque varius. Aptent mauris ac nunc dis habitant penatibus torquent dictumst platea class sociis. Sodales mattis augue libero vestibulum interdum condimentum arcu ridiculus massa lobortis. Orci pretium dictumst sociosqu fringilla praesent faucibus tempus ultrices natoque. Risus potenti class nascetur molestie augue a justo vehicula vivamus? Molestie natoque lectus rhoncus sociosqu ligula semper mattis urna mi quis dignissim?
 
 # Data and Methods
+
+The sample size for this analysis is `r format(nrow(popularity), scientific=FALSE, big.mark=",")` students.
 
 Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis mattis. Porta pharetra rhoncus dis massa nulla ornare egestas! Ante leo cursus mauris eleifend potenti donec tempus. Fusce ultricies aptent accumsan himenaeos netus augue felis nibh. Duis commodo himenaeos aliquam integer! See @tbl-desc-gt.
 
