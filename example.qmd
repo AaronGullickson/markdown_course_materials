@@ -39,6 +39,7 @@ execute:
 fig-height: 3
 fig-align: center        # default is center
 fig-cap-location: bottom # default is bottom
+fig-dpi: 300
 ## Bibliography information ##
 bibliography: references.bib
 csl: bib-styles/chicago-parenthetical.csl
@@ -46,7 +47,7 @@ csl: bib-styles/chicago-parenthetical.csl
 format: 
   html:
     keep-md: false
-    self-contained: true
+    self-contained: false
     #theme: cosmo
     #css: css/my_styles.css
     #mainfont: Times New Roman #css font-family
@@ -70,11 +71,11 @@ format:
       text: |
         \usepackage{booktabs}
         \usepackage{dcolumn}
-        \renewcommand{\thetable}{\Alph{table}}
-        \renewcommand{\thefigure}{\Roman{figure}}
+        \renewcommand{\thetable}{\arabic{table}}
+        \renewcommand{\thefigure}{\arabic{figure}}
         \usepackage{subcaption}
         \DeclareCaptionSubType{figure}
-        \renewcommand{\thesubfigure}{\Alph{subfigure}}
+        \renewcommand{\thesubfigure}{\alph{subfigure}}
   docx:
     keep-md: false
     #reference-doc: sample_word_style.docx
@@ -206,6 +207,8 @@ Ipsum fringilla natoque sem praesent auctor tellus viverra convallis nullam quis
 
 The sample size for this analysis is `r format(nrow(popularity), scientific=FALSE, big.mark=",")` students.
 
+Quisque semper, lectus vel sollicitudin vehicula, turpis ante facilisis mi, bibendum dignissim augue mauris sit amet urna. Sed luctus blandit est, non lobortis lorem suscipit ut. Maecenas sollicitudin sodales elit nec sodales. Pellentesque consectetur feugiat augue sed sodales. Phasellus vitae laoreet purus. Suspendisse urna quam, volutpat et leo et, imperdiet ultrices justo. Nunc ultricies ipsum in ex imperdiet mattis. Maecenas eget tellus eu nibh sagittis tempor. Vestibulum dolor eros, scelerisque non fermentum nec, eleifend eget quam. Vivamus cursus vel augue eu posuere. Suspendisse sed elementum ante.
+
 Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis mattis. Porta pharetra rhoncus dis massa nulla ornare egestas! Ante leo cursus mauris eleifend potenti donec tempus. Fusce ultricies aptent accumsan himenaeos netus augue felis nibh. Duis commodo himenaeos aliquam integer! See @tbl-desc-gt.
 
 ```{r}
@@ -216,12 +219,12 @@ popularity %>%
   summarize(n=n(), m_nom=mean(indegree),  p_drink=mean(alcoholuse=="Drinker"),
             p_smoke=mean(smoker=="Smoker")) %>%
   gt() %>%
-  fmt_integer(1:2) %>%
-  fmt_number(3, decimals=2) %>%
-  fmt_percent(4:5, decimals = 1) %>%
-  cols_label(grade="Grade", n="N", m_nom="Mean friend nominations",
-             p_drink="Drink Regularly", p_smoke="Smoke Regularly") %>%
-  tab_spanner("Percent substance use", 4:5) %>%
+  fmt_integer(grade:n) %>%
+  fmt_number(m_nom, decimals=2, pattern = "{x} nominations") %>%
+  fmt_percent(starts_with("p_"), decimals = 1) %>%
+  cols_label(grade="Grade", n="N", m_nom="Mean Friend Nominations",
+             p_drink=md("**Drink Regularly**"), p_smoke="Smoke Regularly") %>%
+  tab_spanner("Percent substance use", starts_with("p_")) %>%
   tab_options(table.width = "100%") %>%
   tab_footnote(footnote = "Drinking frequently is defined as drinking at least one or twice a month for the previous 12 months.",
                locations = cells_column_labels(columns = p_drink)) %>%
@@ -229,6 +232,21 @@ popularity %>%
                locations = cells_column_labels(columns = p_smoke)) %>%
   tab_source_note(md("*Source*: National Survey of Adolescent to Adult Health, Wave 1, 1997"))
   
+```
+
+```{r}
+#| label: tbl-penguins
+#| tbl-cap: Some Penguin Data
+palmerpenguins::penguins[c(1,200,205,307),] |> 
+  select(species, island, body_mass_g, bill_length_mm, sex) |>
+  group_by(sex) |>
+  gt() |>
+  tab_options(table.width="100%") |>
+  cols_label(species="Species", island="Island", body_mass_g="Body mass (g)", bill_length_mm="Bill length (mm)") |>
+  summary_rows(groups=TRUE, columns=c(body_mass_g, bill_length_mm), 
+               fns = list(mean = ~mean(.), median = ~median(.), 
+                          "standard deviation" = ~sd(.)),
+               missing_text="")
 ```
 
 Lorem lobortis lectus pellentesque sapien vivamus eros felis cum. Mattis risus euismod vivamus vel mi nostra euismod euismod praesent aliquam? @tbl-desc-gt Sagittis posuere bibendum turpis arcu maecenas gravida leo sollicitudin primis. Ullamcorper lacinia laoreet tincidunt mollis torquent semper. Sem nascetur eleifend gravida nostra magnis arcu gravida facilisis sollicitudin? Cum curae placerat et auctor faucibus arcu ad mauris sollicitudin nunc! Posuere iaculis arcu dapibus dis ullamcorper pellentesque penatibus ultrices sed aenean ligula ullamcorper donec aliquam.
@@ -253,6 +271,21 @@ popularity %>%
 # Results
 
 Elit imperdiet aenean varius conubia sagittis orci ultrices. Ridiculus conubia accumsan aliquam mi penatibus molestie fringilla proin. Ullamcorper blandit libero sapien etiam cum justo vel habitant nostra? Molestie tincidunt lobortis dis accumsan curae mi maecenas aptent bibendum eget lacus ad torquent lobortis mattis sagittis aliquam!
+
+```{r}
+#| label: tbl-summary
+#| tbl-cap: Summary Statistics
+popularity |>
+  select(indegree, race, parentinc, nsports, sex) |>
+  tbl_summary(type=list(nsports="continuous"),
+              statistic=list(all_continuous() ~ "{mean} ({sd})", 
+                             all_categorical() ~ "{n} ({p}%)"),
+              label=list(indegree ~ "Friend nominations",
+                         race ~ "Race",
+                         sex ~ "Sex",
+                         parentinc ~ "Parent income ($1000s)",
+                         nsports ~ "Number of sports played"))
+```
 
 Lorem accumsan pharetra est cubilia placerat cubilia est fusce natoque laoreet rutrum porta pellentesque tempus! Inceptos arcu augue phasellus nunc ad aptent sem pulvinar maecenas. Tempor porttitor velit fermentum ornare convallis consequat proin mauris. Magna tortor non integer proin semper ad malesuada cras orci.
 
@@ -292,6 +325,7 @@ model1 <- lm(indegree~smoker+alcoholuse, data=popularity)
 model2 <- update(model1, .~.+parentinc+sex+race)
 model3 <- update(model2, .~.+pseudoGPA+honorsociety)
 texreg(list(model1, model2, model3),
+#        file="model.doc",
         digits=3,
         caption.above=TRUE,
         booktabs=TRUE,
@@ -304,7 +338,7 @@ texreg(list(model1, model2, model3),
                             "Native American","Pseudo-GPA",
                             "Honor society member"),
         custom.note="%stars. Standard errors in parenthesis.",
-       use.packages=FALSE)
+        use.packages=FALSE)
 ```
 
 ```{r}
