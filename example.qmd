@@ -45,27 +45,53 @@ bibliography: references.bib
 csl: https://www.zotero.org/styles/american-journal-of-sociology
 ## Available formats ##
 format: 
+  sketchy-html: default
   html:
+    theme: slate
     keep-md: false
     self-contained: false
     #theme: cosmo
-    #css: css/my_styles.css
+    css: css/my_styles.css
     #mainfont: Times New Roman #css font-family
     #fontsize: 1.1em
     #linestretch: 1.7
-    #fontcolor: "white"
+    #fontcolor: "purple"
     #backgroundcolor: "grey"
     #linkcolor: "purple"
     #max-width: "1600px"
+  submittable-docx: default
+  submittable-pdf:
+    keep-tex: true
+    endnotes: true
+    titlepage: true
+    linestretch: 2
+    include-in-header: 
+      text: |
+        \usepackage{dcolumn}
+  hikmah-pdf:
+    keep-tex: true
+    include-in-header: 
+      text: |
+        \usepackage{dcolumn}
+  elsevier-pdf:
+    keep-tex: true
+    include-in-header: 
+      text: |
+        \usepackage{dcolumn}
+  plos-pdf:
+    keep-tex: true
+    include-in-header: 
+      text: |
+        \usepackage{dcolumn}
   pdf:
     fig-pos: "!t"
     keep-md: false
     keep-tex: true
     ## Change to alternate citation system
-    #cite-method: natbib
-    #natbiboptions: authoryear,comma # other options are numbers, super
-    #biblio-title: References
-    #biblio-style: bib-styles/ajs.bst
+    cite-method: natbib
+    natbiboptions: authoryear,comma # other options are numbers, super
+    biblio-title: References
+    biblio-style: bib-styles/ajs.bst
     ## To change document characteristics
     #documentclass: scrartcl # LaTeX document class
     #fontfamily: accanthis   # font family, see below for options
@@ -84,22 +110,24 @@ format:
         \renewcommand{\thesubfigure}{\Alph{subfigure}}
   docx:
     keep-md: false
-    #reference-doc: sample_word_style.docx
+    reference-doc: reference.docx
 prefer-html: true        # This ensures that html tables will render in Word
 ## Cross-reference customization ##
-crossref:
- fig-title: Fig      # (default is "Figure")
- tbl-title: Table       # (default is "Table")
- title-delim: " -"       # (default is ":")
- fig-prefix: Fig.     # (default is "Figure")
- tbl-prefix: Tab.      # (default is "Table")
- eq-prefix: Eq.         # (default is "Equation")
- ref-hyperlink: true    # (default is true)
- fig-labels: alpha A     # (default is arabic)
- tbl-labels: arabic     # (default is arabic)
- eq-labels: arabic      # (default is arabic)
- subref-labels: roman I # (default is alpha a)
+#crossref:
+# fig-title: Fig      # (default is "Figure")
+# tbl-title: Table       # (default is "Table")
+# title-delim: " -"       # (default is ":")
+# fig-prefix: Fig.     # (default is "Figure")
+# tbl-prefix: Tab.      # (default is "Table")
+# eq-prefix: Eq.         # (default is "Equation")
+# ref-hyperlink: true    # (default is true)
+# fig-labels: alpha A     # (default is arabic)
+# tbl-labels: arabic     # (default is arabic)
+# eq-labels: arabic      # (default is arabic)
+# subref-labels: roman I # (default is alpha a)
 ## Which editor to use as default ##
+filters:
+  - authors-block
 editor: source
 ---
 
@@ -120,6 +148,7 @@ library(gapminder)
 #| label: load-data
 #| include: false
 load("input/popularity.RData")
+load("input/models.RData")
 ```
 
 # Introduction
@@ -157,6 +186,14 @@ Consectetur ullamcorper pharetra [FIG @fig-complex-panel-2]mattis leo himenaeos 
 [^2]: This is another footnote. This one has math. $$\sum (x_i-\bar{x})^2$$
 
 # Background
+
+Check out my diagram in @fig-mermaid!
+
+```{r}
+#| label: fig-mermaid
+#| fig-cap: A flowchart made in mermaid
+knitr::include_graphics("input/mermaid_diagram.png")
+```
 
 Ipsum scelerisque id tellus luctus malesuada eget aptent nullam. Urna nec ad habitant sollicitudin dui porttitor tortor nisl augue [@seibold_computational_2021]. @mcfadden_conditional_1973 Class quam at metus mattis condimentum lacus gravida hendrerit. Tincidunt nullam laoreet facilisis dui bibendum faucibus urna.[^3]
 
@@ -331,9 +368,9 @@ Elit varius diam quam magnis suscipit leo aptent congue? Proin placerat ultrices
 #| tbl-cap: Linear models predicting the number of friend nominations recieved, Add Health data
 #| results: asis
 #| eval: true
-model1 <- lm(indegree~smoker+alcoholuse, data=popularity)
-model2 <- update(model1, .~.+parentinc+sex+race)
-model3 <- update(model2, .~.+pseudoGPA+honorsociety)
+#model1 <- lm(indegree~smoker+alcoholuse, data=popularity)
+#model2 <- update(model1, .~.+parentinc+sex+race)
+#model3 <- update(model2, .~.+pseudoGPA+honorsociety)
 texreg(list(model1, model2, model3),
 #        file="model.doc",
         digits=3,

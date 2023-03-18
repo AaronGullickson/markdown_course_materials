@@ -131,4 +131,12 @@ popularity %>%
                  color="grey30", fill="grey60")+
   labs(x="number of friend nominations received")+
   theme_bw()
+#+
+#  theme(axis.line = element_line(colour="#eee8d5"), 
+#        axis.ticks = element_line(colour="#eee8d5"),
+#        text = element_text(colour = "#eee8d5"),
+#        axis.text = element_text(colour = "#eee8d5"), 
+#        panel.grid = element_blank(), 
+#        plot.background = element_rect(fill="#002b36", colour = "#002b36"),
+#        panel.background = element_rect(fill="#002b36"),)
 ```

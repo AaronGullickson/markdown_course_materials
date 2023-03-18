@@ -3,6 +3,7 @@ title: "Example Document"
 author: "Me"
 format:
   html:
+    theme: slate
     keep-md: true
   pdf:
     keep-tex: true
@@ -54,7 +55,7 @@ x <- 4
 mean(replicate(10000000, 2))+x
 ```
 
- The `echo: false` option disables the printing of code (only output is displayed).
+The `echo: false` option disables the printing of code (only output is displayed).
 
 Testing!
 
@@ -69,7 +70,6 @@ ggplot(mtcars, aes(x=hp, y=mpg))+
   geom_point()+
   geom_smooth()
 ```
-
 
 ```{python}
 #| label: fig-python
