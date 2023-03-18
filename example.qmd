@@ -61,12 +61,19 @@ format:
     fig-pos: "!t"
     keep-md: false
     keep-tex: true
+    ## Change to alternate citation system
+    #cite-method: natbib
+    #natbiboptions: authoryear,comma # other options are numbers, super
+    #biblio-title: References
+    #biblio-style: bib-styles/ajs.bst
+    ## To change document characteristics
     #documentclass: scrartcl # LaTeX document class
     #fontfamily: accanthis   # font family, see below for options
     #fontsize: 11pt          # font size (typically 10pt, 11pt, or 12pt)
     #linestretch: 1          # line spacing (1 for single, 2 for double)
     #geometry: margin=0.5in  # controls the margin size
     #papersize: letter       # controls the paper type
+    ## Include latex stuff in preamble
     include-in-header: 
       text: |
         \usepackage{dcolumn}
@@ -128,14 +135,6 @@ load("input/popularity.RData")
 ###### Something
 
 Ipsum interdum enim dapibus luctus potenti viverra ridiculus vulputate! Pretium ante euismod auctor semper proin lacinia augue vitae [@abascal_love_2015; @gentzkow_code_2014]. Magnis vivamus dis dapibus dapibus tristique vestibulum venenatis accumsan lobortis suscipit faucibus. Dis **scelerisque** egestas sodales tempor nisl accumsan conubia sem mauris mi himenaeos. Facilisis curabitur habitant quam malesuada facilisis inceptos phasellus rutrum vulputate etiam primis. Na primis?
-
-```{mermaid}
-flowchart LR
-  A[Hard edge] --> B(Round edge)
-  B --> C{Decision}
-  C --> D[Result one]
-  C --> E[Result two]
-```
 
 Consectetur *sodales* suscipit ultrices venenatis sagittis hendrerit lacus. Imperdiet nunc rhoncus ornare pharetra platea ut blandit nec senectus montes quisque purus @tbl-model-gt. Phasellus rutrum rutrum aliquet rutrum erat scelerisque non augue vulputate suspendisse lacinia commodo aptent vel [@abascal_contraction_2020; @seibold_computational_2021; @abascal_love_2015]. Mattis suscipit himenaeos rhoncus integer fames aliquam [@gravlee_ethnic_2005].
 
