@@ -17,16 +17,12 @@ if(!require(gt)) {
 if(!require(gtsummary)) {
   install.packages("gtsummary")
 }
-
 # Libraries for Python integration
 if(!require(reticulate)) {
   install.packages("reticulate")
 }
 
 # Additional libraries that our documents will use
-if(!require(ggplot2)) {
-  install.packages("ggplot2")
-}
 if(!require(tidyverse)) {
   install.packages("tidyverse")
 }
@@ -39,6 +35,6 @@ if(!require(gapminder)) {
 if(!require(PNWColors)) {
   install.packages("PNWColors")
 }
-if(!require(PNWColors)) {
+if(!require(palmerpenguins)) {
   install.packages("palmerpenguins")
 }
