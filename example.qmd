@@ -23,10 +23,10 @@ author:
 ## Paper details ##
 abstract: "Ipsum nostra facilisis sapien nullam. Facilisi himenaeos pharetra ultricies scelerisque non fusce quisque aliquam netus tellus. Dictum tellus et sociis quisque ornare ad a natoque magna blandit. Tortor duis aptent cursus lacus inceptos tristique magnis dictumst. Taciti varius nascetur aliquet hac ornare vitae ultricies. Rhoncus primis purus morbi aliquet quam cubilia nullam malesuada ridiculus."
 keywords: 
-  - Rmarkdown
+  - Quarto
   - Examples
   - Reproducibility
-description: An R Markdown Document for Testing and Playing
+description: A Quarto Document for Testing and Playing
 thanks: Thanks to everyone for checking this out.
 lang: en
 ## Execute parameters are used for default code chunk options ##
@@ -91,13 +91,12 @@ prefer-html: true        # This ensures that html tables will render in Word
 editor: source
 ---
 
-```{r setup}
+```{r}
+#| label: setup
 #| include: false
-library(ggplot2)
 library(tidyverse)
 library(scales)
 library(texreg)
-library(kableExtra)
 library(gt)
 library(gtsummary)
 load("input/popularity.RData")
@@ -216,44 +215,31 @@ Elit semper laoreet tristique etiam egestas arcu ut. Lacus condimentum diam faci
 
 Lorem nullam nunc habitasse blandit eleifend est mauris. Lacus class mauris interdum netus quisque volutpat. Aliquet at cum lobortis odio dapibus nunc porttitor ullamcorper? Suscipit nostra mi vulputate etiam purus tristique posuere augue orci sociis lectus justo a condimentum nascetur nibh.
 
-Elit varius diam quam magnis suscipit leo aptent congue? Proin placerat ultrices interdum mollis platea integer ac pharetra vulputate lacinia. Viverra nostra bibendum lacus lobortis varius condimentum eleifend faucibus odio justo montes sagittis? Eget imperdiet class tellus tincidunt dictumst sem ridiculus quam? Eget rutrum fames ridiculus eget pretium neque libero per! Eget dignissim magna nunc nulla dis orci interdum tellus tortor risus ut @tbl-model-results.
+Elit varius diam quam magnis suscipit leo aptent congue? Proin placerat ultrices interdum mollis platea integer ac pharetra vulputate lacinia. Viverra nostra bibendum lacus lobortis varius condimentum eleifend faucibus odio justo montes sagittis? Eget imperdiet class tellus tincidunt dictumst sem ridiculus quam? Eget rutrum fames ridiculus eget pretium neque libero per! Eget dignissim magna nunc nulla dis orci interdum tellus tortor risus ut Table 2.
 
 ```{r}
-#| label: tbl-model-results
-#| tbl-cap: Linear models predicting the number of friend nominations recieved, Add Health data
+#| label: model-results
 #| results: asis
-#| eval: true
 model1 <- lm(indegree~smoker+alcoholuse, data=popularity)
 model2 <- update(model1, .~.+parentinc+sex+race)
 model3 <- update(model2, .~.+pseudoGPA+honorsociety)
 texreg(list(model1, model2, model3),
-        digits=3,
-        caption.above=TRUE,
-        booktabs=TRUE,
-        float.pos = "t",
-        dcolumn=TRUE,
-        custom.coef.names=c("Intercept","Smoker","Drinker",
-                            "Parental income (1000 USD)",
-                            "Male","Black","Latino",
-                            "Asian/Pacific Islander","Other",
-                            "Native American","Pseudo-GPA",
-                            "Honor society member"),
-        custom.note="%stars. Standard errors in parenthesis.",
+       digits=3,
+       caption.above=TRUE,
+       caption = "Linear models predicting the number of friend nominations recieved, Add Health data",
+       booktabs=TRUE,
+       dcolumn=TRUE,
+       custom.coef.names=c("Intercept","Smoker","Drinker",
+                           "Parental income (1000 USD)",
+                           "Male","Black","Latino",
+                           "Asian/Pacific Islander","Other",
+                           "Native American","Pseudo-GPA",
+                           "Honor society member"),
+       custom.note="%stars. Standard errors in parenthesis.",
        use.packages=FALSE)
 ```
 
-```{r}
-#| label: tbl-model-gt
-#| tbl-cap: Linear models predicting the number of friend nominations recieved, Add Health data
-#| eval: false
-t1 <- tbl_regression(model1, conf.int=FALSE)
-t2 <- tbl_regression(model2, conf.int=FALSE)
-t3 <- tbl_regression(model3, conf.int=FALSE)
-tbl_merge(tbls = list(t1, t2, t3),
-          tab_spanner=c("Model 1","Model 2","Model 3"))
-```
-
-@tbl-model-results results olor convallis vulputate dictum mollis ante placerat dui parturient porttitor conubia vitae. Eros nec dignissim tortor nascetur laoreet mi nascetur interdum lacus donec? Non potenti elementum massa hendrerit odio taciti euismod sagittis rhoncus sodales montes mattis? Sociosqu luctus neque euismod elementum accumsan parturient sed morbi scelerisque sociis quis faucibus primis suscipit scelerisque.
+Results olor convallis vulputate dictum mollis ante placerat dui parturient porttitor conubia vitae. Eros nec dignissim tortor nascetur laoreet mi nascetur interdum lacus donec? Non potenti elementum massa hendrerit odio taciti euismod sagittis rhoncus sodales montes mattis? Sociosqu luctus neque euismod elementum accumsan parturient sed morbi scelerisque sociis quis faucibus primis suscipit scelerisque.
 
 Sit aenean sociosqu curae magna natoque sociis pulvinar sagittis et congue. Sodales magna montes potenti tristique quis? Id suscipit lobortis suspendisse felis taciti massa vitae convallis in montes. Mauris sodales parturient mus tellus mollis dapibus felis vel? Dui malesuada nibh dui ut torquent taciti sodales tempor dapibus vitae montes?
 
