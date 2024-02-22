@@ -1,5 +1,7 @@
 # Course Materials for Reproducible Reports with Quarto and R Markdown: A Short Course
 
+February 2024
+
 These are the course materials for the [course on Reproducible Reports with Quarto and R Markdown](https://codehorizons.com/Seminars/reproducible-reports-with-quarto-and-r-markdown/) offered through [Code Horizons](https://codehorizons.com/). This repository contains a variety of example documents and scripts that we will use throughout the course. Participants should download the latest release in the [Releases](https://github.com/AaronGullickson/markdown_course_materials/releases) section. Alternatively, participants can clone or fork the repository if they are familiar with using git and GitHub.
 
 ## Preparation for the Course
