@@ -1,0 +1,147 @@
+---
+title: "A First Quarto Document"
+author: "Aaron Gullickson"
+format: 
+  html: 
+    theme: materia
+    keep-md: true
+  pdf:
+    keep-md: false
+    keep-tex: false
+  docx:
+    keep-md: false
+editor: source
+execute: 
+  echo: false
+  warning: false
+  message: false
+  eval: true
+  cache: true
+---
+
+```{r}
+#| label: load-stuff
+
+library(tidyverse)
+load("input/popularity.RData")
+```
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see [the Quarto website](https://quarto.org).
+
+### Things I like about Quarto
+
+Some of the cool things you can use quarto for:
+
+* Lab notebooks
+   * For organizing data
+   * For analysis
+* Journal manuscripts
+* Websites
+* Presentations
+* Books
+* Laundry (just kidding!)
+
+My top favorite things about Quarto:
+
+1. Beautiful Output
+1. No transcription
+2. No Microsoft Word
+
+## Running Code
+
+<!-- QUESTION: What is this comment doing here? -->
+
+When you click the **Render** button a <b>document</b> will be generated that includes both content and the output of embedded code. You **can embed** code like this:
+
+The number of observations in this dataset is `r format(nrow(popularity), big.mark = ",")`. The correlation coefficient between parental income and number of friend nominations is `r x <- cor(popularity$parentinc, popularity$indegree); round(x, 3)`.
+
+```r
+x <- 2+2
+```
+
+```{r}
+#| label: fig-boxplot
+#| fig-cap: Boxplot of number of sports by popularity
+
+ggplot(popularity, aes(x=factor(nsports), y=indegree))+
+  geom_boxplot()
+```
+
+```{r}
+#| label: fig-scatter
+#| output: true
+
+ggplot(popularity, aes(x=parentinc, y=indegree))+
+  geom_point()+
+  geom_smooth()
+```
+
+Here is another paragraph <!-- TODO: Figure out what this paragraph is for  -->.
+
+```{r}
+#| label: different-thing
+#| echo: true
+4+2
+```
+
+You can add options to executable code like this. See @fig-boxplot.
+
+```{r}
+#| label: simple-math
+#| echo: true
+2 * 3
+```
+
+```{r}
+#| label: hello-world-html
+#| results: asis
+cat("<center><b>Hello, World!</b></center><br>")
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+## Another Section
+
+Definition 1
+: A thing
+
+Definition 2
+: Another thing
+
+| Column Header 1  | Column Header 2 |
+|------------------|:---------------|
+|   Dog            | Cat in a hat feeding a bat |
+| Seal             | Lion            |
+
+: Some animals
+
+## Try out python code
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 2 * np.pi * r
+fig, ax = plt.subplots(
+  subplot_kw = {'projection':'polar'} 
+)
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```
+
+
+```{mermaid}
+%%| label: fig-mermaid-example
+%%| fig-cap: A flowchart
+flowchart LR
+  A[Hard edge] --> B(Round edge)
+  B --> C{Decision}
+  C --> D[Result one]
+  C --> E[Result two]
+```
+
