@@ -36,12 +36,12 @@ execute:
   warning: false
   error: false
 ## Some figure parameters ##
-fig-height: 3
+fig-height: 3.5
 fig-align: center        # default is center
 fig-cap-location: bottom # default is bottom
 ## Bibliography information ##
 bibliography: references.bib
-csl: bib-styles/chicago-parenthetical.csl
+csl: bib-styles/vancouver.csl
 ## Available formats ##
 format: 
   html:
@@ -98,15 +98,16 @@ library(tidyverse)
 library(scales)
 library(texreg)
 library(gt)
-library(gtsummary)
+library(gtmodels)
+library(palmerpenguins)
 load("input/popularity.RData")
 ```
 
 # Introduction
 
-Ipsum interdum enim dapibus luctus potenti viverra ridiculus vulputate! Pretium ante euismod auctor semper proin lacinia augue vitae [@abascal_love_2015; @gentzkow_code_2014]. Magnis vivamus dis dapibus dapibus tristique vestibulum venenatis accumsan lobortis suscipit faucibus. Dis **scelerisque** egestas sodales tempor nisl accumsan conubia sem mauris mi himenaeos. Facilisis curabitur habitant quam malesuada facilisis inceptos phasellus rutrum vulputate etiam primis. Na primis?
+Ipsum interdum enim dapibus luctus potenti viverra ridiculus vulputate! Pretium ante euismod auctor semper proin lacinia augue vitae [@abascal_love_2015; @gentzkow_code_2014]. Magnis vivamus dis dapibus dapibus tristique vestibulum venenatis accumsan lobortis suscipit faucibus. Dis **scelerisque** egestas sodales tempor nisl accumsan conubia sem mauris mi himenaeos. Facilisis curabitur habitant quam malesuada facilisis inceptos phasellus rutrum vulputate etiam primis . Na primis?
 
-Consectetur *sodales* suscipit ultrices venenatis sagittis hendrerit lacus. Imperdiet nunc rhoncus ornare pharetra platea ut blandit nec senectus montes quisque purus. Phasellus rutrum rutrum aliquet rutrum erat scelerisque non augue vulputate suspendisse lacinia commodo aptent vel. Mattis suscipit himenaeos rhoncus integer fames aliquam.
+Consectetur *sodales* suscipit ultrices venenatis sagittis hendrerit lacus. Imperdiet nunc rhoncus ornare pharetra platea ut blandit nec senectus montes quisque purus . Phasellus rutrum rutrum aliquet rutrum erat scelerisque non augue vulputate suspendisse lacinia commodo aptent vel [@alexander_modelling_2005; @bratter_poverty_2013; @bratter_multiracial_2013]. Mattis suscipit himenaeos rhoncus integer fames aliquam [@López-Otín2023].
 
 1.  Sit pharetra ut lacus tortor sodales convallis?
 2.  Molestie egestas fermentum aliquam convallis fames dictum?
@@ -116,11 +117,15 @@ Consectetur ullamcorper pharetra mattis leo himenaeos magnis non est non sagitti
 
 [^1]: This is a footnote.
 
-[^2]: This is another footnote. This one has math. $$\sum (x_i-\bar{x})^2$$
+[^2]: This is another footnote.
+
+    This one has math. $$\sum (x_i-\bar{x})^2$$
 
 # Background
 
-Ipsum scelerisque id tellus luctus malesuada eget aptent nullam. Urna nec ad habitant sollicitudin dui porttitor tortor nisl augue [@seibold_computational_2021]. @mcfadden_conditional_1973 Class quam at metus mattis condimentum lacus gravida hendrerit. Tincidunt nullam laoreet facilisis dui bibendum faucibus urna.
+Ipsum scelerisque id tellus luctus malesuada eget aptent nullam. Urna nec ad habitant sollicitudin dui porttitor tortor nisl augue [@seibold_computational_2021]. @mcfadden_conditional_1973 Class quam at metus mattis condimentum lacus gravida hendrerit. Tincidunt nullam laoreet facilisis dui bibendum faucibus urna.[^3]
+
+[^3]: I put my foot in the note!
 
 Adipiscing habitasse integer sed fusce phasellus morbi libero mauris scelerisque fusce! Phasellus proin sem potenti torquent potenti ultrices orci bibendum morbi. Venenatis in vitae platea ligula orci dictumst pulvinar eleifend id ligula? Nisi vel mus tellus porttitor justo class cras orci est. Iaculis pretium tristique euismod facilisis vestibulum luctus lobortis quam tellus quis cum facilisis. Curabitur est parturient habitant proin elementum nascetur.
 
@@ -146,22 +151,26 @@ Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis matt
 #| label: tbl-desc-gt
 #| tbl-cap: Sample size and descriptive statistics, Add Health data, Wave 1
 popularity %>%
-  group_by(grade) %>%
+  group_by(grade) |>
   summarize(n=n(), m_nom=mean(indegree),  p_drink=mean(alcoholuse=="Drinker"),
-            p_smoke=mean(smoker=="Smoker")) %>%
-  gt() %>%
-  fmt_integer(1:2) %>%
-  fmt_number(3, decimals=2) %>%
-  fmt_percent(4:5, decimals = 1) %>%
-  cols_label(grade="Grade", n="N", m_nom="Mean friend nominations",
-             p_drink="Drink Regularly", p_smoke="Smoke Regularly") %>%
-  tab_spanner("Percent substance use", 4:5) %>%
-  tab_options(table.width = "100%") %>%
-  tab_footnote(footnote = "Drinking frequently is defined as drinking at least one or twice a month for the previous 12 months.",
-               locations = cells_column_labels(columns = p_drink)) %>%
-  tab_footnote(footnote = "Smoking frequently is defined as smoking at least 5 cigarettes in the last 30 days.",
-               locations = cells_column_labels(columns = p_smoke)) %>%
-  tab_source_note(md("*Source*: National Survey of Adolescent to Adult Health, Wave 1, 1997"))
+            p_smoke=mean(smoker=="Smoker")) |>
+  gt() |>
+  cols_label(grade = "Grade", n = "N", m_nom = "Mean friend nominations",
+             p_drink = "Drinks regularly", p_smoke = "Smokes regularly") |>
+  fmt_integer(grade, pattern = "{x}th") |>
+  fmt_number(m_nom, decimals = 2) |>
+  fmt_percent(c(p_drink, p_smoke), decimals=1) |>
+  tab_spanner(label = "Substance use", columns = c(p_drink, p_smoke)) |>
+  tab_options(table.width = "100%") |>
+  tab_source_note(md("*Source*: [National](https://www.google.com) Survey of Adolescent to Adult Health, Wave 1")) |>
+  tab_footnote(footnote = "This value could be wrong.", 
+               locations = cells_body(columns=m_nom, rows=c(1,4)), 
+               placement = "right") |>
+  tab_footnote(footnote = "Drinking at least once or twice a month for the previous 12 months.",
+               locations = cells_column_labels(columns = p_drink)) |>
+  tab_footnote(footnote = "Smoking at least 5 cigarettes in the last 30 days.",
+               locations = cells_column_labels(columns = p_smoke)) |>
+  tab_options(footnotes.marks = c("*","@","!"))
   
 ```
 
@@ -173,12 +182,42 @@ $$y_i=\beta_0+\beta_1x_i+\epsilon_i$$ {#eq-model}
 
 ```{r}
 #| label: fig-dist
-#| fig-cap: "Distribution of number of friend nominations received in Add Health data"
+#| fig-height: 7
+#| fig-pos: p
+#| layout-ncol: 2
+#| fig-cap: "Distribution of key variables in Add Health data"
+#| fig-subcap: 
+#|   - Number of friend nominations
+#|   - Parental income
+#|   - GPA
+#|   - Race
 popularity %>%
   ggplot(aes(x=indegree))+
   geom_histogram(binwidth = 1, center=0.5, 
                  color="grey30", fill="grey60")+
   labs(x="number of friend nominations received")+
+  theme_bw()
+
+popularity %>%
+  ggplot(aes(x=parentinc))+
+  geom_histogram(binwidth = 10,
+                 color="grey30", fill="grey60")+
+  labs(x="Parental income in 1000 USD")+
+  theme_bw()
+
+popularity %>%
+  ggplot(aes(x=pseudoGPA))+
+  geom_histogram(binwidth = 0.25,
+                 color="grey30", fill="grey60")+
+  labs(x="GPA in four core courses")+
+  theme_bw()
+
+popularity %>%
+  ggplot(aes(x=race, y=after_stat(prop), group=1))+
+  geom_bar()+
+  scale_y_continuous(labels=scales::percent)+
+  coord_flip()+
+  labs(x=NULL, y=NULL)+
   theme_bw()
 ```
 
@@ -187,6 +226,8 @@ popularity %>%
 # Results
 
 Elit imperdiet aenean varius conubia sagittis orci ultrices. Ridiculus conubia accumsan aliquam mi penatibus molestie fringilla proin. Ullamcorper blandit libero sapien etiam cum justo vel habitant nostra? Molestie tincidunt lobortis dis accumsan curae mi maecenas aptent bibendum eget lacus ad torquent lobortis mattis sagittis aliquam!
+
+![A Sloth!](example-presentation/images/sloth1.png){#fig-sloth}
 
 Lorem accumsan pharetra est cubilia placerat cubilia est fusce natoque laoreet rutrum porta pellentesque tempus! Inceptos arcu augue phasellus nunc ad aptent sem pulvinar maecenas. Tempor porttitor velit fermentum ornare convallis consequat proin mauris. Magna tortor non integer proin semper ad malesuada cras orci.
 
@@ -215,6 +256,21 @@ Elit semper laoreet tristique etiam egestas arcu ut. Lacus condimentum diam faci
 
 Lorem nullam nunc habitasse blandit eleifend est mauris. Lacus class mauris interdum netus quisque volutpat. Aliquet at cum lobortis odio dapibus nunc porttitor ullamcorper? Suscipit nostra mi vulputate etiam purus tristique posuere augue orci sociis lectus justo a condimentum nascetur nibh.
 
+```{r}
+#| label: tbl-penguins
+#| tbl-cap: A grouped `gt` table with summary statistics
+palmerpenguins::penguins[c(1,200,205,307),] |> 
+  select(species, island, body_mass_g, bill_length_mm, sex) |>
+  group_by(sex) |>
+  gt() |>
+  #tab_options(table.width="100%") |>
+  cols_label(species="Species", island="Island", body_mass_g="Body mass (g)", bill_length_mm="Bill length (mm)") |>
+  summary_rows(columns=c(body_mass_g, bill_length_mm), 
+               fns = list(mean = ~mean(.), sd = ~sd(.), mimimum = ~min(.),
+                          maximum = ~max(.)),
+               fmt = ~ fmt_number(., decimals=1))
+```
+
 Elit varius diam quam magnis suscipit leo aptent congue? Proin placerat ultrices interdum mollis platea integer ac pharetra vulputate lacinia. Viverra nostra bibendum lacus lobortis varius condimentum eleifend faucibus odio justo montes sagittis? Eget imperdiet class tellus tincidunt dictumst sem ridiculus quam? Eget rutrum fames ridiculus eget pretium neque libero per! Eget dignissim magna nunc nulla dis orci interdum tellus tortor risus ut Table 2.
 
 ```{r}
@@ -224,19 +280,51 @@ model1 <- lm(indegree~smoker+alcoholuse, data=popularity)
 model2 <- update(model1, .~.+parentinc+sex+race)
 model3 <- update(model2, .~.+pseudoGPA+honorsociety)
 texreg(list(model1, model2, model3),
-       digits=3,
-       caption.above=TRUE,
-       caption = "Linear models predicting the number of friend nominations recieved, Add Health data",
-       booktabs=TRUE,
-       dcolumn=TRUE,
-       custom.coef.names=c("Intercept","Smoker","Drinker",
-                           "Parental income (1000 USD)",
-                           "Male","Black","Latino",
-                           "Asian/Pacific Islander","Other",
-                           "Native American","Pseudo-GPA",
-                           "Honor society member"),
-       custom.note="%stars. Standard errors in parenthesis.",
-       use.packages=FALSE)
+          caption.above=TRUE,
+          caption = "Linear models predicting the number of friend nominations recieved, Add Health data",
+          custom.coef.names = c("Intercept", "Smokes regularly",
+                                "Drinks regularly", "Parental income (1000 USD)",
+                                "Male", "Black","Latino",
+                                "Asian/Pacific Islander","Other",
+                                "American Indian", "GPA in four core courses",
+                                "Honor society member"),
+          digits = 3,
+          dcolumn=TRUE,
+          use.packages=FALSE,
+          include.adjrs=FALSE,
+          custom.model.names = c("(1)", "(2)", "(3)"),
+          groups=list("Race (ref. white)"=6:10),
+          omit.coef = "honorsociety|sex",
+          custom.note="%stars. Standard errors in parenthesis.",
+        file="models.doc")
+```
+
+```{r}
+#| label: tbl-models
+#| tbl-cap: Linear models predicting the number of friend nominations recieved, Add Health data
+name_corr <- c("(Intercept)"="Intercept",
+               "smokerSmoker" = "Smokes regularly",
+               "alcoholuseDrinker" = "Drinks regularly",
+               "parentinc" = "Parental income in 1000 USD",
+               "race Black/African American" = "Black",
+               "raceLatino" = "Latino",
+               "race Asian/Pacific Islander" = "Asian/Pacific Islander",
+               "race Other" = "Other",
+               "race American Indian/Native American" = "American Indian",
+               "pseudoGPA" = "GPA in four core courses",
+               "honorsocietyTRUE" = "Honor society member",
+               "sex Male"="Male",
+               "n" = "N",
+               "adj_rsquared" = "Adj. R-squared",
+               "rsquared" = "R-squared",
+               "sex" = "Gender (ref. female)",
+               "race" = "Race (ref. white)")
+gt_model(list(model1, model2, model3), 
+         var_labels = name_corr,
+         summary_stats = c("adj_rsquared","rsquared"),
+         beside = FALSE,
+         parenthetical_value = "se") |>
+  cols_label(model1="(1)", model2="(2)", model3="(3)")
 ```
 
 Results olor convallis vulputate dictum mollis ante placerat dui parturient porttitor conubia vitae. Eros nec dignissim tortor nascetur laoreet mi nascetur interdum lacus donec? Non potenti elementum massa hendrerit odio taciti euismod sagittis rhoncus sodales montes mattis? Sociosqu luctus neque euismod elementum accumsan parturient sed morbi scelerisque sociis quis faucibus primis suscipit scelerisque.
@@ -256,3 +344,6 @@ Consectetur blandit class scelerisque placerat et sapien. Aptent ornare orci com
 Consectetur torquent justo cubilia luctus justo erat dignissim faucibus aliquet dictumst. Gravida metus morbi tristique pharetra at venenatis pretium dapibus porttitor commodo. Pulvinar tempus platea accumsan aliquam inceptos magna praesent pulvinar curae sollicitudin. Justo tincidunt imperdiet potenti quam malesuada fames dis et dignissim.
 
 # References
+
+::: {#refs}
+:::
