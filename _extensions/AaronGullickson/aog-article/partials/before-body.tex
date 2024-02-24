@@ -1,0 +1,33 @@
+$-- Implements the frontmatter, title page, and abstract.
+
+% for some reason this does not work in header
+\renewcommand{\abstractname}{Abstract.}
+
+% add the short title to the fancy header
+$if(shorttitle)$
+\fancyhead[R]{$shorttitle$}
+$endif$
+$if(shortauthors)$
+\fancyhead[L]{$shortauthors$}
+$endif$
+
+$if(has-frontmatter)$
+\frontmatter
+$endif$
+$if(title)$
+\maketitle
+%\noindent \rule{\linewidth}{.5pt}
+$if(abstract)$
+\begin{abstract}
+$abstract$
+\end{abstract}
+$if(keywords)$
+\begin{keywords}
+\def\sep{;\ }
+$for(keywords/allbutlast)$$keywords$\sep $endfor$
+$for(keywords/last)$$keywords$$endfor$
+\end{keywords}
+$endif$
+$endif$
+%\noindent \rule{\linewidth}{.5pt}
+$endif$

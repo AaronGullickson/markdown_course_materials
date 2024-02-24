@@ -1,0 +1,3 @@
+$-- Custom tex partial for apperance of each author
+
+$it.name.literal$$if(it.attributes.corresponding)$$endif$$if(it.orcid)$~\orcidlink{$it.orcid$}$endif$$for(it.affiliations/first)$\\$it.name$$if(it.department)$, $it.department$$endif$\\$endfor$$if(it.email)$\href{mailto:$it.email$}{$it.email$}$endif$

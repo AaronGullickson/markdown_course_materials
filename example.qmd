@@ -1,6 +1,8 @@
 ---
 ##  Author and title information ##
 title: "Example Quarto Document"
+shorttitle: "Example Doc"
+shortauthors: "Gullickson & Secondauthor"
 author:
   - name: Aaron Gullickson
     orcid: 0000-0001-7237-8131
@@ -12,7 +14,6 @@ author:
       - id: uo
         name: University of Oregon
         department: Sociology
-        address: 727 PLC
         city: Eugene
         region: OR
         country: USA
@@ -47,56 +48,86 @@ format:
   html:
     keep-md: false
     self-contained: true
-    #theme: cosmo
+    theme: journal
     #css: css/my_styles.css
-    #mainfont: Chalkduster # font for text
-    #monofont: JCsmPC      # font for code
+    #mainfont: MarkerFelt-Wide # font for text
+    #monofont: Osaka-Mono      # font for code
     #fontsize: 1.1em
     #linestretch: 1.7
     #fontcolor: "white"
-    #backgroundcolor: "grey"
+    #backgroundcolor: "black"
     #linkcolor: "purple"
     #max-width: "1600px"
+  #plos-pdf:
+  #  fig-pos: "!t"
+  #  include-in-header: 
+  #    text: |
+  #      \usepackage{booktabs}
+  #      \usepackage{dcolumn}
+  #aog-article-pdf:
+  #  fig-pos: "!t"
+  #  mainfont: Baskerville   # font for regular text
+  #  sansfont: Futura-Medium     # font for headings
+  #  include-in-header: 
+  #    text: |
+  #      \usepackage{booktabs}
+  #      \usepackage{dcolumn}
+  #submittable-pdf:
+  #  endnotes: true
+  #  titlepage: true
+  #  fig-pos: "!t"
+  #  include-in-header: 
+  #    text: |
+  #      \usepackage{booktabs}
+  #      \usepackage{dcolumn}
   pdf:
     fig-pos: "!t"
     keep-md: false
     keep-tex: false
-    #documentclass: scrartcl # LaTeX document class
-    #mainfont: Baskerville   # font for regular text
-    #sansfont: Helvetica     # font for headings
+    #documentclass: article # LaTeX document class
+    #mainfont: Papyrus   # font for regular text
+    #sansfont: ComicSansMS     # font for headings
     #monofont: Osaka-Mono    # font for code
     #fontsize: 12pt          # font size (typically 10pt, 11pt, or 12pt)
     #linestretch: 1          # line spacing (1 for single, 2 for double)
     #geometry: margin=0.5in  # controls the margin size
-    #papersize: letter       # controls the paper type
+    #papersize: a4       # controls the paper type
     include-in-header: 
       text: |
         \usepackage{booktabs}
         \usepackage{dcolumn}
-  docx:
-    keep-md: false
-    #reference-doc: sample_word_style.docx
+  # docx:
+  #  keep-md: false
+  #  reference-doc: custom-reference-doc.docx
+  #submittable-docx: default
+filters:
+  - authors-block
 prefer-html: true        # This ensures that html tables will render in Word
 ## Cross-reference customization ##
-#crossref:
-#  fig-title: Figure      # (default is "Figure")
+crossref:
+  custom:
+    - kind: float
+      reference-prefix: Video
+      key: vid
+      latex-env: video
+  fig-title: Fig      # (default is "Figure")
 #  tbl-title: Table       # (default is "Table")
-#  title-delim: ":"       # (default is ":")
-#  fig-prefix: Figure     # (default is "Figure")
+  title-delim: '-'       # (default is ":")
+  fig-prefix: Fig.     # (default is "Figure")
 #  tbl-prefix: Table      # (default is "Table")
 #  eq-prefix: Eq.         # (default is "Equation")
 #  ref-hyperlink: true    # (default is true)
-#  fig-labels: arabic     # (default is arabic)
+  fig-labels: alpha A    # (default is arabic)
 #  tbl-labels: arabic     # (default is arabic)
 #  eq-labels: arabic      # (default is arabic)
-#  subref-labels: alpha a # (default is alpha a)
+  subref-labels: roman i # (default is alpha a)
 ## Which editor to use as default ##
 editor: source
 ---
 
 ```{r}
 #| label: setup
-#| echo: true
+#| include: false
 library(tidyverse)
 library(scales)
 library(texreg)
@@ -106,7 +137,7 @@ library(palmerpenguins)
 load("input/popularity.RData")
 ```
 
-# Introduction
+# {{< fa thumbs-up >}} Introduction
 
 Ipsum interdum enim dapibus luctus potenti viverra ridiculus vulputate! Pretium ante euismod auctor semper proin lacinia augue vitae [@abascal_love_2015; @gentzkow_code_2014]. Magnis vivamus dis dapibus dapibus tristique vestibulum venenatis accumsan lobortis suscipit faucibus. Dis **scelerisque** egestas sodales tempor nisl accumsan conubia sem mauris mi himenaeos. Facilisis curabitur habitant quam malesuada facilisis inceptos phasellus rutrum vulputate etiam primis . Na primis?
 
@@ -116,7 +147,9 @@ Consectetur *sodales* suscipit ultrices venenatis sagittis hendrerit lacus. Impe
 2.  Molestie egestas fermentum aliquam convallis fames dictum?
 3.  Consectetur vehicula habitant porttitor volutpat velit augue eleifend rutrum accumsan quam pretium pretium?
 
-Consectetur ullamcorper pharetra mattis leo himenaeos magnis non est non sagittis.[^1] Nec rutrum aptent sapien convallis <!--TODO: Check this--> euismod taciti felis interdum torquent suspendisse. Ultrices auctor hac ad arcu urna leo integer. Torquent turpis accumsan suscipit cum laoreet blandit ante molestie netus a. Sociosqu placerat purus mollis senectus blandit magna quis pharetra sodales. Platea dui felis porttitor leo enim aenean interdum mauris libero primis volutpat vulputate. Ultrices ullamcorper magna consequat vehicula leo massa at erat sapien arcu scelerisque.[^2]
+Just a test!
+
+Consectetur ullamcorper pharetra mattis leo himenaeos magnis non est non sagittis.[^1] Nec rutrum aptent sapien convallis <!--TODO: Check this--> euismod taciti felis interdum torquent suspendisse. Ultrices auctor hac ad arcu urna leo integer. <!-- QUESTION: Are we sure this is true? Do we need more citations? --> Torquent turpis accumsan suscipit cum laoreet blandit ante molestie netus a. Sociosqu placerat purus mollis senectus blandit magna quis pharetra sodales. Platea dui felis porttitor leo enim aenean interdum mauris libero primis volutpat vulputate. Ultrices ullamcorper magna consequat vehicula leo massa at erat sapien arcu scelerisque.[^2]
 
 [^1]: This is a footnote.
 
@@ -153,6 +186,7 @@ Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis matt
 ```{r}
 #| label: tbl-desc-gt
 #| tbl-cap: Sample size and descriptive statistics, Add Health data, Wave 1
+#| echo: true
 popularity %>%
   group_by(grade) |>
   summarize(n=n(), m_nom=mean(indegree),  p_drink=mean(alcoholuse=="Drinker"),
@@ -177,7 +211,7 @@ popularity %>%
   
 ```
 
-Lorem lobortis lectus pellentesque sapien vivamus eros felis cum. Mattis risus euismod vivamus vel mi nostra euismod euismod praesent aliquam? @tbl-desc-gt Sagittis posuere bibendum turpis arcu maecenas gravida leo sollicitudin primis. Ullamcorper lacinia laoreet tincidunt mollis torquent semper. Sem nascetur eleifend gravida nostra magnis arcu gravida facilisis sollicitudin? Cum curae placerat et auctor faucibus arcu ad mauris sollicitudin nunc! Posuere iaculis arcu dapibus dis ullamcorper pellentesque penatibus ultrices sed aenean ligula ullamcorper donec aliquam.
+Lorem lobortis lectus pellentesque sapien vivamus eros felis cum. Mattis risus euismod vivamus vel mi nostra euismod euismod praesent aliquam? @tbl-desc-gt Sagittis posuere bibendum turpis arcu maecenas gravida leo sollicitudin primis. Ullamcorper lacinia laoreet tincidunt mollis torquent semper. Sem nascetur eleifend gravida nostra magnis arcu gravida facilisis sollicitudin? Cum curae placerat et auctor faucibus arcu ad mauris sollicitudin nunc! Posuere iaculis arcu dapibus dis ullamcorper pellentesque penatibus ultrices sed aenean ligula ullamcorper donec aliquam. See [Tbl. @tbl-desc-gt].
 
 $$y_i=\beta_0+\beta_1x_i+\epsilon_i$$ {#eq-model}
 
@@ -185,7 +219,7 @@ $$y_i=\beta_0+\beta_1x_i+\epsilon_i$$ {#eq-model}
 
 ```{r}
 #| label: fig-dist
-#| fig-height: 7
+#| fig-height: 6.5
 #| fig-pos: p
 #| layout-ncol: 2
 #| fig-cap: "Distribution of key variables in Add Health data"
@@ -232,7 +266,7 @@ Elit imperdiet aenean varius conubia sagittis orci ultrices. Ridiculus conubia a
 
 ![A Sloth!](example-presentation/images/sloth1.png){#fig-sloth}
 
-Lorem accumsan pharetra est cubilia placerat cubilia est fusce natoque laoreet rutrum porta pellentesque tempus! Inceptos arcu augue phasellus nunc ad aptent sem pulvinar maecenas. Tempor porttitor velit fermentum ornare convallis consequat proin mauris. Magna tortor non integer proin semper ad malesuada cras orci.
+@fig-sloth Lorem accumsan pharetra est cubilia placerat cubilia est fusce natoque laoreet rutrum porta pellentesque tempus! Inceptos arcu augue phasellus nunc ad aptent sem pulvinar maecenas. Tempor porttitor velit fermentum ornare convallis consequat proin mauris. Magna tortor non integer proin semper ad malesuada cras orci.
 
 Lorem accumsan pharetra est cubilia placerat cubilia est fusce natoque laoreet rutrum porta pellentesque tempus! Inceptos arcu augue phasellus nunc ad aptent sem pulvinar maecenas. Tempor porttitor velit fermentum ornare convallis consequat proin mauris. Magna tortor non integer proin semper ad malesuada cras orci. See @fig-scatter.
 
@@ -274,7 +308,7 @@ palmerpenguins::penguins[c(1,200,205,307),] |>
                fmt = ~ fmt_number(., decimals=1))
 ```
 
-Elit varius diam quam magnis suscipit leo aptent congue? Proin placerat ultrices interdum mollis platea integer ac pharetra vulputate lacinia. Viverra nostra bibendum lacus lobortis varius condimentum eleifend faucibus odio justo montes sagittis? Eget imperdiet class tellus tincidunt dictumst sem ridiculus quam? Eget rutrum fames ridiculus eget pretium neque libero per! Eget dignissim magna nunc nulla dis orci interdum tellus tortor risus ut Table 2.
+Elit varius diam quam magnis suscipit leo aptent congue? Proin placerat ultrices interdum mollis platea integer ac pharetra vulputate lacinia. @tbl-penguins viverra nostra bibendum lacus lobortis varius condimentum eleifend faucibus odio justo montes sagittis? Eget imperdiet class tellus tincidunt dictumst sem ridiculus quam? Eget rutrum fames ridiculus eget pretium neque libero per! Eget dignissim magna nunc nulla dis orci interdum tellus tortor risus ut.
 
 ```{r}
 #| label: model-results
@@ -333,6 +367,16 @@ gt_model(list(model1, model2, model3),
 Results olor convallis vulputate dictum mollis ante placerat dui parturient porttitor conubia vitae. Eros nec dignissim tortor nascetur laoreet mi nascetur interdum lacus donec? Non potenti elementum massa hendrerit odio taciti euismod sagittis rhoncus sodales montes mattis? Sociosqu luctus neque euismod elementum accumsan parturient sed morbi scelerisque sociis quis faucibus primis suscipit scelerisque.
 
 Sit aenean sociosqu curae magna natoque sociis pulvinar sagittis et congue. Sodales magna montes potenti tristique quis? Id suscipit lobortis suspendisse felis taciti massa vitae convallis in montes. Mauris sodales parturient mus tellus mollis dapibus felis vel? Dui malesuada nibh dui ut torquent taciti sodales tempor dapibus vitae montes?
+
+::: {#vid-cern}
+
+{{< video https://www.youtube.com/embed/wo9vZccmqwc >}}
+
+"CERN: The Journey of Discovery"
+
+:::
+
+See @vid-cern.
 
 Amet habitasse semper egestas ultricies libero fames orci primis mus sapien fringilla. Pretium tellus convallis bibendum aliquet rutrum potenti! Fringilla et et enim! Lorem molestie lacinia elementum nostra sem et dui condimentum nisl porttitor suspendisse. Felis enim semper nec semper odio.
 

@@ -1,0 +1,7 @@
+- source: example.qmd
+  quarto-pub:
+    - id: 14ed886b-e750-4823-892a-cfc870934a1d
+      url: 'https://aarongullickson.quarto.pub/example-quarto-document-54ca'
+  netlify:
+    - id: e29f99bc-77c7-40ca-bcc8-4e9c00916b99
+      url: 'https://sparkling-brioche-6bb1bc.netlify.app'
