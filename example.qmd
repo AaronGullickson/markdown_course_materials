@@ -49,7 +49,8 @@ format:
     self-contained: true
     #theme: cosmo
     #css: css/my_styles.css
-    #mainfont: Times New Roman #css font-family
+    #mainfont: Chalkduster # font for text
+    #monofont: JCsmPC      # font for code
     #fontsize: 1.1em
     #linestretch: 1.7
     #fontcolor: "white"
@@ -61,8 +62,10 @@ format:
     keep-md: false
     keep-tex: false
     #documentclass: scrartcl # LaTeX document class
-    #fontfamily: accanthis   # font family, see below for options
-    #fontsize: 11pt          # font size (typically 10pt, 11pt, or 12pt)
+    #mainfont: Baskerville   # font for regular text
+    #sansfont: Helvetica     # font for headings
+    #monofont: Osaka-Mono    # font for code
+    #fontsize: 12pt          # font size (typically 10pt, 11pt, or 12pt)
     #linestretch: 1          # line spacing (1 for single, 2 for double)
     #geometry: margin=0.5in  # controls the margin size
     #papersize: letter       # controls the paper type
@@ -93,7 +96,7 @@ editor: source
 
 ```{r}
 #| label: setup
-#| include: false
+#| echo: true
 library(tidyverse)
 library(scales)
 library(texreg)
