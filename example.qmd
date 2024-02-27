@@ -12,7 +12,6 @@ author:
       - id: uo
         name: University of Oregon
         department: Sociology
-        address: 727 PLC
         city: Eugene
         region: OR
         country: USA
@@ -20,6 +19,7 @@ author:
   - name: Bob Secondauthor
     affiliations:
       - ref: uo
+
 ## Paper details ##
 abstract: "Ipsum nostra facilisis sapien nullam. Facilisi himenaeos pharetra ultricies scelerisque non fusce quisque aliquam netus tellus. Dictum tellus et sociis quisque ornare ad a natoque magna blandit. Tortor duis aptent cursus lacus inceptos tristique magnis dictumst. Taciti varius nascetur aliquet hac ornare vitae ultricies. Rhoncus primis purus morbi aliquet quam cubilia nullam malesuada ridiculus."
 keywords: 
@@ -29,27 +29,34 @@ keywords:
 description: A Quarto Document for Testing and Playing
 thanks: Thanks to everyone for checking this out.
 lang: en
+
 ## Execute parameters are used for default code chunk options ##
 execute: 
   eval: true
   echo: false
   warning: false
   error: false
-## Some figure parameters ##
+
+## Figure parameters ##
 fig-height: 3
 fig-align: center        # default is center
 fig-cap-location: bottom # default is bottom
+
 ## Bibliography information ##
 bibliography: references.bib
-csl: bib-styles/chicago-parenthetical.csl
+csl: bib-styles/chicago-parenthetical.csl # can also provide link
+
 ## Available formats ##
 format: 
   html:
     keep-md: false
-    self-contained: true
-    #theme: cosmo
-    #css: css/my_styles.css
-    #mainfont: Times New Roman #css font-family
+    embed-resources: true
+    #theme: cosmo              # bootswatch built-in theme 
+    #css: css/my_styles.css    # css style
+    # ensure fonts are install on system by checking 
+    # systemfonts::system_fonts()
+    #mainfont: Times New Roman # font for main body
+    #monofont: Helvetica       # font for code
     #fontsize: 1.1em
     #linestretch: 1.7
     #fontcolor: "white"
@@ -60,20 +67,20 @@ format:
     fig-pos: "!t"
     keep-md: false
     keep-tex: true
-    #documentclass: scrartcl # LaTeX document class
-    #fontfamily: accanthis   # font family, see below for options
-    #fontsize: 11pt          # font size (typically 10pt, 11pt, or 12pt)
-    #linestretch: 1          # line spacing (1 for single, 2 for double)
-    #geometry: margin=0.5in  # controls the margin size
-    #papersize: letter       # controls the paper type
-    include-in-header: 
-      text: |
-        \usepackage{booktabs}
-        \usepackage{dcolumn}
+    #documentclass: scrartcl   # LaTeX document class
+    # ensure fonts are install on system by checking 
+    # systemfonts::system_fonts()
+    #mainfont: Times New Roman # font for main body
+    #sansfont: Helvetica       # font for headers
+    #monofont: Monaco          # font for code
+    #fontsize: 11pt            # font size (typically 10pt, 11pt, or 12pt)
+    #linestretch: 1            # line spacing (1 for single, 2 for double)
+    #geometry: margin=0.5in    # controls the margin size
+    #papersize: letter         # controls the paper type
   docx:
     keep-md: false
     #reference-doc: sample_word_style.docx
-prefer-html: true        # This ensures that html tables will render in Word
+
 ## Cross-reference customization ##
 #crossref:
 #  fig-title: Figure      # (default is "Figure")
@@ -87,8 +94,10 @@ prefer-html: true        # This ensures that html tables will render in Word
 #  tbl-labels: arabic     # (default is arabic)
 #  eq-labels: arabic      # (default is arabic)
 #  subref-labels: alpha a # (default is alpha a)
-## Which editor to use as default ##
-editor: source
+
+## Miscellaneous ##
+prefer-html: true  # This ensures that html tables will render in Word
+editor: source     # default view when document opens - source or visual
 ---
 
 ```{r}
