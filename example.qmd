@@ -67,6 +67,11 @@ format:
     fig-pos: "!t"
     keep-md: false
     keep-tex: true
+    include-in-header:
+      - text: |
+          \usepackage{booktabs}
+          \usepackage{siunitx}
+          \newcolumntype{d}{S[input-symbols = ()]}
     #documentclass: scrartcl   # LaTeX document class
     # ensure fonts are install on system by checking 
     # systemfonts::system_fonts()
@@ -108,6 +113,7 @@ library(scales)
 library(texreg)
 library(gt)
 library(gtmodels)
+library(modelsummary)
 load("input/popularity.RData")
 ```
 
@@ -170,8 +176,7 @@ popularity %>%
                locations = cells_column_labels(columns = p_drink)) %>%
   tab_footnote(footnote = "Smoking frequently is defined as smoking at least 5 cigarettes in the last 30 days.",
                locations = cells_column_labels(columns = p_smoke)) %>%
-  tab_source_note(md("*Source*: National Survey of Adolescent to Adult Health, Wave 1, 1997")) |>
-  tab_options(latex.use.longtable = FALSE)
+  tab_source_note(md("*Source*: National Survey of Adolescent to Adult Health, Wave 1, 1997"))
 ```
 
 Lorem lobortis lectus pellentesque sapien vivamus eros felis cum. Mattis risus euismod vivamus vel mi nostra euismod euismod praesent aliquam? @tbl-desc-gt Sagittis posuere bibendum turpis arcu maecenas gravida leo sollicitudin primis. Ullamcorper lacinia laoreet tincidunt mollis torquent semper. Sem nascetur eleifend gravida nostra magnis arcu gravida facilisis sollicitudin? Cum curae placerat et auctor faucibus arcu ad mauris sollicitudin nunc! Posuere iaculis arcu dapibus dis ullamcorper pellentesque penatibus ultrices sed aenean ligula ullamcorper donec aliquam.
@@ -224,44 +229,78 @@ Elit semper laoreet tristique etiam egestas arcu ut. Lacus condimentum diam faci
 
 Lorem nullam nunc habitasse blandit eleifend est mauris. Lacus class mauris interdum netus quisque volutpat. Aliquet at cum lobortis odio dapibus nunc porttitor ullamcorper? Suscipit nostra mi vulputate etiam purus tristique posuere augue orci sociis lectus justo a condimentum nascetur nibh.
 
-Elit varius diam quam magnis suscipit leo aptent congue? Proin placerat ultrices interdum mollis platea integer ac pharetra vulputate lacinia. Viverra nostra bibendum lacus lobortis varius condimentum eleifend faucibus odio justo montes sagittis? Eget imperdiet class tellus tincidunt dictumst sem ridiculus quam? Eget rutrum fames ridiculus eget pretium neque libero per! Eget dignissim magna nunc nulla dis orci interdum tellus tortor risus ut Table 2.
+Elit varius diam quam magnis suscipit leo aptent congue? Proin placerat ultrices interdum mollis platea integer ac pharetra vulputate lacinia. Viverra nostra bibendum lacus lobortis varius condimentum eleifend faucibus odio justo montes sagittis? Eget imperdiet class tellus tincidunt dictumst sem ridiculus quam? Eget rutrum fames ridiculus eget pretium neque libero per! Eget dignissim magna nunc nulla dis orci interdum tellus tortor risus ut @tbl-model-results.
 
 ```{r}
 #| label: tbl-model-results
 #| tbl-cap: Linear models predicting the number of friend nominations recieved, Add Health data
+#| tbl-pos: "!t"
+
+cm <- c("(Intercept)" = "Intercept",
+        "smokerSmoker" = "Smokes regularly",
+        "alcoholuseDrinker" = "Drinks regularly",
+        "parentinc" = "Parental income (1000 USD)",
+        "sex Male" = "Male",
+        "race Black/African American" = "Black",
+        "raceLatino" = "Latino",
+        "race Asian/Pacific Islander" = "API",
+        "race Other" = "Other",
+        "race American Indian/Native American" = "American Indian",
+        "pseudoGPA" = "GPA in four core courses",
+        "honorsocietyTRUE" = "Honor society member")
+
+gm <- tibble(raw = c("nobs", "r.squared"),
+             clean = c("N", "R-squared"),
+             fmt = c(0, 3))
 
 model1 <- lm(indegree~smoker+alcoholuse, data=popularity)
 model2 <- update(model1, .~.+parentinc+sex+race)
 model3 <- update(model2, .~.+pseudoGPA+honorsociety)
-name_corr <- c("(Intercept)" = "Intercept",
-               "smokerSmoker" = "Smokes regularly",
-               "alcoholuseDrinker" = "Drinks regularly",
-               "parentinc" = "Parental income (1000 USD)",
-               "sex Male" = "Male",
-               "race Black/African American" = "Black",
-               "raceLatino" = "Latino",
-               "race Asian/Pacific Islander" = "Asian/Pacific Islander",
-               "race Other" = "Other",
-               "race American Indian/Native American" = "American Indian",
-               "pseudoGPA" = "GPA in four core courses",
-               "honorsocietyTRUE" = "Honor society member",
-               "nobs" = "N",
-               "r.squared" = "R-squared",
-               "BIC" = "BIC")
-gt_model(list(model1, model2, model3),
-         digits=3,
-         var_labels = name_corr,
-         beside=TRUE,
-         summary_stats = c("r.squared","BIC")) |>
-  cols_label(model1_par = "(1)", model2_par = "(2)", model3_par = "(3)",
-             model1_coef = "", model2_coef = "", model3_coef = "") |>
-  fmt_number(rows = "summary:BIC", decimals=0) |>
+models <- list("Model 1" = model1,
+               "Model 2" = model2,
+               "Model 3" = model3)
+
+#groups <- tibble(term = c("Race", "White (ref.)"), 
+#                 `Model 1` = c("", ""),
+#                 `Model 2` = c("", "-"),
+#                 `Model 3` = c("", "-"))
+#attr(groups, "position") <- c(10,11)
+
+modelsummary(models,  # a list of models
+             output = "gt",  # the desired output format
+             fmt = 3, # how many decimals or more complicated functions
+             stars = c("*" = 0.05, "**" = 0.01, "***" = 0.001),
+             coef_map = cm,
+             gof_map = gm,
+             align = "lddd",
+             add_rows = groups
+             #estimate = "{estimate} [{conf.low}, {conf.high}]",
+             #estimate = "{estimate} ({std.error}){stars}",
+             #statistic = NULL,
+             #shape = term ~ model + statistic
+             ) |>
   tab_source_note(md("*Notes:* Standard errors shown in parenthesis."))
 ```
 
 Results olor convallis vulputate dictum mollis ante placerat dui parturient porttitor conubia vitae. Eros nec dignissim tortor nascetur laoreet mi nascetur interdum lacus donec? Non potenti elementum massa hendrerit odio taciti euismod sagittis rhoncus sodales montes mattis? Sociosqu luctus neque euismod elementum accumsan parturient sed morbi scelerisque sociis quis faucibus primis suscipit scelerisque.
 
 Sit aenean sociosqu curae magna natoque sociis pulvinar sagittis et congue. Sodales magna montes potenti tristique quis? Id suscipit lobortis suspendisse felis taciti massa vitae convallis in montes. Mauris sodales parturient mus tellus mollis dapibus felis vel? Dui malesuada nibh dui ut torquent taciti sodales tempor dapibus vitae montes?
+
+```{r}
+#| label: tbl-multinomial
+#| tbl-cap: Multinomial logit models predicing cylinders
+#| tbl-pos: "!t" 
+#| eval: false
+
+mtcars$cyl <- sprintf("%s Cylinder", mtcars$cyl)
+model1 <- nnet::multinom(cyl ~ mpg, data = mtcars)
+model2 <- update(model1, .~.+hp)
+model3 <- update(model2, .~.+drat+wt)
+
+modelsummary(list(model1, model2, model3),
+             shape = term + statistic ~ model + response,
+             gof_map = c("nobs", "deviance"))
+```
 
 Amet habitasse semper egestas ultricies libero fames orci primis mus sapien fringilla. Pretium tellus convallis bibendum aliquet rutrum potenti! Fringilla et et enim! Lorem molestie lacinia elementum nostra sem et dui condimentum nisl porttitor suspendisse. Felis enim semper nec semper odio.
 
