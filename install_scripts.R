@@ -8,15 +8,16 @@ if(!require(knitr)) {
 }
 
 # Libraries for making tables
-if(!require(texreg)) {
-  install.packages("texreg")
-}
 if(!require(gt)) {
   install.packages("gt")
 }
 if(!require(gtsummary)) {
   install.packages("gtsummary")
 }
+if(!require(modelsummary)) {
+  install.packages("modelsummary")
+}
+
 # Libraries for Python integration
 if(!require(reticulate)) {
   install.packages("reticulate")
