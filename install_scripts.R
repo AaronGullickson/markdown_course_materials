@@ -2,6 +2,11 @@
 # also see a popup at the top of the script with an option to install missing
 # libraries. If so, you can use that instead.
 
+# examples will use tidyverse commands
+if(!require(tidyverse)) {
+  install.packages("tidyverse")
+}
+
 # Core libraries required for Quarto
 if(!require(knitr)) {
   install.packages("knitr")
