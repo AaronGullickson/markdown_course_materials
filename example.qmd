@@ -67,11 +67,6 @@ format:
     fig-pos: "!t"
     keep-md: false
     keep-tex: true
-    include-in-header:
-      - text: |
-          \usepackage{booktabs}
-          \usepackage{siunitx}
-          \newcolumntype{d}{S[input-symbols = ()]}
     #documentclass: scrartcl   # LaTeX document class
     # ensure fonts are install on system by checking 
     # systemfonts::system_fonts()
@@ -82,6 +77,7 @@ format:
     #linestretch: 1            # line spacing (1 for single, 2 for double)
     #geometry: margin=0.5in    # controls the margin size
     #papersize: letter         # controls the paper type
+  typst: default
   docx:
     keep-md: false
     #reference-doc: sample_word_style.docx
@@ -110,9 +106,7 @@ editor: source     # default view when document opens - source or visual
 #| include: false
 library(tidyverse)
 library(scales)
-library(texreg)
 library(gt)
-library(gtmodels)
 library(modelsummary)
 load("input/popularity.RData")
 ```
@@ -273,7 +267,7 @@ modelsummary(models,  # a list of models
              coef_map = cm,
              gof_map = gm,
              align = "lddd"
-             #add_rows = groups
+             #add_rows = groups,
              #estimate = "{estimate} [{conf.low}, {conf.high}]",
              #estimate = "{estimate} ({std.error}){stars}",
              #statistic = NULL,
@@ -285,22 +279,6 @@ modelsummary(models,  # a list of models
 Results olor convallis vulputate dictum mollis ante placerat dui parturient porttitor conubia vitae. Eros nec dignissim tortor nascetur laoreet mi nascetur interdum lacus donec? Non potenti elementum massa hendrerit odio taciti euismod sagittis rhoncus sodales montes mattis? Sociosqu luctus neque euismod elementum accumsan parturient sed morbi scelerisque sociis quis faucibus primis suscipit scelerisque.
 
 Sit aenean sociosqu curae magna natoque sociis pulvinar sagittis et congue. Sodales magna montes potenti tristique quis? Id suscipit lobortis suspendisse felis taciti massa vitae convallis in montes. Mauris sodales parturient mus tellus mollis dapibus felis vel? Dui malesuada nibh dui ut torquent taciti sodales tempor dapibus vitae montes?
-
-```{r}
-#| label: tbl-multinomial
-#| tbl-cap: Multinomial logit models predicing cylinders
-#| tbl-pos: "!t" 
-#| eval: false
-
-mtcars$cyl <- sprintf("%s Cylinder", mtcars$cyl)
-model1 <- nnet::multinom(cyl ~ mpg, data = mtcars)
-model2 <- update(model1, .~.+hp)
-model3 <- update(model2, .~.+drat+wt)
-
-modelsummary(list(model1, model2, model3),
-             shape = term + statistic ~ model + response,
-             gof_map = c("nobs", "deviance"))
-```
 
 Amet habitasse semper egestas ultricies libero fames orci primis mus sapien fringilla. Pretium tellus convallis bibendum aliquet rutrum potenti! Fringilla et et enim! Lorem molestie lacinia elementum nostra sem et dui condimentum nisl porttitor suspendisse. Felis enim semper nec semper odio.
 
