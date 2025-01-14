@@ -44,7 +44,7 @@ fig-cap-location: bottom # default is bottom
 
 ## Bibliography information ##
 bibliography: references.bib
-csl: bib-styles/chicago-parenthetical.csl # can also provide link
+csl: resources/bib-styles/chicago-parenthetical.csl # can also provide link
 
 ## Available formats ##
 format: 
@@ -52,8 +52,8 @@ format:
     keep-md: false
     embed-resources: true
     #theme: cosmo              # bootswatch built-in theme 
-    #css: css/my_styles.css    # css style
-    # ensure fonts are install on system by checking 
+    #css: resources/css/my_styles.css    # css style
+    # ensure fonts are installed on system by checking 
     # systemfonts::system_fonts()
     #mainfont: Times New Roman # font for main body
     #monofont: Helvetica       # font for code
@@ -66,7 +66,7 @@ format:
   pdf:
     fig-pos: "!t"
     keep-md: false
-    keep-tex: true
+    keep-tex: false
     #documentclass: scrartcl   # LaTeX document class
     # ensure fonts are install on system by checking 
     # systemfonts::system_fonts()
@@ -108,7 +108,7 @@ library(tidyverse)
 library(scales)
 library(gt)
 library(modelsummary)
-load("input/popularity.RData")
+load("resources/data/popularity.RData")
 ```
 
 # Introduction
