@@ -1,0 +1,57 @@
+/*-- scss:defaults --*/
+
+// fonts
+$font-family-sans-serif: "Tahoma" !default;
+
+// colors
+$body-bg: #FAF9F6 !default;
+$body-color: #063970 !default;
+$link-color: #51483d !default;
+$selection-bg: #26351c !default;
+$code-block-bg: #eeeee4 !default;
+
+// headings
+$presentation-heading-font: "Tahoma" !default;
+$presentation-heading-color: #873e23 !default;
+
+// title and headings
+#title-slide {
+  text-align: left;
+
+  .title {
+    color: #FFFFFF;
+    font-size: 2.4em;
+    font-weight: 350;
+  }
+
+  .subtitle {
+    color: #FFFFFF;
+    font-style: italic;
+    margin-top: 0em;
+  }
+
+  .institute,
+  .quarto-title-affiliation,
+  .quarto-title-author-email {
+    font-style: italic;
+    // font-size: 80%;
+    // color: #7F7F7F;
+  }
+
+  .author,
+  .quarto-title-author-name {
+    color: #FFFFFF;
+  }
+
+  .quarto-title-authors {
+    display: flex;
+    justify-content: left;
+
+    .quarto-title-author {
+      padding-left: 0em;
+      padding-right: 0em;
+      width: 100%;
+    }
+  }
+
+}

@@ -1,7 +1,0 @@
-- source: presentation.qmd
-  quarto-pub:
-    - id: db68591a-4bdb-4052-90c4-3a0ee7d73062
-      url: 'https://quartopub.com/sites/aarongullickson/my-presentation'
-  netlify:
-    - id: 8fe4d080-dd9d-4141-9cfb-1b416adb5913
-      url: 'https://regal-crisp-c3237f.netlify.app'

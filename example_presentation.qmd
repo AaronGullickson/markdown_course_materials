@@ -5,8 +5,7 @@ author: "Aaron Gullickson"
 format:
   revealjs:
     theme: default
-    #theme: moon
-    #theme: [default, my_styles.scss]
+    #theme: resources/css/presentation_style.scss
     chalkboard: true
     preview-links: true
     incremental: true
@@ -26,17 +25,19 @@ format:
     highlight-style: arrow
     code-line-numbers: false
     self-contained: false
+#title-slide-attributes:
+#    data-background-image: "resources/images/mohammad-rahmani-oXlXu2qukGE-unsplash.jpg"
+#    data-background-size: cover
 editor: source
 ---
 
 ```{r setup, include=FALSE}
 library(tidyverse)
-library(texreg)
 library(gt)
-load("../input/popularity.RData")
+load("resources/data/popularity.RData")
 ```
 
-# An Inverse Cover Slide {background-color="black" background-image="images/mikael-kristenson-3aVlWP-7bg8-unsplash.jpg"}
+# An Inverse Cover Slide {background-color="black" background-image="resources/images/mikael-kristenson-3aVlWP-7bg8-unsplash.jpg"}
 
 ## Basic Bullet Points
 
@@ -89,7 +90,7 @@ I wonder what content is in the other column?
 :::
 ::: {.column width="60%"}
 ::: {.fragment}
-![Its a Sloth!](images/sloth1.png)
+![Its a Sloth!](resources/images/sloth1.png)
 :::
 :::
 
