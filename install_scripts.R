@@ -2,11 +2,6 @@
 # also see a popup at the top of the script with an option to install missing
 # libraries. If so, you can use that instead.
 
-# examples will use tidyverse commands
-if(!require(tidyverse)) {
-  install.packages("tidyverse")
-}
-
 # Core libraries required for Quarto
 if(!require(knitr)) {
   install.packages("knitr")
@@ -26,6 +21,11 @@ if(!require(modelsummary)) {
 # Libraries for Python integration
 if(!require(reticulate)) {
   install.packages("reticulate")
+}
+
+# Useful package for tracking comments
+if(!require(todor)) {
+  install.packages("todor")
 }
 
 # Additional libraries that our documents will use
