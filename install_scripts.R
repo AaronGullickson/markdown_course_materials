@@ -28,6 +28,11 @@ if(!require(todor)) {
   install.packages("todor")
 }
 
+# Useful package for checking installed fonts
+if(!require(systemfonts)) {
+  install.packages("systemfonts")
+}
+
 # Additional libraries that our documents will use
 if(!require(tidyverse)) {
   install.packages("tidyverse")
