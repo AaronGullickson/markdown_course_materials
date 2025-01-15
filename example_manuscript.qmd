@@ -155,21 +155,21 @@ Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis matt
 #| label: tbl-desc-gt
 #| tbl-cap: Sample size and descriptive statistics, Add Health data, Wave 1
 #| tbl-pos: "!t"
-popularity %>%
-  group_by(grade) %>%
+popularity |>
+  group_by(grade) |>
   summarize(n=n(), m_nom=mean(indegree),  p_drink=mean(alcoholuse=="Drinker"),
-            p_smoke=mean(smoker=="Smoker")) %>%
-  gt() %>%
-  fmt_integer(1:2) %>%
-  fmt_number(3, decimals=2) %>%
-  fmt_percent(4:5, decimals = 1) %>%
+            p_smoke=mean(smoker=="Smoker")) |>
+  gt() |>
+  fmt_integer(1:2) |>
+  fmt_number(3, decimals=2) |>
+  fmt_percent(4:5, decimals = 1) |>
   cols_label(grade="Grade", n="N", m_nom="Mean friend nominations",
-             p_drink="Drink Regularly", p_smoke="Smoke Regularly") %>%
-  tab_spanner("Percent substance use", 4:5) %>%
+             p_drink="Drink Regularly", p_smoke="Smoke Regularly") |>
+  tab_spanner("Percent substance use", 4:5) |>
   tab_footnote(footnote = "Drinking frequently is defined as drinking at least one or twice a month for the previous 12 months.",
-               locations = cells_column_labels(columns = p_drink)) %>%
+               locations = cells_column_labels(columns = p_drink)) |>
   tab_footnote(footnote = "Smoking frequently is defined as smoking at least 5 cigarettes in the last 30 days.",
-               locations = cells_column_labels(columns = p_smoke)) %>%
+               locations = cells_column_labels(columns = p_smoke)) |>
   tab_source_note(md("*Source*: National Survey of Adolescent to Adult Health, Wave 1, 1997"))
 ```
 
@@ -182,7 +182,7 @@ $$y_i=\beta_0+\beta_1x_i+\epsilon_i$$ {#eq-model}
 ```{r}
 #| label: fig-dist
 #| fig-cap: "Distribution of number of friend nominations received in Add Health data"
-popularity %>%
+popularity |>
   ggplot(aes(x=indegree))+
   geom_histogram(binwidth = 1, center=0.5, 
                  color="grey30", fill="grey60")+
@@ -203,7 +203,7 @@ Lorem accumsan pharetra est cubilia placerat cubilia est fusce natoque laoreet r
 ```{r}
 #| label: fig-scatter
 #| fig-cap: "Association between parental income and friend nominations by gender."
-popularity %>%
+popularity |>
   ggplot(aes(x=parentinc, y=indegree, color=sex))+
   geom_jitter(alpha=0.3)+
   geom_smooth(se=FALSE)+
