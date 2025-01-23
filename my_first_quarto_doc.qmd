@@ -9,36 +9,134 @@ format:
     keep-md: false
     keep-tex: false
   docx: default
+execute:
+  warning: false
+  message: false
+  echo: true
+  output: true
 ---
 
 ```{r}
+#| label: setup
 library(ggplot2)
+# options(scipen = 999)
 ```
 
+## Lets try out some markdown
+
+-   Something I **want** you to know
+    -   but *also* consider X
+    -   and Y!
+        -   but not Z!
+-   **Here is *another* important thing**
+-   You can also use asterisks
+
+1.  Do this first
+    1.  Testing
+    2.  Another subthing
+2.  Then do this
+3.  Finally do this
+
+### This is a subheader
+
+![A sloth!](resources/images/sloth1.png)
+
+You can always get the low down on quarto at [quarto.org](https://quarto.org).
+
+> Its like deja vu all over again.
+
+#### Lets go even deeper!
+
+YAML
+
+:   Where you put the metadata
+
+Markdown
+
+:   Where you write text
+
+Code Chunk
+
+:   Where you put the executable code
+
+| Left columns | Right columns |
+|--------------|:-------------:|
+| left foo     |   right foo   |
+| left bar     |   right bar   |
+| left baz     |   right baz   |
 
 ## Quarto
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+Quarto enables you to <b>weave</b> together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+Here is another paragraph about something. Maybe, its about sloths! 
+<!-- TODO: make this paragraph about sloths -->
+
+Here is *another* paragraph.
 
 ## Running Code
 
 When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
 
 ```{r}
+#| label: define-x
+#| cache: true
+x <- 2
+```
+
+```{r}
+#| label: simple-math
 1 + 1
 ```
 
-You can add options to executable code like this 
+You can add options to executable code like this
 
 ```{r}
-#| echo: false
-2 * 2
+#| label: more-math
+#| echo: true
+#| output: true
+x*3
 ```
 
 ```{r}
+#| label: warning-example
+#| warning: false
+log(-2)
+```
+
+```{r}
+#| label: fig-cars
+#| fig-cap: A scatterplot of cars
+#| message: false
 ggplot(cars, aes(x = speed, y = dist))+
   geom_point(color = "tomato")+
+  geom_smooth()+
   theme_bw()
 ```
 
 The `echo: false` option disables the printing of code (only output is displayed).
+
+@fig-cars crossreferences this figure.
+
+<!-- TODO: Talk about inline code -->
+
+`r round(exp(1), 4)` is a very special number.
+
+`r format(exp(20), big.mark = ",", scientific = FALSE)` is a very big number.
+
+```{python}
+#| label: fig-python-example
+#| fig-cap: A figure made in python
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 2 * np.pi * r
+fig, ax = plt.subplots(
+  subplot_kw = {'projection':'polar'} 
+)
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```
