@@ -39,18 +39,19 @@ execute:
 
 ## Figure parameters ##
 fig-height: 3
+#fig-width: 6.5
 fig-align: center        # default is center
-fig-cap-location: bottom # default is bottom
+fig-cap-location: bottom    # default is bottom
 
 ## Bibliography information ##
 bibliography: references.bib
-csl: resources/bib-styles/chicago-parenthetical.csl # can also provide link
+csl: https://www.zotero.org/styles/apa-numeric-superscript-brackets
 
 ## Available formats ##
 format: 
   html:
-    keep-md: false
-    embed-resources: true
+    keep-md: true
+    embed-resources: false
     #theme: cosmo              # bootswatch built-in theme 
     #css: resources/css/my_styles.css    # css style
     # ensure fonts are installed on system by checking 
@@ -66,7 +67,7 @@ format:
   pdf:
     fig-pos: "!t"
     keep-md: false
-    keep-tex: false
+    keep-tex: true
     #documentclass: scrartcl   # LaTeX document class
     # ensure fonts are install on system by checking 
     # systemfonts::system_fonts()
@@ -79,19 +80,20 @@ format:
     #papersize: letter         # controls the paper type
   typst: default
   docx:
+    fig-format: svg
     keep-md: false
     #reference-doc: sample_word_style.docx
 
 ## Cross-reference customization ##
-#crossref:
-#  fig-title: Figure      # (default is "Figure")
+crossref:
+  fig-title: "Fig"      # (default is "Figure")
 #  tbl-title: Table       # (default is "Table")
-#  title-delim: ":"       # (default is ":")
+  title-delim: "."       # (default is ":")
 #  fig-prefix: Figure     # (default is "Figure")
 #  tbl-prefix: Table      # (default is "Table")
 #  eq-prefix: Eq.         # (default is "Equation")
 #  ref-hyperlink: true    # (default is true)
-#  fig-labels: arabic     # (default is arabic)
+#  fig-labels: alpha a     # (default is arabic)
 #  tbl-labels: arabic     # (default is arabic)
 #  eq-labels: arabic      # (default is arabic)
 #  subref-labels: alpha a # (default is alpha a)
@@ -107,6 +109,7 @@ editor: source     # default view when document opens - source or visual
 library(tidyverse)
 library(scales)
 library(gt)
+library(gtsummary)
 library(modelsummary)
 load("resources/data/popularity.RData")
 ```
@@ -115,17 +118,27 @@ load("resources/data/popularity.RData")
 
 Ipsum interdum enim dapibus luctus potenti viverra ridiculus vulputate! Pretium ante euismod auctor semper proin lacinia augue vitae [@abascal_love_2015; @gentzkow_code_2014]. Magnis vivamus dis dapibus dapibus tristique vestibulum venenatis accumsan lobortis suscipit faucibus. Dis **scelerisque** egestas sodales tempor nisl accumsan conubia sem mauris mi himenaeos. Facilisis curabitur habitant quam malesuada facilisis inceptos phasellus rutrum vulputate etiam primis. Na primis?
 
-Consectetur *sodales* suscipit ultrices venenatis sagittis hendrerit lacus. Imperdiet nunc rhoncus ornare pharetra platea ut blandit nec senectus montes quisque purus. Phasellus rutrum rutrum aliquet rutrum erat scelerisque non augue vulputate suspendisse lacinia commodo aptent vel. Mattis suscipit himenaeos rhoncus integer fames aliquam.
+Consectetur *sodales* suscipit ultrices venenatis sagittis hendrerit lacus. Imperdiet nunc rhoncus ornare pharetra platea ut blandit nec senectus montes quisque purus. Phasellus rutrum rutrum aliquet rutrum erat scelerisque non augue vulputate suspendisse lacinia commodo aptent vel. Mattis suscipit himenaeos rhoncus integer fames aliquam [@massey_effect_1987; @massey_does_1999].
 
 1.  Sit pharetra ut lacus tortor sodales convallis?
 2.  Molestie egestas fermentum aliquam convallis fames dictum?
 3.  Consectetur vehicula habitant porttitor volutpat velit augue eleifend rutrum accumsan quam pretium pretium?
 
-Consectetur ullamcorper pharetra mattis leo himenaeos magnis non est non sagittis.[^1] Nec rutrum aptent sapien convallis <!--TODO: Check this--> euismod taciti felis interdum torquent suspendisse. Ultrices auctor hac ad arcu urna leo integer. Torquent turpis accumsan suscipit cum laoreet blandit ante molestie netus a. Sociosqu placerat purus mollis senectus blandit magna quis pharetra sodales. Platea dui felis porttitor leo enim aenean interdum mauris libero primis volutpat vulputate. Ultrices ullamcorper magna consequat vehicula leo massa at erat sapien arcu scelerisque.[^2]
+```{r}
+#| label: raw-html
+#| results: asis
+#| eval: false
+cat("This is <b>html</b> code. <br>How does it look?")
+```
 
-[^1]: This is a footnote.
+Consectetur ullamcorper pharetra mattis leo himenaeos magnis non est non sagittis.[^example-footnote] Nec rutrum aptent sapien convallis <!--TODO: Check this--> euismod taciti felis interdum torquent suspendisse. Ultrices auctor hac ad arcu urna leo integer. Torquent turpis accumsan suscipit cum laoreet blandit ante molestie netus a. Sociosqu placerat purus mollis senectus blandit magna quis pharetra sodales. Platea dui felis porttitor leo enim aenean interdum mauris libero primis volutpat vulputate. Ultrices ullamcorper magna consequat vehicula leo massa at erat sapien arcu scelerisque.[^another-footnote]
 
-[^2]: This is another footnote. This one has math. $$\sum (x_i-\bar{x})^2$$
+[^example-footnote]: This is a footnote.
+
+[^another-footnote]: This is another footnote. This one has math. 
+
+    $$\sum (x_i-\bar{x})^2$$
+     Adipiscing habitasse integer sed fusce phasellus morbi libero mauris scelerisque fusce! Phasellus proin sem potenti torquent potenti ultrices orci bibendum morbi. Venenatis in vitae platea ligula orci dictumst pulvinar eleifend id ligula? Nisi vel mus tellus porttitor justo class cras orci est. Iaculis pretium tristique euismod facilisis vestibulum luctus lobortis quam tellus quis cum facilisis. Curabitur est parturient habitant proin elementum nascetur.
 
 # Background
 
@@ -137,11 +150,57 @@ Adipiscing habitasse integer sed fusce phasellus morbi libero mauris scelerisque
 
 Amet ridiculus magna ut pulvinar viverra himenaeos dignissim malesuada elementum montes. Luctus libero torquent praesent eleifend pretium convallis dictumst dictum! Porta erat senectus class pellentesque lobortis curabitur non pulvinar varius nibh lobortis fermentum sem? Volutpat id curabitur mattis egestas netus habitasse purus aliquam montes. Pellentesque pellentesque placerat integer varius sagittis curabitur laoreet nunc maecenas ullamcorper [see @lieberson_many_1988].
 
+```{r}
+#| label: tbl-penguins
+#| tbl-cap: Some data on some penguins
+#| results: asis
+
+head(palmerpenguins::penguins) |>
+  select(species, bill_length_mm, body_mass_g, sex) |>
+  gt() |>
+  sub_missing(missing_text = "-") |>
+  fmt_number(bill_length_mm, decimals = 2, 
+             pattern = "{x} mm") |>
+  fmt_number(body_mass_g, decimals = 0, sep_mark = ",", use_seps = FALSE,
+             pattern = "{x}g") |>
+  cols_label(species = "Species",
+             bill_length_mm = "Bill length",
+             body_mass_g = "Body mass", 
+             sex = "Sex") |>
+  tab_options(table.width = "100%")
+```
+
 Amet rutrum a venenatis mi lectus venenatis nullam purus libero. Pulvinar dapibus nisl dapibus ornare dignissim nibh congue elementum pharetra natoque cum ac laoreet tortor facilisi penatibus sollicitudin.
 
 ## Subsection 2
 
 Adipiscing ad rhoncus nunc molestie sed feugiat? Imperdiet vivamus montes himenaeos sagittis urna nec felis vehicula nec pretium tortor? Molestie natoque sociis aenean mollis donec ornare cursus parturient tortor erat. Volutpat mi natoque sodales et hac ultricies eu pulvinar primis semper. Vitae est curabitur blandit montes tortor eros senectus porttitor maecenas.
+
+```{r}
+#| label: tbl-summary
+#| tbl-cap: Summary statistics for Add Health data
+#| tbl-pos: "p"
+popularity |>
+  tbl_summary(by=sex, 
+              #type=list(nsports="continuous"),
+              statistic=list(all_continuous() ~ "{mean} ({sd})", 
+                             all_categorical() ~ "{n} ({p}%)"),
+              label=list(indegree ~ "Friend nominations",
+                         race ~ "Race",
+                         grade ~ "Grade in school",
+                         pseudoGPA ~ "GPA in four core courses",
+                         honorsociety ~ "Honor society member",
+                         alcoholuse ~ "Alcohol use",
+                         smoker ~ "Smoking behavior",
+                         bandchoir ~ "Band/Choir member",
+                         academicclub ~ "Academic club member",
+                         sweight ~ "Sample weight",
+                         parentinc ~ "Parent income ($1000s)",
+                         nsports ~ "Number of sports played")) |>
+  as_gt() |>
+  tab_options(latex.use_longtable = FALSE) # set to true to disable floating
+
+```
 
 Sit nunc lacus sapien augue ornare magnis massa odio velit maecenas mauris. Molestie justo proin venenatis hac congue facilisi suscipit arcu litora quam varius urna. Lacinia montes convallis ante sapien orci platea rutrum. Gravida dignissim mauris bibendum sollicitudin libero primis ultrices enim aliquam dictum! Vivamus sociis odio non vivamus ridiculus. Libero vitae cursus montes aptent est quisque sociosqu fringilla posuere lacinia sagittis. Quisque orci cum nulla sollicitudin duis nisi.
 
@@ -165,12 +224,18 @@ popularity |>
   fmt_percent(4:5, decimals = 1) |>
   cols_label(grade="Grade", n="N", m_nom="Mean friend nominations",
              p_drink="Drink Regularly", p_smoke="Smoke Regularly") |>
-  tab_spanner("Percent substance use", 4:5) |>
+  tab_spanner("Variables", c(m_nom, p_drink, p_smoke)) |>
+  tab_spanner("Percent substance use", starts_with("p_")) |>
   tab_footnote(footnote = "Drinking frequently is defined as drinking at least one or twice a month for the previous 12 months.",
                locations = cells_column_labels(columns = p_drink)) |>
   tab_footnote(footnote = "Smoking frequently is defined as smoking at least 5 cigarettes in the last 30 days.",
                locations = cells_column_labels(columns = p_smoke)) |>
-  tab_source_note(md("*Source*: National Survey of Adolescent to Adult Health, Wave 1, 1997"))
+  tab_footnote(footnote = "A footnote in a body cell.",
+               locations = cells_body(rows = 3:4, columns = m_nom),
+               placement = "right") |>
+  tab_source_note(md("*Source*: National Survey of Adolescent to Adult Health, Wave 1, 1997. Later waves are not available in this analysis. All results are unweighted.")) |>
+  tab_source_note("Here is another note where you could say things.") |>
+  tab_options(table.width = "100%", footnotes.marks = c("a","b","c","d"))
 ```
 
 Lorem lobortis lectus pellentesque sapien vivamus eros felis cum. Mattis risus euismod vivamus vel mi nostra euismod euismod praesent aliquam? @tbl-desc-gt Sagittis posuere bibendum turpis arcu maecenas gravida leo sollicitudin primis. Ullamcorper lacinia laoreet tincidunt mollis torquent semper. Sem nascetur eleifend gravida nostra magnis arcu gravida facilisis sollicitudin? Cum curae placerat et auctor faucibus arcu ad mauris sollicitudin nunc! Posuere iaculis arcu dapibus dis ullamcorper pellentesque penatibus ultrices sed aenean ligula ullamcorper donec aliquam.
@@ -221,6 +286,34 @@ Sit suscipit conubia nisi integer vel suscipit torquent taciti. Urna eu phasellu
 
 Elit semper laoreet tristique etiam egestas arcu ut. Lacus condimentum diam facilisis quam tellus magnis sollicitudin a suspendisse penatibus convallis tellus felis urna. Montes pulvinar ultrices himenaeos interdum nostra imperdiet per mauris luctus. Integer cubilia vestibulum vestibulum parturient cubilia morbi orci dictumst morbi sodales faucibus. Maecenas magnis et nulla nulla.
 
+```{r}
+#| label: fig-multi-panel
+#| fig-cap: Two figures together on a separate float page
+#| fig-height: 3.5
+#| fig-pos: "p"
+#| #layout: [[50, 50]]
+#| layout-nrow: 2
+#| fig-subcap: 
+#|   - Distribution of number of friend nominations received in Add Health data.
+#|   - Association between parental income and friend nominations by gender.
+popularity |>
+  ggplot(aes(x=indegree))+
+  geom_histogram(binwidth = 1, center=0.5, 
+                 color="grey30", fill="grey60")+
+  labs(x="number of friend nominations received")+
+  theme_bw()
+
+
+popularity |>
+  ggplot(aes(x=parentinc, y=indegree, color=sex))+
+  geom_jitter(alpha=0.3)+
+  geom_smooth(se=FALSE)+
+  labs(x="parental income in 1000 USD",
+       y="number of friend nominations received",
+       color="gender")+
+  theme_bw()
+```
+
 Lorem nullam nunc habitasse blandit eleifend est mauris. Lacus class mauris interdum netus quisque volutpat. Aliquet at cum lobortis odio dapibus nunc porttitor ullamcorper? Suscipit nostra mi vulputate etiam purus tristique posuere augue orci sociis lectus justo a condimentum nascetur nibh.
 
 Elit varius diam quam magnis suscipit leo aptent congue? Proin placerat ultrices interdum mollis platea integer ac pharetra vulputate lacinia. Viverra nostra bibendum lacus lobortis varius condimentum eleifend faucibus odio justo montes sagittis? Eget imperdiet class tellus tincidunt dictumst sem ridiculus quam? Eget rutrum fames ridiculus eget pretium neque libero per! Eget dignissim magna nunc nulla dis orci interdum tellus tortor risus ut @tbl-model-results.
@@ -254,11 +347,11 @@ models <- list("Model 1" = model1,
                "Model 2" = model2,
                "Model 3" = model3)
 
-#groups <- tibble(term = c("Race", "White (ref.)"), 
-#                 `Model 1` = c("", ""),
-#                 `Model 2` = c("", "-"),
-#                 `Model 3` = c("", "-"))
-#attr(groups, "position") <- c(10,11)
+groups <- tibble(term = c("Race", "White (ref.)"), 
+                 `Model 1` = c("", ""),
+                 `Model 2` = c("", "-"),
+                 `Model 3` = c("", "-"))
+attr(groups, "position") <- c(10,11)
 
 modelsummary(models,  # a list of models
              output = "gt",  # the desired output format
@@ -268,15 +361,26 @@ modelsummary(models,  # a list of models
              gof_map = gm,
              align = "lddd"
              #add_rows = groups,
-             #estimate = "{estimate} [{conf.low}, {conf.high}]",
+             #estimate = "{estimate}",
              #estimate = "{estimate} ({std.error}){stars}",
              #statistic = NULL,
+             #statistic ="[{conf.low}-{conf.high}]"
              #shape = term ~ model + statistic
              ) |>
   tab_source_note(md("*Notes:* Standard errors shown in parenthesis."))
 ```
 
 Results olor convallis vulputate dictum mollis ante placerat dui parturient porttitor conubia vitae. Eros nec dignissim tortor nascetur laoreet mi nascetur interdum lacus donec? Non potenti elementum massa hendrerit odio taciti euismod sagittis rhoncus sodales montes mattis? Sociosqu luctus neque euismod elementum accumsan parturient sed morbi scelerisque sociis quis faucibus primis suscipit scelerisque.
+
+Sit aenean sociosqu curae magna natoque sociis pulvinar sagittis et congue. Sodales magna montes potenti tristique quis? Id suscipit lobortis suspendisse felis taciti massa vitae convallis in montes. Mauris sodales parturient mus tellus mollis dapibus felis vel? Dui malesuada nibh dui ut torquent taciti sodales tempor dapibus vitae montes?
+
+Amet habitasse semper egestas ultricies libero fames orci primis mus sapien fringilla. Pretium tellus convallis bibendum aliquet rutrum potenti! Fringilla et et enim! Lorem molestie lacinia elementum nostra sem et dui condimentum nisl porttitor suspendisse. Felis enim semper nec semper odio.
+
+Sit aenean sociosqu curae magna natoque sociis pulvinar sagittis et congue. Sodales magna montes potenti tristique quis? Id suscipit lobortis suspendisse felis taciti massa vitae convallis in montes. Mauris sodales parturient mus tellus mollis dapibus felis vel? Dui malesuada nibh dui ut torquent taciti sodales tempor dapibus vitae montes?
+
+![You can have sloths, too.](resources/images/sloth1.png){#fig-sloth}
+
+Amet habitasse semper egestas ultricies libero fames orci primis mus sapien fringilla. Pretium tellus convallis bibendum aliquet rutrum potenti! Fringilla et et enim! Lorem molestie lacinia elementum nostra sem et dui condimentum nisl porttitor suspendisse. Felis enim semper nec semper odio.
 
 Sit aenean sociosqu curae magna natoque sociis pulvinar sagittis et congue. Sodales magna montes potenti tristique quis? Id suscipit lobortis suspendisse felis taciti massa vitae convallis in montes. Mauris sodales parturient mus tellus mollis dapibus felis vel? Dui malesuada nibh dui ut torquent taciti sodales tempor dapibus vitae montes?
 
