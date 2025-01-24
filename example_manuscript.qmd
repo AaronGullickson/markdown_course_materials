@@ -153,7 +153,6 @@ Amet ridiculus magna ut pulvinar viverra himenaeos dignissim malesuada elementum
 ```{r}
 #| label: tbl-penguins
 #| tbl-cap: Some data on some penguins
-#| results: asis
 
 head(palmerpenguins::penguins) |>
   select(species, bill_length_mm, body_mass_g, sex) |>
