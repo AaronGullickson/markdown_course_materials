@@ -33,6 +33,7 @@ lang: en
 ## Execute parameters are used for default code chunk options ##
 execute: 
   eval: true
+  message: false
   echo: false
   warning: false
   error: false
