@@ -5,10 +5,10 @@ format:
   html:
     embed-resources: true
     keep-md: false
- # pdf: 
-#    keep-md: false
-#    keep-tex: false
-#  docx: default
+  #pdf: 
+  #  keep-md: false
+  #  keep-tex: false
+  #docx: default
 execute:
   warning: false
   message: false
@@ -80,7 +80,7 @@ When you click the **Render** button a document will be generated that includes 
 
 ```{r}
 #| label: define-x
-#| cache: true
+#| cache: false
 x <- 2
 ```
 

@@ -87,12 +87,10 @@ format:
   #plos-pdf:
   #  fig-pos: "!t"
   #  keep-tex: true
-  #typst:
-  #  keep-typ: true
-  #docx:
-  #  fig-format: svg
-  #  keep-md: false
-  #  reference-doc: resources/custom-reference-doc.docx
+  docx:
+    fig-format: pdf
+    keep-md: false
+    reference-doc: resources/custom-reference-doc.docx
 
 ## Cross-reference customization ##
 crossref:
