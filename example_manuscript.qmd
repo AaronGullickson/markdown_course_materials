@@ -80,6 +80,7 @@ format:
   typst: default
   docx:
     keep-md: false
+    #fig-format: pdf
     #reference-doc: sample_word_style.docx
 
 ## Cross-reference customization ##
