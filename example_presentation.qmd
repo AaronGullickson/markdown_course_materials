@@ -21,7 +21,9 @@ format:
 editor: source
 ---
 
-```{r setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
 library(tidyverse)
 library(gt)
 load("resources/data/popularity.RData")
