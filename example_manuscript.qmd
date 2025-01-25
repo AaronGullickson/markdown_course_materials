@@ -78,7 +78,8 @@ format:
     #linestretch: 1            # line spacing (1 for single, 2 for double)
     #geometry: margin=0.5in    # controls the margin size
     #papersize: letter         # controls the paper type
-  typst: default
+  #typst: 
+  #  keep-typ: false
   docx:
     keep-md: false
     #fig-format: pdf
