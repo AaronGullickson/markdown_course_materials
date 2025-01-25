@@ -13,3 +13,5 @@ example_manuscript.tex
 example_manuscript_files
 example_presentation_files
 *_cache
+
+/.quarto/

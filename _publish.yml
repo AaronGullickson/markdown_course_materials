@@ -1,0 +1,8 @@
+- source: example_manuscript.qmd
+  quarto-pub:
+    - id: b0e6c0be-0115-4f78-85b6-3967097bed53
+      url: https://aarongullickson.quarto.pub/example-quarto-document-48f4
+- source: example_presentation.qmd
+  netlify:
+    - id: e127de38-53eb-4537-93db-e35e03a97b3d
+      url: https://code-horizon-class-example.netlify.app

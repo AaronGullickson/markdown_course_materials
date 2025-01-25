@@ -21,7 +21,7 @@ author:
       - ref: uo
 
 ## Paper details ##
-abstract: "Ipsum nostra facilisis sapien nullam. Facilisi himenaeos pharetra ultricies scelerisque non fusce quisque aliquam netus tellus. Dictum tellus et sociis quisque ornare ad a natoque magna blandit. Tortor duis aptent cursus lacus inceptos tristique magnis dictumst. Taciti varius nascetur aliquet hac ornare vitae ultricies. Rhoncus primis purus morbi aliquet quam cubilia nullam malesuada ridiculus."
+#abstract: "Ipsum nostra facilisis sapien nullam. Facilisi himenaeos pharetra ultricies scelerisque non fusce quisque aliquam netus tellus. Dictum tellus et sociis quisque ornare ad a natoque magna blandit. Tortor duis aptent cursus lacus inceptos tristique magnis dictumst. Taciti varius nascetur aliquet hac ornare vitae ultricies. Rhoncus primis purus morbi aliquet quam cubilia nullam malesuada ridiculus."
 keywords: 
   - Quarto
   - Examples
@@ -44,63 +44,77 @@ fig-align: center        # default is center
 fig-cap-location: bottom    # default is bottom
 
 ## Bibliography information ##
+#citeproc: true # ensure that pandoc's citation system is used in all formats
 bibliography: references.bib
 csl: https://www.zotero.org/styles/apa-numeric-superscript-brackets
 
 ## Available formats ##
 format: 
   html:
-    keep-md: true
+    keep-md: false
     embed-resources: false
-    #theme: cosmo              # bootswatch built-in theme 
-    #css: resources/css/my_styles.css    # css style
+    theme: united              # bootswatch built-in theme 
+    css: resources/css/my_styles.css    # css style
     # ensure fonts are installed on system by checking 
     # systemfonts::system_fonts()
-    #mainfont: Times New Roman # font for main body
+    #mainfont: NewPeninimMT # font for main body
     #monofont: Helvetica       # font for code
-    #fontsize: 1.1em
-    #linestretch: 1.7
-    #fontcolor: "white"
-    #backgroundcolor: "grey"
+    #fontsize: 2em
+    #linestretch: 2
+    #fontcolor: "blue"
+    #backgroundcolor: "red"
     #linkcolor: "purple"
     #max-width: "1600px"
   pdf:
     fig-pos: "!t"
     keep-md: false
-    keep-tex: true
-    #documentclass: scrartcl   # LaTeX document class
+    keep-tex: false
+    documentclass: scrartcl   # LaTeX document class
     # ensure fonts are install on system by checking 
     # systemfonts::system_fonts()
-    #mainfont: Times New Roman # font for main body
-    #sansfont: Helvetica       # font for headers
+    #mainfont: Papyrus # font for main body
+    #sansfont: ComicSansMS       # font for headers
     #monofont: Monaco          # font for code
-    #fontsize: 11pt            # font size (typically 10pt, 11pt, or 12pt)
-    #linestretch: 1            # line spacing (1 for single, 2 for double)
-    #geometry: margin=0.5in    # controls the margin size
-    #papersize: letter         # controls the paper type
-  typst: default
-  docx:
-    fig-format: svg
-    keep-md: false
-    #reference-doc: sample_word_style.docx
+    #fontsize: 10pt            # font size (typically 10pt, 11pt, or 12pt)
+    #linestretch: 2            # line spacing (1 for single, 2 for double)
+    #geometry: margin=0.25in    # controls the margin size
+    #papersize: a4         # controls the paper type
+  #aog-article-pdf:
+  #  fig-pos: "!t"
+  #  keep-tex: false
+  #  shorttitle: Example Document
+  #  shortauthors: Gullickson
+  #plos-pdf:
+  #  fig-pos: "!t"
+  #  keep-tex: true
+  #typst:
+  #  keep-typ: true
+  #docx:
+  #  fig-format: svg
+  #  keep-md: false
+  #  reference-doc: resources/custom-reference-doc.docx
 
 ## Cross-reference customization ##
 crossref:
   fig-title: "Fig"      # (default is "Figure")
-#  tbl-title: Table       # (default is "Table")
+  tbl-title: "Tbl"       # (default is "Table")
   title-delim: "."       # (default is ":")
-#  fig-prefix: Figure     # (default is "Figure")
-#  tbl-prefix: Table      # (default is "Table")
-#  eq-prefix: Eq.         # (default is "Equation")
+  fig-prefix: "fig."     # (default is "Figure")
+  tbl-prefix: "table"      # (default is "Table")
+  eq-prefix: "eq."         # (default is "Equation")
 #  ref-hyperlink: true    # (default is true)
-#  fig-labels: alpha a     # (default is arabic)
-#  tbl-labels: arabic     # (default is arabic)
-#  eq-labels: arabic      # (default is arabic)
-#  subref-labels: alpha a # (default is alpha a)
+  fig-labels: roman     # (default is arabic)
+  tbl-labels: alpha A    # (default is arabic)
+  eq-labels: alpha a      # (default is arabic)
+  subref-labels: roman i # (default is alpha a)
 
 ## Miscellaneous ##
 prefer-html: true  # This ensures that html tables will render in Word
 editor: source     # default view when document opens - source or visual
+
+filters:
+  - abstract-section
+  #- authors-block
 ---
 
 ```{r}
@@ -113,6 +127,14 @@ library(gtsummary)
 library(modelsummary)
 load("resources/data/popularity.RData")
 ```
+
+# Abstract
+
+Ipsum nostra facilisis sapien nullam. Facilisi himenaeos pharetra ultricies scelerisque non fusce quisque aliquam netus tellus. Dictum tellus et sociis quisque ornare ad a natoque magna blandit. Tortor duis aptent cursus lacus inceptos tristique magnis dictumst. Taciti varius nascetur aliquet hac ornare vitae ultricies. Rhoncus primis purus morbi aliquet quam cubilia nullam malesuada ridiculus.
+
+$$x_i = 2$$
+
+Ipsum nostra facilisis sapien nullam. Facilisi himenaeos pharetra ultricies scelerisque non fusce quisque aliquam netus tellus. Dictum tellus et sociis quisque ornare ad a natoque magna blandit. Tortor duis aptent cursus lacus inceptos tristique magnis dictumst. Taciti varius nascetur aliquet hac ornare vitae ultricies. Rhoncus primis purus morbi aliquet quam cubilia nullam malesuada ridiculus.
 
 # Introduction
 
@@ -131,14 +153,13 @@ Consectetur *sodales* suscipit ultrices venenatis sagittis hendrerit lacus. Impe
 cat("This is <b>html</b> code. <br>How does it look?")
 ```
 
-Consectetur ullamcorper pharetra mattis leo himenaeos magnis non est non sagittis.[^example-footnote] Nec rutrum aptent sapien convallis <!--TODO: Check this--> euismod taciti felis interdum torquent suspendisse. Ultrices auctor hac ad arcu urna leo integer. Torquent turpis accumsan suscipit cum laoreet blandit ante molestie netus a. Sociosqu placerat purus mollis senectus blandit magna quis pharetra sodales. Platea dui felis porttitor leo enim aenean interdum mauris libero primis volutpat vulputate. Ultrices ullamcorper magna consequat vehicula leo massa at erat sapien arcu scelerisque.[^another-footnote]
+Consectetur ullamcorper pharetra mattis leo himenaeos magnis non est non sagittis.[^1] Nec rutrum aptent sapien convallis <!--TODO: Check this--> euismod taciti felis interdum torquent suspendisse. Ultrices auctor hac ad arcu urna leo integer. Torquent turpis accumsan suscipit cum laoreet blandit ante molestie netus a. Sociosqu placerat purus mollis senectus blandit magna quis pharetra sodales. Platea dui felis porttitor leo enim aenean interdum mauris libero primis volutpat vulputate. Ultrices ullamcorper magna consequat vehicula leo massa at erat sapien arcu scelerisque.[^2]
 
-[^example-footnote]: This is a footnote.
+[^1]: This is a footnote.
 
-[^another-footnote]: This is another footnote. This one has math. 
+[^2]: This is another footnote. This one has math.
 
-    $$\sum (x_i-\bar{x})^2$$
-     Adipiscing habitasse integer sed fusce phasellus morbi libero mauris scelerisque fusce! Phasellus proin sem potenti torquent potenti ultrices orci bibendum morbi. Venenatis in vitae platea ligula orci dictumst pulvinar eleifend id ligula? Nisi vel mus tellus porttitor justo class cras orci est. Iaculis pretium tristique euismod facilisis vestibulum luctus lobortis quam tellus quis cum facilisis. Curabitur est parturient habitant proin elementum nascetur.
+    $$\sum (x_i-\bar{x})^2$$ Adipiscing habitasse integer sed fusce phasellus morbi libero mauris scelerisque fusce! Phasellus proin sem potenti torquent potenti ultrices orci bibendum morbi. Venenatis in vitae platea ligula orci dictumst pulvinar eleifend id ligula? Nisi vel mus tellus porttitor justo class cras orci est. Iaculis pretium tristique euismod facilisis vestibulum luctus lobortis quam tellus quis cum facilisis. Curabitur est parturient habitant proin elementum nascetur.
 
 # Background
 
@@ -150,9 +171,11 @@ Adipiscing habitasse integer sed fusce phasellus morbi libero mauris scelerisque
 
 Amet ridiculus magna ut pulvinar viverra himenaeos dignissim malesuada elementum montes. Luctus libero torquent praesent eleifend pretium convallis dictumst dictum! Porta erat senectus class pellentesque lobortis curabitur non pulvinar varius nibh lobortis fermentum sem? Volutpat id curabitur mattis egestas netus habitasse purus aliquam montes. Pellentesque pellentesque placerat integer varius sagittis curabitur laoreet nunc maecenas ullamcorper [see @lieberson_many_1988].
 
+::: {.landscape}
 ```{r}
 #| label: tbl-penguins
 #| tbl-cap: Some data on some penguins
+#| tbl-pos: "p"
 
 head(palmerpenguins::penguins) |>
   select(species, bill_length_mm, body_mass_g, sex) |>
@@ -168,12 +191,15 @@ head(palmerpenguins::penguins) |>
              sex = "Sex") |>
   tab_options(table.width = "100%")
 ```
+:::
 
 Amet rutrum a venenatis mi lectus venenatis nullam purus libero. Pulvinar dapibus nisl dapibus ornare dignissim nibh congue elementum pharetra natoque cum ac laoreet tortor facilisi penatibus sollicitudin.
 
 ## Subsection 2
 
 Adipiscing ad rhoncus nunc molestie sed feugiat? Imperdiet vivamus montes himenaeos sagittis urna nec felis vehicula nec pretium tortor? Molestie natoque sociis aenean mollis donec ornare cursus parturient tortor erat. Volutpat mi natoque sodales et hac ultricies eu pulvinar primis semper. Vitae est curabitur blandit montes tortor eros senectus porttitor maecenas.
+
+@Tbl-summary shows the descriptive statistics for my analytical dataset, separated by boys and girls.
 
 ```{r}
 #| label: tbl-summary
@@ -203,11 +229,21 @@ popularity |>
 
 Sit nunc lacus sapien augue ornare magnis massa odio velit maecenas mauris. Molestie justo proin venenatis hac congue facilisi suscipit arcu litora quam varius urna. Lacinia montes convallis ante sapien orci platea rutrum. Gravida dignissim mauris bibendum sollicitudin libero primis ultrices enim aliquam dictum! Vivamus sociis odio non vivamus ridiculus. Libero vitae cursus montes aptent est quisque sociosqu fringilla posuere lacinia sagittis. Quisque orci cum nulla sollicitudin duis nisi.
 
+::: {#fig-maradona}
+
+{{< video https://www.youtube.com/watch?v=-ccNkksrfls >}}
+
+Diego Maradona's "Hand of God", World Cup 1986
+
+:::
+
+@fig-maradona shows Maradona was onside.
+
 Ipsum fringilla natoque sem praesent auctor tellus viverra convallis nullam quis risus. Mus natoque cras facilisi ac blandit maecenas fringilla natoque varius. Aptent mauris ac nunc dis habitant penatibus torquent dictumst platea class sociis. Sodales mattis augue libero vestibulum interdum condimentum arcu ridiculus massa lobortis. Orci pretium dictumst sociosqu fringilla praesent faucibus tempus ultrices natoque. Risus potenti class nascetur molestie augue a justo vehicula vivamus? Molestie natoque lectus rhoncus sociosqu ligula semper mattis urna mi quis dignissim?
 
 # Data and Methods
 
-Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis mattis. Porta pharetra rhoncus dis massa nulla ornare egestas! Ante leo cursus mauris eleifend potenti donec tempus. Fusce ultricies aptent accumsan himenaeos netus augue felis nibh. Duis commodo himenaeos aliquam integer! See @tbl-desc-gt.
+Adipiscing pretium duis penatibus habitasse nisi metus parturient convallis mattis. Porta pharetra rhoncus dis massa nulla ornare egestas! Ante leo cursus mauris eleifend potenti donec tempus. Fusce ultricies aptent accumsan himenaeos netus augue felis nibh. Duis commodo himenaeos aliquam integer! See [Tbl. @tbl-desc-gt].
 
 ```{r}
 #| label: tbl-desc-gt
@@ -358,7 +394,7 @@ modelsummary(models,  # a list of models
              stars = c("*" = 0.05, "**" = 0.01, "***" = 0.001),
              coef_map = cm,
              gof_map = gm,
-             align = "lddd"
+             #align = "lddd"
              #add_rows = groups,
              #estimate = "{estimate}",
              #estimate = "{estimate} ({std.error}){stars}",

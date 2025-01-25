@@ -1,0 +1,5 @@
+project:
+  title: "Example Quarto Project"
+  output-dir: _output
+  
+  

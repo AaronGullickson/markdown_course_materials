@@ -4,8 +4,8 @@ subtitle: "A Subtitle"
 author: "Aaron Gullickson"
 format:
   revealjs:
-    theme: default
-    #theme: resources/css/presentation_style.scss
+    #theme: blood
+    theme: resources/css/presentation_style.scss
     chalkboard: true
     preview-links: true
     incremental: true
@@ -15,19 +15,9 @@ format:
     highlight-style: arrow
     code-line-numbers: false
     self-contained: false
-  blackboard-revealjs:
-    chalkboard: true
-    preview-links: true
-    incremental: true
-    smaller: false
-    background-transition: concave
-    fig-align: center
-    highlight-style: arrow
-    code-line-numbers: false
-    self-contained: false
-#title-slide-attributes:
-#    data-background-image: "resources/images/mohammad-rahmani-oXlXu2qukGE-unsplash.jpg"
-#    data-background-size: cover
+title-slide-attributes:
+    data-background-image: "resources/images/mohammad-rahmani-oXlXu2qukGE-unsplash.jpg"
+    data-background-size: cover
 editor: source
 ---
 
@@ -133,3 +123,7 @@ popularity %>%
   labs(x="number of friend nominations received")+
   theme_bw()
 ```
+
+## A New Slide
+
+What should I put here?
