@@ -44,8 +44,9 @@ fig-align: center        # default is center
 fig-cap-location: bottom # default is bottom
 
 ## Bibliography information ##
-bibliography: references.bib
-csl: resources/bib-styles/chicago-parenthetical.csl # can also provide link
+citeproc: true  # use pandoc citation system rather than latex or typst
+bibliography: resources/bibliography/references.bib  # path to bibtex file
+csl: resources/bibliography/csl_files/chicago-parenthetical.csl # csl file
 
 ## Available formats ##
 format: 
