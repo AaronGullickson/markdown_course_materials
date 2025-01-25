@@ -15,16 +15,6 @@ format:
     highlight-style: arrow
     code-line-numbers: false
     self-contained: false
-  blackboard-revealjs:
-    chalkboard: true
-    preview-links: true
-    incremental: true
-    smaller: false
-    background-transition: concave
-    fig-align: center
-    highlight-style: arrow
-    code-line-numbers: false
-    self-contained: false
 #title-slide-attributes:
 #    data-background-image: "resources/images/mohammad-rahmani-oXlXu2qukGE-unsplash.jpg"
 #    data-background-size: cover
