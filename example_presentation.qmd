@@ -5,8 +5,8 @@ author: "Aaron Gullickson"
 format:
   revealjs:
     theme: default
-    #theme: resources/css/presentation_style.scss
-    chalkboard: true
+    #theme: [default, resources/css/presentation_style.scss]
+    chalkboard: false
     preview-links: true
     incremental: true
     smaller: false
@@ -14,7 +14,7 @@ format:
     fig-align: center
     highlight-style: arrow
     code-line-numbers: false
-    self-contained: false
+    embed-resources: true
 #title-slide-attributes:
 #    data-background-image: "resources/images/mohammad-rahmani-oXlXu2qukGE-unsplash.jpg"
 #    data-background-size: cover
